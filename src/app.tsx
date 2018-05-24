@@ -1,40 +1,38 @@
 import * as React from 'react';
 import { css } from 'styled-components';
 import styled from 'styled-components/native';
-import { Platform, StyleSheet, Text, View, TextInput } from 'react-native';
+import { Platform, StyleSheet, Text, View } from 'react-native';
 
 const Container = styled.View`
+	background-color: #f5fcff;
+	justify-content: center;
+	align-items: center;
 	flex: 1;
-	padding: 40px;
 `;
 
-const MyTextInput = styled.TextInput`
-	margin-top: 30px;
-	background-color: grey;
-	padding: 10px;
+const WelcomeText = styled.Text`
+	font-size: 20px;
+	text-align: center;
+	margin: 10px;
 `;
 
-export interface Props {}
+const InstructionsText = styled.Text`
+	text-align: center;
+	color: #333333;
+	margin-bottom: 5px;
+`;
 
-export default class App extends React.Component<Props, {}> {
-	constructor(props: Props) {
-		super(props);
-		this.state = {
-			newTodo: ''
-		};
-	}
+interface Propx {}
 
-	render(): JSX.Element {
+interface State {}
+
+export default class App extends React.Component<Props, State> {
+	public render() {
 		return (
 			<Container>
-				<Text>text form</Text>
-				<MyTextInput onChangeText={text => this.onChangetext(text)} />
+				<WelcomeText>Add TypeScript</WelcomeText>
+				<InstructionsText>To get started, edit App.js</InstructionsText>
 			</Container>
 		);
-	}
-
-	private onChangetext(text: string) {
-		console.log(text);
-		this.setState({ newTodo: text });
 	}
 }
