@@ -7,7 +7,8 @@ import {
 	Text,
 	View,
 	TextInput,
-	TouchableOpacity
+	TouchableOpacity,
+	ScrollView
 } from 'react-native';
 
 const Container = styled.View`
@@ -34,9 +35,25 @@ const AddButtonText = styled.Text`
 	font-weight: bold;
 `;
 
+const TodoScrollView = styled.ScrollView`
+	background-color: #ddd;
+`;
+
+const TodoContainer = styled.View`
+	flex-direction: row;
+	background-color: #fff;
+	padding: 10px;
+	justify-content: space-between;
+`;
+
 export interface Props {}
 
-export default class App extends React.Component<Props, { value: string }> {
+export interface State {
+	newTodo: string;
+	todos: string[];
+}
+
+export default class App extends React.Component<Props, State> {
 	constructor(props: Props) {
 		super(props);
 		this.state = {
@@ -57,6 +74,18 @@ export default class App extends React.Component<Props, { value: string }> {
 				<AddButton onPress={() => this.onPressAdd()}>
 					<AddButtonText>Add</AddButtonText>
 				</AddButton>
+
+				<TodoScrollView>
+					{this.state.todos.map((todo, index) => (
+						<TodoContainer key={todo + index}>
+							<Text>{todo}</Text>
+
+							<TouchableOpacity onPress={() => this.onPressDelete(index)}>
+								<Text>Dlete</Text>
+							</TouchableOpacity>
+						</TodoContainer>
+					))}
+				</TodoScrollView>
 			</Container>
 		);
 	}
@@ -72,5 +101,12 @@ export default class App extends React.Component<Props, { value: string }> {
 			newTodo: '',
 			todos: [newTodo, ...this.state.todos]
 		});
+	}
+
+	private onPressDelete(index): void {
+		this.setState({
+			todos: this.state.todos.filter((t, i) => i !== index)
+		});
+		console.log(index);
 	}
 }
