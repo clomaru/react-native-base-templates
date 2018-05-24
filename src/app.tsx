@@ -8,7 +8,8 @@ import {
 	View,
 	TextInput,
 	TouchableOpacity,
-	ScrollView
+	ScrollView,
+	AsyncStorage
 } from 'react-native';
 
 const Container = styled.View`
@@ -56,6 +57,7 @@ export interface State {
 export default class App extends React.Component<Props, State> {
 	constructor(props: Props) {
 		super(props);
+		this.loadTodos()
 		this.state = {
 			newTodo: '',
 			todos: []
@@ -100,13 +102,25 @@ export default class App extends React.Component<Props, State> {
 		this.setState({
 			newTodo: '',
 			todos: [newTodo, ...this.state.todos]
-		});
+		}, () => this.storeTodos());
 	}
 
-	private onPressDelete(index): void {
+	private onPressDelete(index: any): void {
 		this.setState({
 			todos: this.state.todos.filter((t, i) => i !== index)
-		});
+		}, () => this.storeTodos());
 		console.log(index);
+	}
+
+	private storeTodos(): void{
+		const str = JSON.stringify(this.state.todos)
+		AsyncStorage.setItem('todos', str)
+	}
+
+	private loadTodos(): void{
+		AsyncStorage.getItem('todos').then((str) => {
+			const todos = str ? JSON.parse(str) : [];
+			this.setState({todos})
+		}
 	}
 }
