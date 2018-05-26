@@ -12,6 +12,12 @@ import {
 	AsyncStorage
 } from 'react-native';
 
+import Button from './components/atoms/Button/index'
+import TextBox from './components/atoms/TextBox/index'
+import ListItem from './components/atoms/ListItem/index'
+import List from './components/molecules/List/index'
+import SubmittionBox from './components/molecules/SubmittionBox/index'
+
 const Container = styled.View`
 	flex: 1;
 	padding: 40px;
@@ -21,19 +27,6 @@ const MyTextInput = styled.TextInput`
 	margin-top: 30px;
 	background-color: #eee;
 	padding: 10px;
-`;
-
-const AddButton = styled.TouchableOpacity`
-	background-color: #333;
-	padding: 14px;
-	border-radius: 4px;
-	margin-top: 10px;
-`;
-
-const AddButtonText = styled.Text`
-	color: #fff;
-	text-align: center;
-	font-weight: bold;
 `;
 
 const TodoScrollView = styled.ScrollView`
@@ -69,24 +62,28 @@ export default class App extends React.Component<Props, State> {
 		return (
 			<Container>
 				<Text>text form</Text>
-				<MyTextInput
+
+				{/* <SubmittionBox></SubmittionBox> */}
+
+				<TextBox
 					value={this.state.newTodo}
 					onChangeText={text => this.onChangetext(text)}
 				/>
-				<AddButton onPress={() => this.onPressAdd()}>
-					<AddButtonText>Add</AddButtonText>
-				</AddButton>
+				<Button onPress={() => this.onPressAdd()}>Add</Button>
 
 				<TodoScrollView>
 					{this.state.todos.map((todo, index) => (
-						<TodoContainer key={todo + index}>
-							<Text>{todo}</Text>
 
+
+						<ListItem key={todo + index}>
+							<Text>{todo}</Text>
 							<TouchableOpacity onPress={() => this.onPressDelete(index)}>
 								<Text>Dlete</Text>
 							</TouchableOpacity>
-						</TodoContainer>
+						</ListItem>
+
 					))}
+
 				</TodoScrollView>
 			</Container>
 		);
