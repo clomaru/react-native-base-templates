@@ -3,53 +3,46 @@
 // import styled from 'styled-components/native';
 // import { Text } from 'react-native';
 //
-// export const HeadingPresenter = ({
+// interface Props {
+// 	children: string;
+// }
+//
+// export const HeadingPresenter: React.SFC<Props> = ({
 // 	tag: Tag,
 // 	visualLevel,
 // 	className,
 // 	...props
 // }) => (
 // 	<Tag
-// 		className={[styles.h, styles[`h${visualLevel}`], className].join(' ')}
+// 		className={[styles[`h${visualLevel}`], className].join(' ')}
 // 		{...props}
 // 	/>
 // );
 //
-// export const HeadingUnderlinedPresenter = ({
+// export const HeadingUnderlinedPresenter: React.SFC<Props> = ({
+// 	tag: Tag,
+// 	visualLevel,
+// 	...props
+// }) => (
+// 	<Tag
+// 		className={[styles[`h${visualLevel}`], className].join(' ')}
+// 		{...props}
+// 	/>
+// );
+//
+// export const HeadingOutlinedPresenter: React.SFC<Props> = ({
 // 	tag: Tag,
 // 	visualLevel,
 // 	className,
 // 	...props
 // }) => (
 // 	<Tag
-// 		className={[
-// 			styles.h,
-// 			styles.underlined,
-// 			styles[`h${visualLevel}`],
-// 			className
-// 		].join(' ')}
+// 		className={[styles[`h${visualLevel}`], className].join(' ')}
 // 		{...props}
 // 	/>
 // );
 //
-// export const HeadingOutlinedPresenter = ({
-// 	tag: Tag,
-// 	visualLevel,
-// 	className,
-// 	...props
-// }) => (
-// 	<Tag
-// 		className={[
-// 			styles.h,
-// 			styles.outlined,
-// 			styles[`h${visualLevel}`],
-// 			className
-// 		].join(' ')}
-// 		{...props}
-// 	/>
-// );
-//
-// export const HeadingContainer = ({
+// export const HeadingContainer: React.SFC<Props> = ({
 // 	presenter,
 // 	level = 2,
 // 	visualLevel,

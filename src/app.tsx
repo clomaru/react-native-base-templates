@@ -63,25 +63,15 @@ export default class App extends React.Component<Props, State> {
 			<Container>
 				<Text>text form</Text>
 
-				{/* <SubmittionBox></SubmittionBox> */}
-
-				<TextBox
+				<SubmittionBox
 					value={this.state.newTodo}
 					onChangeText={text => this.onChangetext(text)}
+					onPress={() => this.onPressAdd()}
 				/>
-				<Button onPress={() => this.onPressAdd()}>Add</Button>
 
 				<TodoScrollView>
 					{this.state.todos.map((todo, index) => (
-
-
-						<ListItem key={todo + index}>
-							<Text>{todo}</Text>
-							<TouchableOpacity onPress={() => this.onPressDelete(index)}>
-								<Text>Dlete</Text>
-							</TouchableOpacity>
-						</ListItem>
-
+						<List key={todo + index} onPress={() => this.onPressDelete(index)}>{todo}</List>
 					))}
 
 				</TodoScrollView>
@@ -120,4 +110,5 @@ export default class App extends React.Component<Props, State> {
 			this.setState({todos})
 		}
 	}
+
 }
