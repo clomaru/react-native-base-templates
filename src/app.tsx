@@ -18,26 +18,16 @@ import ListItem from './components/atoms/ListItem/index'
 import List from './components/molecules/List/index'
 import SubmittionBox from './components/molecules/SubmittionBox/index'
 
+import TodoList from './components/organisms/TodoList/index'
+
 const Container = styled.View`
 	flex: 1;
 	padding: 40px;
 `;
 
-const MyTextInput = styled.TextInput`
-	margin-top: 30px;
-	background-color: #eee;
-	padding: 10px;
-`;
 
 const TodoScrollView = styled.ScrollView`
 	background-color: #ddd;
-`;
-
-const TodoContainer = styled.View`
-	flex-direction: row;
-	background-color: #fff;
-	padding: 10px;
-	justify-content: space-between;
 `;
 
 export interface Props {}
@@ -61,7 +51,7 @@ export default class App extends React.Component<Props, State> {
 		console.log(this.state);
 		return (
 			<Container>
-				<Text>text form</Text>
+				{/* <Text>text form</Text>
 
 				<SubmittionBox
 					value={this.state.newTodo}
@@ -73,8 +63,12 @@ export default class App extends React.Component<Props, State> {
 					{this.state.todos.map((todo, index) => (
 						<List key={todo + index} onPress={() => this.onPressDelete(index)}>{todo}</List>
 					))}
+				</TodoScrollView> */}
 
-				</TodoScrollView>
+				<TodoList
+					onChangeText={text => this.onChangetext(text)}
+				/>
+
 			</Container>
 		);
 	}
