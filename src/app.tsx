@@ -51,6 +51,8 @@ export default class App extends React.Component<Props, State> {
 		console.log(this.state);
 		return (
 			<Container>
+
+
 				{/* <Text>text form</Text>
 
 				<SubmittionBox

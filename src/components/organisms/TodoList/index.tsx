@@ -6,6 +6,7 @@ import List from '../../molecules/List/index';
 import SubmittionBox from '../../molecules/SubmittionBox/index';
 import { Text } from 'react-native';
 import { containPresenter } from '../../utils/HoC.js';
+import Heading from '../../atoms/Heading/index';
 
 interface Props {
 	children: string;
@@ -66,7 +67,7 @@ export const TodoListPresenter: React.SFC<Props> = ({
 	...props
 }) => (
 	<Wrapper>
-		<Text>text form</Text>
+		<Heading type="h3">Todo App</Heading>
 
 		<SubmittionBox onChangeText={onChangeText} />
 
