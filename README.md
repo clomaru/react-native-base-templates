@@ -1,15 +1,17 @@
-# ReactNativeBaseTemplate
+# ReactNativeBaseTemplate - TodoApp
 
 ## Feature Pckages
 
-- React
-- TypeScript
-- StoryBook
+* [ReactNative](https://github.com/facebook/react-native)
+* [React](https://github.com/facebook/react/)
+* [TypeScript](https://github.com/Microsoft/TypeScript)
+* [StoryBook](https://github.com/storybooks/storybook)
+* [styled-components](https://github.com/storybooks/storybook)
+* [Atomic Design](http://bradfrost.com/blog/post/atomic-web-design/)
 
-## Branchs
+## Other Branchs
 
-- master
-- todoApp
-- searchRepositoryApp
-- upLoadImgApp
-- twitterApp
+* master
+* searchRepositoryApp
+* upLoadImgApp
+* twitterApp
