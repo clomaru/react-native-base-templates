@@ -4,6 +4,4 @@ import { action } from '@storybook/addon-actions';
 import { linkTo } from '@storybook/addon-links';
 import Button from './index.js';
 
-storiesOf('Button', module).add('デフォルト', () => (
-	<Button>デフォルト</Button>
-));
+storiesOf('Button', module).add('default', () => <Button>default</Button>);
