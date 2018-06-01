@@ -12,7 +12,7 @@
 
 ## Other Branchs
 
-* master
+* [master](https://github.com/clomaru/react-native-base-templates/tree/master)
 * searchRepositoryApp
 * upLoadImgApp
 * twitterApp
