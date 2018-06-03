@@ -68,6 +68,7 @@ export default class App extends React.Component<Props, State> {
 				</TodoScrollView> */}
 
 				<TodoList
+					value={this.state.newTodo}
 					todos={this.state.todos}
 					onChangeText={text => this.onChangetext(text)}
 					onPressAdd={() => this.onPressAdd()}

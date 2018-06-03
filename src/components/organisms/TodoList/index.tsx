@@ -11,6 +11,7 @@ import Heading from '../../atoms/Heading/index';
 interface Props {
 	presenter: any;
 	children: string;
+	value: any;
 	onPressAdd: any;
 	onChangeText: any;
 	onPressDelete: any;
@@ -19,7 +20,6 @@ interface Props {
 }
 
 interface State {
-	newTodo: any;
 	todos: string[];
 }
 
@@ -34,7 +34,7 @@ export class TodoListContianer extends React.Component<Props, State> {
 	public render() {
 		const {
 			presenter,
-			newTodo,
+			value,
 			todos,
 			onChangeText,
 			onPressAdd,
@@ -42,7 +42,7 @@ export class TodoListContianer extends React.Component<Props, State> {
 			...props
 		} = this.props;
 		const presenterProps = {
-			newTodo,
+			value,
 			todos,
 			onChangeText,
 			onPressAdd,
@@ -69,7 +69,7 @@ export class TodoListContianer extends React.Component<Props, State> {
 }
 
 export const TodoListPresenter: React.SFC<Props> = ({
-	newTodo,
+	value,
 	todos,
 	onChangeText,
 	onPressAdd,
@@ -79,7 +79,11 @@ export const TodoListPresenter: React.SFC<Props> = ({
 	<Wrapper>
 		<Heading type="h3">Todo App</Heading>
 
-		<SubmittionBox onChangeText={onChangeText} onPress={onPressAdd} />
+		<SubmittionBox
+			value={value}
+			onChangeText={onChangeText}
+			onPress={onPressAdd}
+		/>
 
 		<TodoScrollView>
 			{todos.map((todo, index) => (
