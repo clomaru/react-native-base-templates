@@ -68,7 +68,10 @@ export default class App extends React.Component<Props, State> {
 				</TodoScrollView> */}
 
 				<TodoList
+					todos={this.state.todos}
 					onChangeText={text => this.onChangetext(text)}
+					onPressAdd={() => this.onPressAdd()}
+					onPressDelete={index => this.onPressDelete(index)}
 				/>
 
 			</Container>
@@ -76,7 +79,6 @@ export default class App extends React.Component<Props, State> {
 	}
 
 	private onChangetext(text: string): void {
-		console.log(text);
 		this.setState({ newTodo: text });
 	}
 

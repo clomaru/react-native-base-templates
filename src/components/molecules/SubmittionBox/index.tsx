@@ -7,12 +7,17 @@ import { View } from 'react-native';
 
 interface Props {
 	children: string;
+	onPressAdd: any;
 }
 
-export const SubmittionBox: React.SFC<Props> = ({ children, ...props }) => (
+export const SubmittionBox: React.SFC<Props> = ({
+	children,
+	onPress,
+	...props
+}) => (
 	<Wrapper {...props}>
 		<TextBox {...props}>{children}</TextBox>
-		<Button {...props}>Add</Button>
+		<Button onPress={onPress}>Add</Button>
 	</Wrapper>
 );
 

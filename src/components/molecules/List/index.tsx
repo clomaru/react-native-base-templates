@@ -9,10 +9,12 @@ interface Props {
 	children: string;
 }
 
-export const List: React.SFC<Props> = ({ children, ...props }) => (
+export const List: React.SFC<Props> = ({ children, onPress, ...props }) => (
 	<Wrapper {...props}>
 		<Text>{children}</Text>
-		<Button {...props}>Delete</Button>
+		<Button onPress={onPress} {...props}>
+			Delete
+		</Button>
 	</Wrapper>
 );
 

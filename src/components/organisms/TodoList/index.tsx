@@ -9,71 +9,84 @@ import { containPresenter } from '../../utils/HoC.js';
 import Heading from '../../atoms/Heading/index';
 
 interface Props {
-	children: string;
 	presenter: any;
+	children: string;
+	onPressAdd: any;
 	onChangeText: any;
+	onPressDelete: any;
+	storeTodos: any;
+	loadTodos: any;
 }
 
-interface State {}
+interface State {
+	newTodo: any;
+	todos: string[];
+}
 
 export class TodoListContianer extends React.Component<Props, State> {
-	constructor(props) {
-		super(props);
-		this.state = {
-			newTodo: '',
-			todos: []
-		};
-
+	constructor() {
+		super();
 		this.onChangeText = this.onChangeText.bind(this);
+		this.onPressAdd = this.onPressAdd.bind(this);
+		this.onPressDelete = this.onPressDelete.bind(this);
 	}
 
 	public render() {
-		const { presenter, onChangeText, ...props } = this.props;
-		const presenterProps = { onChangeText, ...props };
+		const {
+			presenter,
+			newTodo,
+			todos,
+			onChangeText,
+			onPressAdd,
+			onPressDelete,
+			...props
+		} = this.props;
+		const presenterProps = {
+			newTodo,
+			todos,
+			onChangeText,
+			onPressAdd,
+			onPressDelete,
+			...props
+		};
 		return presenter(presenterProps);
 	}
 
-	private onChangeText(text: string): void {
-		console.log(this.state);
-		this.setState({ newTodo: text });
+	private onChangeText(...args): void {
+		const { onChangeText, text } = this.props;
+		onChangeText(...args, text);
 	}
 
-	// private onPressAdd(): void {
-	// 	const { newTodo } = this.state;
-	// 	this.setState(
-	// 		{
-	// 			newTodo: '',
-	// 			todos: [newTodo, ...this.state.todos]
-	// 		}
-	// 		// () => this.storeTodos()
-	// 	);
-	// }
+	private onPressAdd(): void {
+		const { onPressAdd } = this.props;
+		onPressAdd();
+	}
 
-	// private storeTodos(): void{
-	//   const str = JSON.stringify(this.state.todos)
-	//   AsyncStorage.setItem('todos', str)
-	// }
-
-	// private loadTodos(): void{
-	//   AsyncStorage.getItem('todos').then((str) => {
-	//     const todos = str ? JSON.parse(str) : [];
-	//     this.setState({todos})
-	//   }
-	// }
+	private onPressDelete(index): void {
+		const { onPressDelete, index } = this.props;
+		onPressDelete(index);
+	}
 }
 
 export const TodoListPresenter: React.SFC<Props> = ({
+	newTodo,
+	todos,
 	onChangeText,
+	onPressAdd,
+	onPressDelete,
 	...props
 }) => (
 	<Wrapper>
 		<Heading type="h3">Todo App</Heading>
 
-		<SubmittionBox onChangeText={onChangeText} />
+		<SubmittionBox onChangeText={onChangeText} onPress={onPressAdd} />
 
 		<TodoScrollView>
-			<List />
-			{/* {todos.map((todo, index) => <List key={todo + index}>{todo}</List>)} */}
+			{todos.map((todo, index) => (
+				<List key={todo + index} onPress={index => onPressDelete(index)}>
+					{todo}
+				</List>
+			))}
 		</TodoScrollView>
 
 		{/* <SubmittionBox
