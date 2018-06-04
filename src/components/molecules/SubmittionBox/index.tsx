@@ -17,11 +17,14 @@ export const SubmittionBox: React.SFC<Props> = ({
 }) => (
 	<Wrapper {...props}>
 		<TextBox {...props}>{children}</TextBox>
-		<Button onPress={onPress}>Add</Button>
+		<StyleButton onPress={onPress}>Add</StyleButton>
 	</Wrapper>
 );
 
 export default SubmittionBox;
 
-// TODO: もっと汎用的なstyleにする
 const Wrapper = styled.View``;
+
+const StyleButton = styled(Button)`
+	margin-top: 10px;
+`;

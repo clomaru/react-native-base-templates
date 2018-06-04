@@ -15,12 +15,10 @@ export const Button: React.SFC<Props> = ({ children, ...props }) => (
 
 export default Button;
 
-// TODO: もっと汎用的なstyleにする
 const Wrapper = styled.TouchableOpacity`
 	background-color: #333;
 	padding: 14px;
 	border-radius: 4px;
-	margin-top: 10px;
 `;
 
 const ButtonText = styled.Text`

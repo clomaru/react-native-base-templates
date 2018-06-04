@@ -15,7 +15,6 @@ export const ListItem: React.SFC<Props> = ({ children, ...props }) => (
 
 export default ListItem;
 
-// TODO: もっと汎用的なstyleにする
 const Wrapper = styled.View`
 	flex-direction: row;
 	background-color: #fff;

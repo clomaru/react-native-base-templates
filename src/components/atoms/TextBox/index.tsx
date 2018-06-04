@@ -13,7 +13,6 @@ export const TextBox: React.SFC<Props> = ({ placeholder, ...props }) => (
 
 export default TextBox;
 
-// TODO: もっと汎用的なstyleにする
 const Wrapper = styled.TextInput`
 	background-color: #eee;
 	padding: 10px;

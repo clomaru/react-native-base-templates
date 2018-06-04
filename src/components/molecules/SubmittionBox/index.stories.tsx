@@ -4,6 +4,4 @@ import { action } from '@storybook/addon-actions';
 import { linkTo } from '@storybook/addon-links';
 import SubmittionBox from './index.js';
 
-storiesOf('SubmittionBox', module).add('default', () => (
-	<SubmittionBox>default</SubmittionBox>
-));
+storiesOf('SubmittionBox', module).add('default', () => <SubmittionBox />);

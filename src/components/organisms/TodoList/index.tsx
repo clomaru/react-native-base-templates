@@ -79,7 +79,7 @@ export const TodoListPresenter: React.SFC<Props> = ({
 	<Wrapper>
 		<Heading type="h3">Todo App</Heading>
 
-		<SubmittionBox
+		<StyleSubmittionBox
 			value={value}
 			onChangeText={onChangeText}
 			onPress={onPressAdd}
@@ -99,9 +99,15 @@ const TodoList = containPresenter(TodoListContianer, TodoListPresenter);
 
 export default TodoList;
 
-// TODO: もっと汎用的なstyleにする
-const Wrapper = styled.View``;
+const Wrapper = styled.View`
+	padding: 10px;
+`;
+
+const StyleSubmittionBox = styled(SubmittionBox)`
+	margin-top: 10px;
+`;
 
 const TodoScrollView = styled.ScrollView`
+	margin-top: 20px;
 	background-color: #ddd;
 `;
