@@ -2,10 +2,11 @@
 
 ## Feature Pckages
 
+### Architecture
+
 - [ReactNative](https://github.com/facebook/react-native)
 - [React](https://github.com/facebook/react/)
 - [TypeScript](https://github.com/Microsoft/TypeScript)
-- [StoryBook](https://github.com/storybooks/storybook)
 
 
 ### CodeFormatter
@@ -18,6 +19,7 @@
 ### Design
 
 - [styled-components](https://github.com/storybooks/storybook)
+- [StoryBook](https://github.com/storybooks/storybook)
 - [Atomic Design](http://bradfrost.com/blog/post/atomic-web-design/)
 
 
@@ -32,7 +34,6 @@
 
 ## To Install
 
-- [prettier](https://github.com/prettier/prettier)
 - [redux](https://redux.js.org/)
 - [immutable.js](https://github.com/facebook/immutable-js)
 - [redux-thunk](https://github.com/reduxjs/redux-thunk)
