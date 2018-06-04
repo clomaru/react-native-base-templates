@@ -5,11 +5,6 @@ import { View, ScrollView, AsyncStorage } from 'react-native';
 
 import TodoList from '../organisms/TodoList/index';
 
-const Container = styled.View`
-	flex: 1;
-	padding: 40px;
-`;
-
 export interface Props {}
 
 export interface State {
@@ -63,7 +58,6 @@ export default class TodoAppPage extends React.Component<Props, State> {
 			},
 			() => this.storeTodos()
 		);
-		console.log(`index: ${index}`);
 	}
 
 	private storeTodos(): void {
@@ -78,3 +72,8 @@ export default class TodoAppPage extends React.Component<Props, State> {
 		});
 	}
 }
+
+const Container = styled.View`
+	flex: 1;
+	padding: 40px;
+`;
