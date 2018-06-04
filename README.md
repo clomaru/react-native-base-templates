@@ -6,8 +6,20 @@
 - [React](https://github.com/facebook/react/)
 - [TypeScript](https://github.com/Microsoft/TypeScript)
 - [StoryBook](https://github.com/storybooks/storybook)
+
+
+### CodeFormatter
+
+- [tslint](https://github.com/palantir/tslint)
+- [prettier](https://github.com/prettier/prettier)
+- [tslint-plugin-prettier](https://github.com/ikatyang/tslint-plugin-prettier)
+
+
+### Design
+
 - [styled-components](https://github.com/storybooks/storybook)
 - [Atomic Design](http://bradfrost.com/blog/post/atomic-web-design/)
+
 
 ## Branchs
 
@@ -16,6 +28,7 @@
 - searchRepositoryApp
 - upLoadImgApp
 - twitterApp
+
 
 ## To Install
 
