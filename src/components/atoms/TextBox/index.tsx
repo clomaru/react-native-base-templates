@@ -1,19 +1,20 @@
 import * as React from 'react';
 import { css } from 'styled-components';
 import styled from 'styled-components/native';
-import { Text, TouchableOpacity } from 'react-native';
+import { TextInput } from 'react-native';
 
-interface Props {}
+interface Props {
+	placeholder: string;
+}
 
-export const TextBox: React.SFC<Props> = ({ ...props }) => (
-	<Wrapper {...props} />
+export const TextBox: React.SFC<Props> = ({ placeholder, ...props }) => (
+	<Wrapper placeholder={placeholder} {...props} />
 );
 
 export default TextBox;
 
 // TODO: もっと汎用的なstyleにする
 const Wrapper = styled.TextInput`
-	margin-top: 30px;
 	background-color: #eee;
 	padding: 10px;
 `;
