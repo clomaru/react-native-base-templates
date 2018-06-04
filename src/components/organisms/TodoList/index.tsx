@@ -87,25 +87,11 @@ export const TodoListPresenter: React.SFC<Props> = ({
 
 		<TodoScrollView>
 			{todos.map((todo, index) => (
-				<List key={todo + index} onPress={index => onPressDelete(index)}>
+				<List key={todo + index} onPress={() => onPressDelete(index)}>
 					{todo}
 				</List>
 			))}
 		</TodoScrollView>
-
-		{/* <SubmittionBox
-			value={value}
-			onChangeText={onChangeText}
-			onPress={onPressAdd}
-		/>
-
-		<TodoScrollView>
-			{this.state.todos.map((todo, index) => (
-				<List key={todo + index} onPress={() => this.onPressDelete(index)}>
-					{todo}
-				</List>
-			))}
-		</TodoScrollView> */}
 	</Wrapper>
 );
 

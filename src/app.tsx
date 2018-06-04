@@ -52,27 +52,12 @@ export default class App extends React.Component<Props, State> {
 		return (
 			<Container>
 
-
-				{/* <Text>text form</Text>
-
-				<SubmittionBox
-					value={this.state.newTodo}
-					onChangeText={text => this.onChangetext(text)}
-					onPress={() => this.onPressAdd()}
-				/>
-
-				<TodoScrollView>
-					{this.state.todos.map((todo, index) => (
-						<List key={todo + index} onPress={() => this.onPressDelete(index)}>{todo}</List>
-					))}
-				</TodoScrollView> */}
-
 				<TodoList
 					value={this.state.newTodo}
 					todos={this.state.todos}
-					onChangeText={text => this.onChangetext(text)}
-					onPressAdd={() => this.onPressAdd()}
-					onPressDelete={index => this.onPressDelete(index)}
+					onChangeText={this.onChangetext.bind(this)}
+					onPressAdd={this.onPressAdd.bind(this)}
+					onPressDelete={this.onPressDelete.bind(this)}
 				/>
 
 			</Container>
@@ -95,7 +80,7 @@ export default class App extends React.Component<Props, State> {
 		this.setState({
 			todos: this.state.todos.filter((t, i) => i !== index)
 		}, () => this.storeTodos());
-		console.log(index);
+		console.log(`index: ${index}`);
 	}
 
 	private storeTodos(): void{
