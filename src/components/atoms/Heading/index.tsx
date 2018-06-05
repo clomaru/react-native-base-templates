@@ -1,10 +1,17 @@
 import * as React from 'react';
 import styled from 'styled-components/native';
+import styledComponents from 'styled-components';
+import styledComponentsTS from 'styled-components-ts';
 import { Text } from 'react-native';
 
 interface Props {
 	children: string;
-	type: string;
+	type?: string;
+	presenter: any;
+}
+
+interface StyledProps {
+	type?: string;
 }
 
 export const HeadingPresenter: React.SFC<Props> = ({
@@ -30,8 +37,8 @@ const Heading: React.SFC<Props> = props => (
 
 export default Heading;
 
-const Wrapper = styled.Text`
-	font-size: ${p => tagSize[p.type]};
+const Wrapper = styledComponentsTS<StyledProps>(styledComponents(Text))`
+    font-size: ${p => tagSize[p.type]};
 `;
 
 const tagSize = {
