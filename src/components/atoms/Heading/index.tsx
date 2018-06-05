@@ -3,18 +3,16 @@ import styled from 'styled-components/native';
 import { Text } from 'react-native';
 
 interface Props {
-	className: string;
 	children: string;
-	type: number;
+	type: string;
 }
 
 export const HeadingPresenter: React.SFC<Props> = ({
-	className,
 	children,
 	type,
 	...props
 }) => (
-	<Wrapper className={className} type={type} {...props}>
+	<Wrapper type={type} {...props}>
 		{children}
 	</Wrapper>
 );

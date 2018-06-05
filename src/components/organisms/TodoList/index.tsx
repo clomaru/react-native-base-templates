@@ -17,15 +17,16 @@ interface Props {
 	onPressDelete: any;
 	storeTodos: any;
 	loadTodos: any;
+	todos: string[];
+	text: string;
+	index: number;
 }
 
-interface State {
-	todos: string[];
-}
+interface State {}
 
 export class TodoListContianer extends React.Component<Props, State> {
-	constructor() {
-		super();
+	constructor(props: Props) {
+		super(props);
 		this.onChangeText = this.onChangeText.bind(this);
 		this.onPressAdd = this.onPressAdd.bind(this);
 		this.onPressDelete = this.onPressDelete.bind(this);
@@ -62,7 +63,7 @@ export class TodoListContianer extends React.Component<Props, State> {
 		onPressAdd();
 	}
 
-	private onPressDelete(index): void {
+	private onPressDelete(): void {
 		const { onPressDelete, index } = this.props;
 		onPressDelete(index);
 	}
