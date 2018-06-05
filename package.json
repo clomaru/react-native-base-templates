@@ -9,6 +9,9 @@
 		"storybook": "storybook start -p 7007"
 	},
 	"dependencies": {
+		"@types/storybook__addon-actions": "^3.0.3",
+		"@types/storybook__addon-links": "^3.3.0",
+		"@types/storybook__react": "^3.0.7",
 		"react": "16.3.1",
 		"react-native": "0.55.4"
 	},
