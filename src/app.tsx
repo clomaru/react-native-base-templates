@@ -1,38 +1,52 @@
 import * as React from 'react';
-import { css } from 'styled-components';
-import styled from 'styled-components/native';
-import { Platform, StyleSheet, Text, View, Button, Picker } from 'react-native';
+import { Navigation } from 'react-native-navigation';
+import registerScreens from './screen';
+// import * as appActions from './actions/index';
+// import { Provider } from 'react-redux';
+// import configureStore from './store';
 
-interface Props {}
+// const store = configureStore();
 
-interface State {}
+registerScreens();
 
-export default class App extends React.Component<Props, State> {
-	public render() {
-		return (
-			<Container>
-				<WelcomeText>Add TypeScript</WelcomeText>
-				<InstructionsText>To get started, edit App.js</InstructionsText>
-			</Container>
-		);
-	}
-}
+Navigation.startTabBasedApp({
+	tabs: [
+		{
+			label: 'One',
+			screen: 'searchRepository.Main',
+			title: 'Screen One'
+		},
+		{
+			label: 'Two',
+			screen: 'searchRepository.Main',
+			title: 'Screen Two'
+		}
+	]
+});
 
-const Container = styled.View`
-	background-color: #f5fcff;
-	justify-content: center;
-	align-items: center;
-	flex: 1;
-`;
+// Navigation.startSingleScreenApp({
+// 	screen: {
+// 		screen: 'searchRepository.Main',
+// 		title: 'Hello World',
+// 		navigatorStyle: {},
+// 		navigatorButtons: {}
+// 	}
+// });
 
-const WelcomeText = styled.Text`
-	font-size: 20px;
-	text-align: center;
-	margin: 10px;
-`;
-
-const InstructionsText = styled.Text`
-	text-align: center;
-	color: #333333;
-	margin-bottom: 5px;
-`;
+// export default class App extends React.Component {
+// 	constructor(props) {
+// 		super(props);
+// 		this.startApp();
+// 	}
+//
+// 	startApp() {
+// 		Navigation.startSingleScreenApp({
+// 			screen: {
+// 				screen: 'searchRepository.Main',
+// 				title: 'Hello World',
+// 				navigatorStyle: {},
+// 				navigatorButtons: {}
+// 			}
+// 		});
+// 	}
+// }
