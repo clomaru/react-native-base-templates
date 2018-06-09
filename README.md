@@ -20,7 +20,7 @@
 
 - [styled-components](https://github.com/storybooks/storybook)
 - [StoryBook](https://github.com/storybooks/storybook)
-- [Atomic Design](http://bradfrost.com/blog/post/atomic-web-design/)
+- [Atomic Design](http://atomicdesign.bradfrost.com/)
 
 
 ## Branchs
