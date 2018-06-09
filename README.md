@@ -10,7 +10,7 @@
 * [tslint](https://github.com/palantir/tslint)
 * [prettier](https://github.com/prettier/prettier)
 * [tslint-plugin-prettier](https://github.com/ikatyang/tslint-plugin-prettier)
-* [Atomic Design](http://bradfrost.com/blog/post/atomic-web-design/)
+* [Atomic Design](http://atomicdesign.bradfrost.com/)
 
 
 ## Other Branchs
