@@ -6,12 +6,12 @@ interface Props {}
 
 interface State {}
 
-export default class Main extends React.Component<Props, State> {
+export default class Main2 extends React.Component<Props, State> {
 	public render() {
 		return (
 			<Container>
-				<WelcomeText>main1 page</WelcomeText>
-				<InstructionsText>add react-natibe-nabigation</InstructionsText>
+				<WelcomeText>main2 page!!</WelcomeText>
+				<InstructionsText>To get started, edit Main.js</InstructionsText>
 			</Container>
 		);
 	}

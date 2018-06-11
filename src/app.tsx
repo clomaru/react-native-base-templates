@@ -18,7 +18,7 @@ Navigation.startTabBasedApp({
 		},
 		{
 			label: 'Two',
-			screen: 'searchRepository.Main',
+			screen: 'searchRepository.Main2',
 			title: 'Screen Two'
 		}
 	]
