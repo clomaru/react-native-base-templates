@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components/native';
-import { Text, View } from 'react-native';
+import { Text, View, TouchableOpacity } from 'react-native';
 
 interface Props {}
 
@@ -10,10 +10,17 @@ export default class Main extends React.Component<Props, State> {
 	public render() {
 		return (
 			<Container>
-				<WelcomeText>main1 page</WelcomeText>
-				<InstructionsText>add react-natibe-nabigation</InstructionsText>
+				<TouchableOpacity onPress={() => this.onPressFetch()}>
+					<Text>Fetch</Text>
+				</TouchableOpacity>
 			</Container>
 		);
+	}
+
+	onPressFetch() {
+		fetch('https://api.github.com/search/repositories?q=react')
+			.then(response => response.json())
+			.then(({ items }) => console.log(items));
 	}
 }
 
