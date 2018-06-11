@@ -8,7 +8,8 @@ interface State {}
 
 export default class Main extends React.Component<Props, State> {
 	state = {
-		items: []
+		items: [],
+		refreshing: false
 	};
 	page = 1;
 	public render() {
@@ -25,18 +26,25 @@ export default class Main extends React.Component<Props, State> {
 					keyExtractor={item => item.id}
 					onEndReached={() => this.fetchRepositories()}
 					onEndReachedThreshold={0.1}
+					onRefresh={() => this.fetchRepositories(true)}
+					refreshing={this.state.refreshing}
 				/>
 			</Container>
 		);
 	}
 
-	fetchRepositories() {
-		const newPage = this.page + 1;
+	fetchRepositories(refreshing = false) {
+		const newPage = refreshing ? 1 : this.page + 1;
+		this.setState({ refreshing });
 		fetch(`https://api.github.com/search/repositories?q=react&page=${newPage}`)
 			.then(response => response.json())
 			.then(({ items }) => {
 				this.page = newPage;
-				this.setState({ items: [...this.state.items, ...items] });
+				if (refreshing) {
+					this.setState({ items, refreshing: false });
+				} else {
+					this.setState({ items: [...this.state.items, ...items] });
+				}
 			});
 	}
 }
