@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Navigation } from 'react-native-navigation';
 import registerScreens from './screen';
+import Icon from 'react-native-vector-icons/FontAwesome';
 // import * as appActions from './actions/index';
 // import { Provider } from 'react-redux';
 // import configureStore from './store';
