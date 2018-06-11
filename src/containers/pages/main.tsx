@@ -2,6 +2,11 @@ import * as React from 'react';
 import styled from 'styled-components/native';
 import { Text, View, TouchableOpacity, FlatList } from 'react-native';
 
+// TODO: atomic design
+// TODO: redux & navigatoin
+// TODO: ページ遷移
+// TODO: udemy
+
 interface Props {}
 
 interface State {}
