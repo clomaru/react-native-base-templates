@@ -1,15 +1,26 @@
 import * as React from 'react';
 import styled from 'styled-components/native';
-import { Text, View, TouchableOpacity, FlatList } from 'react-native';
+import { Text, View, FlatList } from 'react-native';
 
-// TODO: atomic design
+import Button from '../../components/atoms/Button/index';
+import ListItem from '../../components/atoms/ListItem/index';
+
+// TODO: molecules↑
 // TODO: redux & navigatoin
 // TODO: ページ遷移
 // TODO: udemy
+// TODO: android navigaton
+// TODO: ios icon
+// TODO: android icon
 
-interface Props {}
+interface Props {
+	page: number;
+}
 
-interface State {}
+interface State {
+	items: string[];
+	refreshing: boolean;
+}
 
 export default class Main extends React.Component<Props, State> {
 	state = {
@@ -20,13 +31,11 @@ export default class Main extends React.Component<Props, State> {
 	public render() {
 		return (
 			<Container>
-				<TouchableOpacity onPress={() => this.fetchRepositories()}>
-					<Text>Fetch</Text>
-				</TouchableOpacity>
+				<Button onPress={() => this.fetchRepositories()}>Fetch</Button>
 				<FlatList
 					data={this.state.items}
 					renderItem={({ item }) => (
-						<Text style={{ padding: 20 }}>{item.name}</Text>
+						<ListItem style={{ padding: 20 }}>{item.name}</ListItem>
 					)}
 					keyExtractor={item => item.id}
 					onEndReached={() => this.fetchRepositories()}
@@ -59,16 +68,4 @@ const Container = styled.View`
 	justify-content: center;
 	align-items: center;
 	flex: 1;
-`;
-
-const WelcomeText = styled.Text`
-	font-size: 20px;
-	text-align: center;
-	margin: 10px;
-`;
-
-const InstructionsText = styled.Text`
-	text-align: center;
-	color: #333333;
-	margin-bottom: 5px;
 `;
