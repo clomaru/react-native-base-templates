@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { css } from 'styled-components';
 import styled from 'styled-components/native';
-import Button from '../../atoms/Button/index';
-import TextBox from '../../atoms/TextBox/index';
+import Button from '../../atoms/Button';
+import TextBox from '../../atoms/TextBox';
 import { View } from 'react-native';
 
 interface Props {

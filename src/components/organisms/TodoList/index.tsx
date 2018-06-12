@@ -1,12 +1,10 @@
 import * as React from 'react';
-import { css } from 'styled-components';
+import { ScrollView } from 'react-native';
 import styled from 'styled-components/native';
-import { AsyncStorage, ScrollView } from 'react-native';
-import List from '../../molecules/List/index';
-import SubmittionBox from '../../molecules/SubmittionBox/index';
-import { Text } from 'react-native';
 import { containPresenter } from '../../utils/HoC.js';
-import Heading from '../../atoms/Heading/index';
+import Heading from '../../atoms/Heading';
+import List from '../../molecules/List';
+import SubmittionBox from '../../molecules/SubmittionBox';
 
 interface Props {
 	presenter: any;
