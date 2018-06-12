@@ -18,7 +18,7 @@ interface Props {
 }
 
 interface State {
-	items: string[];
+	items: any;
 	refreshing: boolean;
 	showText: string;
 }
@@ -63,7 +63,7 @@ export default class Main extends React.Component<Props, State> {
 		});
 	}
 
-	fetchRepositories(refreshing = false) {
+	fetchRepositories(refreshing: boolean = false) {
 		const newPage = refreshing ? 1 : this.page + 1;
 		this.setState({ refreshing });
 		fetch(`https://api.github.com/search/repositories?q=react&page=${newPage}`)
