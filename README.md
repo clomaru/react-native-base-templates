@@ -1,6 +1,6 @@
 # ReactNativeBaseTemplate - TodoApp
 
-## Feature Pckages
+## Feature
 
 * [ReactNative](https://github.com/facebook/react-native)
 * [React](https://github.com/facebook/react/)
@@ -16,6 +16,6 @@
 ## Other Branchs
 
 * [master](https://github.com/clomaru/react-native-base-templates/tree/master)
-* searchRepositoryApp
+* [searchRepositoryApp](https://github.com/clomaru/react-native-base-templates/tree/searchRepositoryApp)
 * upLoadImgApp
 * twitterApp
