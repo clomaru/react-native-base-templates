@@ -8,6 +8,10 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 // const store = configureStore();
 
+// TODO: app.tsxにproviderを書く
+// TODO: まず最初にapp.tsxのclass化？無理ならredux導入してみてもいいかも
+// TODO: その後mainのtodoやる
+
 registerScreens();
 
 Navigation.startTabBasedApp({
