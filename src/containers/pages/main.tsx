@@ -20,17 +20,26 @@ interface Props {
 interface State {
 	items: string[];
 	refreshing: boolean;
+	showText: string;
 }
 
 export default class Main extends React.Component<Props, State> {
-	state = {
-		items: [],
-		refreshing: false
-	};
+	constructor(props: Props) {
+		super(props);
+		this.state = {
+			items: [],
+			refreshing: false,
+			showText: 'hello Redux'
+		};
+	}
 	page = 1;
 	public render() {
 		return (
 			<Container>
+				<View>
+					<Text style={{ fontSize: 20 }}>{this.state.showText}</Text>
+					<Button onPress={this.changeText.bind(this)}>change the text</Button>
+				</View>
 				<Button onPress={() => this.fetchRepositories()}>Fetch</Button>
 				<FlatList
 					data={this.state.items}
@@ -45,6 +54,13 @@ export default class Main extends React.Component<Props, State> {
 				/>
 			</Container>
 		);
+	}
+
+	private changeText(): void {
+		this.setState({
+			showText:
+				this.state.showText == 'hello Redux' ? 'chane success!!' : 'hello Redux'
+		});
 	}
 
 	fetchRepositories(refreshing = false) {
