@@ -25,3 +25,13 @@ export default function registerScreens(store: any, Provider: any) {
 // 		store,
 // 		Provider
 // 	);
+
+// index.js
+// // import { AppRegistry } from 'react-native';
+// // import App from './lib/app';
+// //
+// // AppRegistry.registerComponent('reactNativeBaseTemplate', () => App);
+//
+// import App from './build/main';
+//
+// const app = new App();
