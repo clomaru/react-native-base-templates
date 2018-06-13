@@ -4,7 +4,7 @@ import styled from 'styled-components/native';
 import { Text, View } from 'react-native';
 
 interface Props {
-	children: string;
+	children?: string;
 }
 
 export const ListItem: React.SFC<Props> = ({ children, ...props }) => (
