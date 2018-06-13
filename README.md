@@ -7,6 +7,7 @@
 * [TypeScript](https://github.com/Microsoft/TypeScript)
 * [StoryBook](https://github.com/storybooks/storybook)
 * [styled-components](https://github.com/storybooks/storybook)
+* [styled-components-ts](https://github.com/jacob-ebey/styled-components-ts)
 * [tslint](https://github.com/palantir/tslint)
 * [prettier](https://github.com/prettier/prettier)
 * [tslint-plugin-prettier](https://github.com/ikatyang/tslint-plugin-prettier)
