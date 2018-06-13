@@ -5,9 +5,9 @@ import styledComponentsTS from 'styled-components-ts';
 import { Text } from 'react-native';
 
 interface Props {
-	children: string;
+	children?: string;
 	type?: string;
-	presenter: any;
+	presenter?: any;
 }
 
 interface StyledProps {
@@ -16,7 +16,7 @@ interface StyledProps {
 
 export const HeadingPresenter: React.SFC<Props> = ({
 	children,
-	type,
+	type = 'h2',
 	...props
 }) => (
 	<Wrapper type={type} {...props}>

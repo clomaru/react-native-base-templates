@@ -4,7 +4,7 @@ import styled from 'styled-components/native';
 import { TextInput } from 'react-native';
 
 interface Props {
-	placeholder: string;
+	placeholder?: string;
 }
 
 export const TextBox: React.SFC<Props> = ({ placeholder, ...props }) => (

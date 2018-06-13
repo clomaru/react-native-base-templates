@@ -4,7 +4,7 @@ import styled from 'styled-components/native';
 import { Text, TouchableOpacity } from 'react-native';
 
 interface Props {
-	children: string;
+	children?: string;
 }
 
 export const Button: React.SFC<Props> = ({ children, ...props }) => (

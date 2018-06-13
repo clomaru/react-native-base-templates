@@ -1,23 +1,22 @@
 import * as React from 'react';
 import { ScrollView } from 'react-native';
 import styled from 'styled-components/native';
+import styledComponents from 'styled-components';
+import styledComponentsTS from 'styled-components-ts';
 import { containPresenter } from '../../utils/HoC.js';
-import Heading from '../../atoms/Heading';
-import List from '../../molecules/List';
-import SubmittionBox from '../../molecules/SubmittionBox';
+import Heading from '../../atoms/Heading/index';
+import List from '../../molecules/List/index';
+import SubmittionBox from '../../molecules/SubmittionBox/index';
 
 interface Props {
-	presenter: any;
-	children: string;
-	value: any;
-	onPressAdd: any;
-	onChangeText: any;
-	onPressDelete: any;
-	storeTodos: any;
-	loadTodos: any;
-	todos: string[];
-	text: string;
-	index: number;
+	presenter?: any;
+	onPressAdd?: any;
+	onChangeText?: any;
+	onPressDelete?: any;
+	value?: any;
+	todos?: string[];
+	text?: string;
+	index?: number;
 }
 
 interface State {}
@@ -98,11 +97,19 @@ const TodoList = containPresenter(TodoListContianer, TodoListPresenter);
 
 export default TodoList;
 
+interface StyledProps {
+	value?: any;
+	onChangeText?: any;
+	onPress?: any;
+}
+
 const Wrapper = styled.View`
 	padding: 10px;
 `;
 
-const StyleSubmittionBox = styled(SubmittionBox)`
+const StyleSubmittionBox = styledComponentsTS<StyledProps>(
+	styledComponents(SubmittionBox)
+)`
 	margin-top: 10px;
 `;
 

@@ -1,13 +1,14 @@
 import * as React from 'react';
-import { css } from 'styled-components';
-import styled from 'styled-components/native';
-import Button from '../../atoms/Button';
-import TextBox from '../../atoms/TextBox';
 import { View } from 'react-native';
+import styled from 'styled-components/native';
+import styledComponents from 'styled-components';
+import styledComponentsTS from 'styled-components-ts';
+import Button from '../../atoms/Button/index';
+import TextBox from '../../atoms/TextBox/index';
 
 interface Props {
-	children: string;
-	onPressAdd: any;
+	children?: string;
+	onPress?: any;
 }
 
 export const SubmittionBox: React.SFC<Props> = ({
@@ -15,7 +16,7 @@ export const SubmittionBox: React.SFC<Props> = ({
 	onPress,
 	...props
 }) => (
-	<Wrapper {...props}>
+	<Wrapper>
 		<TextBox {...props}>{children}</TextBox>
 		<StyleButton onPress={onPress}>Add</StyleButton>
 	</Wrapper>
@@ -23,8 +24,12 @@ export const SubmittionBox: React.SFC<Props> = ({
 
 export default SubmittionBox;
 
+interface StyledProps {
+	onPress?: any;
+}
+
 const Wrapper = styled.View``;
 
-const StyleButton = styled(Button)`
+const StyleButton = styledComponentsTS<StyledProps>(styledComponents(Button))`
 	margin-top: 10px;
 `;
