@@ -7831,9 +7831,9 @@ react-native-iphone-x-helper@^1.0.2:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/react-native-iphone-x-helper/-/react-native-iphone-x-helper-1.0.3.tgz#7a2f1e0574e899a0f1d426e6167fd98990083214"
 
-react-native-navigation@^2.0.0-experimental.304:
-  version "2.0.0-experimental.304"
-  resolved "https://registry.yarnpkg.com/react-native-navigation/-/react-native-navigation-2.0.0-experimental.304.tgz#1deecd64a4c3d4865d356301fdf7141ac0ee706f"
+react-native-navigation@1.1.9:
+  version "1.1.9"
+  resolved "https://registry.yarnpkg.com/react-native-navigation/-/react-native-navigation-1.1.9.tgz#3ad7a7e642f6ba8dd5ce317bce0581935e8cb1f8"
   dependencies:
     lodash "4.x.x"
 

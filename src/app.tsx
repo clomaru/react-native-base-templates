@@ -9,42 +9,45 @@ import configureStore from './store';
 const store = configureStore();
 registerScreens(store, Provider);
 
-// ///////////////
-// // dont work
-// ///////////////
-// export default class App {
-// 	private startApp(): any {
-// 		Navigation.startTabBasedApp({
-// 			tabs: [
-// 				{
-// 					label: 'One',
-// 					screen: 'searchRepository.Main',
-// 					title: 'Screen One'
-// 				},
-// 				{
-// 					label: 'Two',
-// 					screen: 'searchRepository.Main2',
-// 					title: 'Screen Two'
-// 				}
-// 			]
-// 		});
-// 	}
-// }
+///////////////
+// dont work
+///////////////
+export default class App {
+	constructor(props) {
+		this.startApp();
+	}
+	startApp() {
+		Navigation.startTabBasedApp({
+			tabs: [
+				{
+					label: 'One',
+					screen: 'searchRepository.Main',
+					title: 'Screen One'
+				},
+				{
+					label: 'Two',
+					screen: 'searchRepository.Main2',
+					title: 'Screen Two'
+				}
+			]
+		});
+	}
+}
 
-///////////////
-// work
-///////////////
-Navigation.startTabBasedApp({
-	tabs: [
-		{
-			label: 'One',
-			screen: 'searchRepository.Main',
-			title: 'Screen One'
-		},
-		{
-			label: 'Two',
-			screen: 'searchRepository.Main2',
-			title: 'Screen Two'
-		}
-	]
-});
+// ///////////////
+// // work
+// ///////////////
+// Navigation.startTabBasedApp({
+// 	tabs: [
+// 		{
+// 			label: 'One',
+// 			screen: 'searchRepository.Main',
+// 			title: 'Screen One'
+// 		},
+// 		{
+// 			label: 'Two',
+// 			screen: 'searchRepository.Main2',
+// 			title: 'Screen Two'
+// 		}
+// 	]
+// });
