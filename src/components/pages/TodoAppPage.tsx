@@ -24,7 +24,7 @@ export default class TodoAppPage extends React.Component<Props, State> {
 
 	public render(): JSX.Element {
 		return (
-			<Container>
+			<Wrapper>
 				<TodoList
 					value={this.state.newTodo}
 					todos={this.state.todos}
@@ -32,7 +32,7 @@ export default class TodoAppPage extends React.Component<Props, State> {
 					onPressAdd={this.onPressAdd.bind(this)}
 					onPressDelete={this.onPressDelete.bind(this)}
 				/>
-			</Container>
+			</Wrapper>
 		);
 	}
 
@@ -73,7 +73,7 @@ export default class TodoAppPage extends React.Component<Props, State> {
 	}
 }
 
-const Container = styled.View`
+const Wrapper = styled.View`
 	flex: 1;
 	padding: 40px;
 `;

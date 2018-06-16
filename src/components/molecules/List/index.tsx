@@ -11,12 +11,6 @@ interface Props {
 	onPress?: any;
 }
 
-interface StyledProps {
-	onPress?: any;
-}
-
-// TODO: FlatListにしたっら？
-// TODO: {...props}がどんなときに必要なのかがわからん
 const List: React.SFC<Props> = ({ children, onPress, ...props }) => (
 	<Wrapper {...props}>
 		<StyledListItem>{children}</StyledListItem>
@@ -27,6 +21,10 @@ const List: React.SFC<Props> = ({ children, onPress, ...props }) => (
 );
 
 export default List;
+
+interface StyledProps {
+	onPress?: any;
+}
 
 const Wrapper = styled.View`
 	flex-direction: row;

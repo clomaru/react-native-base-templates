@@ -10,10 +10,6 @@ interface Props {
 	presenter?: any;
 }
 
-interface StyledProps {
-	type?: string;
-}
-
 const HeadingPresenter: React.SFC<Props> = ({
 	children,
 	type = 'h2',
@@ -36,6 +32,10 @@ const Heading: React.SFC<Props> = props => (
 );
 
 export default Heading;
+
+interface StyledProps {
+	type?: string;
+}
 
 const Wrapper = styledComponentsTS<StyledProps>(styledComponents(Text))`
     font-size: ${p => tagSize[p.type]};
