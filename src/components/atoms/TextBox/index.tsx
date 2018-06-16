@@ -7,7 +7,7 @@ interface Props {
 	placeholder?: string;
 }
 
-export const TextBox: React.SFC<Props> = ({ placeholder, ...props }) => (
+const TextBox: React.SFC<Props> = ({ placeholder, ...props }) => (
 	<Wrapper placeholder={placeholder} {...props} />
 );
 

@@ -21,7 +21,7 @@ interface Props {
 
 interface State {}
 
-export class TodoListContianer extends React.Component<Props, State> {
+class TodoListContianer extends React.Component<Props, State> {
 	constructor(props: Props) {
 		super(props);
 		this.onChangeText = this.onChangeText.bind(this);
@@ -66,7 +66,7 @@ export class TodoListContianer extends React.Component<Props, State> {
 	}
 }
 
-export const TodoListPresenter: React.SFC<Props> = ({
+const TodoListPresenter: React.SFC<Props> = ({
 	value,
 	todos,
 	onChangeText,
@@ -77,7 +77,7 @@ export const TodoListPresenter: React.SFC<Props> = ({
 	<Wrapper>
 		<Heading type="h3">Todo App</Heading>
 
-		<StyleSubmittionBox
+		<StyledSubmittionBox
 			value={value}
 			onChangeText={onChangeText}
 			onPress={onPressAdd}
@@ -107,7 +107,7 @@ const Wrapper = styled.View`
 	padding: 10px;
 `;
 
-const StyleSubmittionBox = styledComponentsTS<StyledProps>(
+const StyledSubmittionBox = styledComponentsTS<StyledProps>(
 	styledComponents(SubmittionBox)
 )`
 	margin-top: 10px;

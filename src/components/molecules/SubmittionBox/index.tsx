@@ -11,11 +11,7 @@ interface Props {
 	onPress?: any;
 }
 
-export const SubmittionBox: React.SFC<Props> = ({
-	children,
-	onPress,
-	...props
-}) => (
+const SubmittionBox: React.SFC<Props> = ({ children, onPress, ...props }) => (
 	<Wrapper>
 		<TextBox {...props}>{children}</TextBox>
 		<StyleButton onPress={onPress}>Add</StyleButton>

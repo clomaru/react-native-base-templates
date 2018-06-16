@@ -14,7 +14,7 @@ interface StyledProps {
 	type?: string;
 }
 
-export const HeadingPresenter: React.SFC<Props> = ({
+const HeadingPresenter: React.SFC<Props> = ({
 	children,
 	type = 'h2',
 	...props
@@ -24,7 +24,7 @@ export const HeadingPresenter: React.SFC<Props> = ({
 	</Wrapper>
 );
 
-export const HeadingContainer: React.SFC<Props> = ({ presenter, ...props }) => {
+const HeadingContainer: React.SFC<Props> = ({ presenter, ...props }) => {
 	return presenter({ ...props });
 };
 

@@ -17,12 +17,12 @@ interface StyledProps {
 
 // TODO: FlatListにしたっら？
 // TODO: {...props}がどんなときに必要なのかがわからん
-export const List: React.SFC<Props> = ({ children, onPress, ...props }) => (
+const List: React.SFC<Props> = ({ children, onPress, ...props }) => (
 	<Wrapper {...props}>
-		<StyleListItem>{children}</StyleListItem>
-		<StyleButton onPress={onPress} {...props}>
+		<StyledListItem>{children}</StyledListItem>
+		<StyledButton onPress={onPress} {...props}>
 			Delete
-		</StyleButton>
+		</StyledButton>
 	</Wrapper>
 );
 
@@ -35,8 +35,8 @@ const Wrapper = styled.View`
 	justify-content: space-between;
 `;
 
-const StyleListItem = styled(ListItem)``;
+const StyledListItem = styled(ListItem)``;
 
-const StyleButton = styledComponentsTS<StyledProps>(styledComponents(Button))`
+const StyledButton = styledComponentsTS<StyledProps>(styledComponents(Button))`
 	background-color: #e65100;
 `;

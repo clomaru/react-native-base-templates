@@ -7,7 +7,7 @@ interface Props {
 	children?: string;
 }
 
-export const ListItem: React.SFC<Props> = ({ children, ...props }) => (
+const ListItem: React.SFC<Props> = ({ children, ...props }) => (
 	<Wrapper {...props}>
 		<Text>{children}</Text>
 	</Wrapper>

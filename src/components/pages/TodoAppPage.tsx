@@ -5,9 +5,9 @@ import { View, ScrollView, AsyncStorage } from 'react-native';
 
 import TodoList from '../organisms/TodoList/index';
 
-export interface Props {}
+interface Props {}
 
-export interface State {
+interface State {
 	newTodo: string;
 	todos: string[];
 }

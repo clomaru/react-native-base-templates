@@ -7,7 +7,7 @@ interface Props {
 	children?: string;
 }
 
-export const Button: React.SFC<Props> = ({ children, ...props }) => (
+const Button: React.SFC<Props> = ({ children, ...props }) => (
 	<Wrapper {...props}>
 		<ButtonText>{children}</ButtonText>
 	</Wrapper>
