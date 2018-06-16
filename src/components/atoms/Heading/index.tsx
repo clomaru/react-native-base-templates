@@ -3,38 +3,43 @@ import styled from 'styled-components/native';
 import styledComponents from 'styled-components';
 import styledComponentsTS from 'styled-components-ts';
 import { Text } from 'react-native';
+import { containPresenter } from '../../utils/HoC';
+
+enum TagSize {
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6
+}
 
 interface Props {
 	children?: string;
-	type?: string;
+	type?: TagSize;
 	presenter?: any;
 }
 
-const HeadingPresenter: React.SFC<Props> = ({
-	children,
-	type = 'h2',
-	...props
-}) => (
+const HeadingPresenter: React.SFC<Props> = ({ children, type, ...props }) => (
 	<Wrapper type={type} {...props}>
 		{children}
 	</Wrapper>
 );
 
-const HeadingContainer: React.SFC<Props> = ({ presenter, ...props }) => {
-	return presenter({ ...props });
+const HeadingContainer: React.SFC<Props> = ({
+	presenter,
+	type = TagSize.h2,
+	children,
+	...props
+}) => {
+	return presenter({ type, children, ...props });
 };
 
-const Heading: React.SFC<Props> = props => (
-	<HeadingContainer
-		presenter={presenterProps => <HeadingPresenter {...presenterProps} />}
-		{...props}
-	/>
-);
-
+const Heading = containPresenter(HeadingContainer, HeadingPresenter);
 export default Heading;
 
 interface StyledProps {
-	type?: string;
+	type?: TagSize;
 }
 
 const Wrapper = styledComponentsTS<StyledProps>(styledComponents(Text))`

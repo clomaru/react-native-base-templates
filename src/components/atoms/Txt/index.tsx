@@ -15,20 +15,22 @@ interface Props {
 	size?: TagSize;
 }
 
-interface StyledProps {
-	size?: TagSize;
-}
-
-const Txt: React.SFC<Props> = ({ children, size = 'm', ...props }) => (
+const Txt: React.SFC<Props> = ({ children, size = TagSize.m, ...props }) => (
 	<Wrapper size={size} {...props}>
 		{children}
 	</Wrapper>
 );
 export default Txt;
 
-export const Anchor: React.SFC<Props> = ({ children, ...props }) => (
-	<StyledTxt {...props}>{children}</StyledTxt>
+export const Anchor: React.SFC<Props> = ({ children, size, ...props }) => (
+	<StyledTxt size={size} {...props}>
+		{children}
+	</StyledTxt>
 );
+
+interface StyledProps {
+	size?: TagSize;
+}
 
 const Wrapper = styledComponentsTS<StyledProps>(styledComponents(Text))`
 	font-size: ${p => tagSize[p.size]};
