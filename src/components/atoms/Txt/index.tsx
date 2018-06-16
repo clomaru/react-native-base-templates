@@ -15,6 +15,10 @@ interface Props {
 	size?: TagSize;
 }
 
+interface StyledProps {
+	size?: TagSize;
+}
+
 const Txt: React.SFC<Props> = ({ children, size = 'm', ...props }) => (
 	<Wrapper size={size} {...props}>
 		{children}
