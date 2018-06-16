@@ -6,13 +6,6 @@ import { reducer } from './reducers/reducer';
 // let middleware = [thunk];
 // middleware = [...middleware];
 
-// // TODO: arrowにできない？
-// export default function configureStore() {
-// 	// return createStore(rootReducer, applyMiddleware(...middleware));
-// 	let store = createStore(rootReducer);
-// 	return store;
-// }
-
 export const configureStore = () => {
 	return createStore(
 		combineReducers({
@@ -21,9 +14,3 @@ export const configureStore = () => {
 	);
 };
 export default configureStore;
-
-// export default createStore(
-// 	combineReducers({
-// 		reducer
-// 	})
-// );
