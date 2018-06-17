@@ -17,7 +17,9 @@
 	},
 	"config": {
 		"react-native-storybook-loader": {
-			"searchDir": ["./lib"],
+			"searchDir": [
+				"./lib"
+			],
 			"pattern": "**/*.stories.js",
 			"outputFile": "./storybook/storyLoader.js"
 		}
@@ -39,7 +41,9 @@
 		"prettier": "^1.13.4",
 		"prop-types": "^15.6.1",
 		"react-dom": "16.3.1",
+		"react-native-storybook-loader": "^1.8.0",
 		"react-test-renderer": "16.3.1",
+		"storybook": "^1.0.0",
 		"styled-components": "^3.2.6",
 		"styled-components-ts": "0.0.14",
 		"ts-jest": "^22.4.6",
@@ -49,7 +53,11 @@
 	},
 	"jest": {
 		"preset": "react-native",
-		"moduleFileExtensions": ["ts", "tsx", "js"],
+		"moduleFileExtensions": [
+			"ts",
+			"tsx",
+			"js"
+		],
 		"transform": {
 			"^.+\\.(js)$": "<rootDir>/node_modules/babel-jest",
 			"\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
