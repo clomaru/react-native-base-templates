@@ -15,35 +15,39 @@ enum TagSize {
 }
 
 interface Props {
-	children?: string;
-	type?: TagSize;
+	children?: React.ReactNode;
+	tagSizeTypes?: TagSize;
 	presenter?: any;
 }
 
-const HeadingPresenter: React.SFC<Props> = ({ children, type, ...props }) => (
-	<Wrapper type={type} {...props}>
+const HeadingPresenter: React.SFC<Props> = ({
+	children,
+	tagSizeTypes,
+	...props
+}) => (
+	<Wrapper types={tagSizeTypes} {...props}>
 		{children}
 	</Wrapper>
 );
 
 const HeadingContainer: React.SFC<Props> = ({
 	presenter,
-	type = TagSize.h2,
+	tagSizeTypes = TagSize.h2,
 	children,
 	...props
 }) => {
-	return presenter({ type, children, ...props });
+	return presenter({ tagSizeTypes, children, ...props });
 };
 
 const Heading = containPresenter(HeadingContainer, HeadingPresenter);
 export default Heading;
 
 interface StyledProps {
-	type?: TagSize;
+	types?: TagSize;
 }
 
 const Wrapper = styledComponentsTS<StyledProps>(styledComponents(Text))`
-    font-size: ${p => tagSize[p.type]};
+  font-size: ${p => tagSize[p.types]};
 `;
 
 const tagSize = {

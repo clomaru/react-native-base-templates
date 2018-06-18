@@ -8,6 +8,8 @@ import Heading from '../../atoms/Heading/index';
 import List from '../../molecules/List/index';
 import SubmittionBox from '../../molecules/SubmittionBox/index';
 
+import Txt from '../../atoms/Txt/index';
+
 interface Props {
 	presenter?: any;
 	onPressAdd?: any;
@@ -75,7 +77,8 @@ const TodoListPresenter: React.SFC<Props> = ({
 	...props
 }) => (
 	<Wrapper>
-		<Heading type="h3">Todo App</Heading>
+		<Heading types="h3">Todo App</Heading>
+		<Txt sizes="s">Todo oooo</Txt>
 
 		<StyledSubmittionBox
 			value={value}

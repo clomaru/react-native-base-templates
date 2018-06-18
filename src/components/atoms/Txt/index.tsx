@@ -4,6 +4,7 @@ import styledComponents from 'styled-components';
 import styledComponentsTS from 'styled-components-ts';
 import { Text } from 'react-native';
 
+// TODO:わかりやすいように'sizes'とかに変えたので修正
 enum TagSize {
 	s,
 	m,
@@ -11,25 +12,25 @@ enum TagSize {
 }
 
 interface Props {
-	children?: string;
-	size?: TagSize;
+	children?: React.ReactNode;
+	sizes?: TagSize;
 }
 
-const Txt: React.SFC<Props> = ({ children, size = TagSize.m, ...props }) => (
-	<Wrapper size={size} {...props}>
+const Txt: React.SFC<Props> = ({ children, sizes = TagSize.m, ...props }) => (
+	<Wrapper size={sizes} {...props}>
 		{children}
 	</Wrapper>
 );
 export default Txt;
 
-export const Anchor: React.SFC<Props> = ({ children, size, ...props }) => (
-	<StyledTxt size={size} {...props}>
-		{children}
-	</StyledTxt>
-);
+// export const Anchor: React.SFC<Props> = ({ children, sizes, ...props }) => (
+// 	<StyledTxt size={sizes} {...props}>
+// 		{children}
+// 	</StyledTxt>
+// );
 
 interface StyledProps {
-	size?: TagSize;
+	sizes?: TagSize;
 }
 
 const Wrapper = styledComponentsTS<StyledProps>(styledComponents(Text))`
