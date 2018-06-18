@@ -12,6 +12,7 @@ interface State {
 	todos: string[];
 }
 
+// TODO: strict:trueでやる
 export default class TodoAppPage extends React.Component<Props, State> {
 	constructor(props: Props) {
 		super(props);
