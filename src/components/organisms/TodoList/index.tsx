@@ -52,7 +52,7 @@ class TodoListContianer extends React.Component<Props, State> {
 		return presenter(presenterProps);
 	}
 
-	private onChangeText(...args): void {
+	private onChangeText(...args: any[]): void {
 		const { onChangeText, text } = this.props;
 		onChangeText(...args, text);
 	}
