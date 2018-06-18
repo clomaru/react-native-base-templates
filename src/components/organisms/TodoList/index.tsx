@@ -78,7 +78,6 @@ const TodoListPresenter: React.SFC<Props> = ({
 }) => (
 	<Wrapper>
 		<Heading types="h3">Todo App</Heading>
-		<Txt sizes={20}>Todo oooo</Txt>
 
 		<StyledSubmittionBox
 			value={value}
