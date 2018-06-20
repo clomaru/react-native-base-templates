@@ -9,6 +9,7 @@ import { Text, View, FlatList } from 'react-native';
 import Button from '../../components/atoms/Button/index';
 import ListItem from '../../components/atoms/ListItem/index';
 
+// TODO: すべてのstateのredux化
 // TODO: ページ遷移
 // TODO: udemy
 // TODO: android navigaton
@@ -26,7 +27,7 @@ interface State {
 }
 // https://stackoverflow.com/questions/47561848/property-value-does-not-exist-on-type-readonly?rq=1&utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = state => {
 	return {
 		showText: state.reducer.showText
 	};
@@ -34,7 +35,7 @@ const mapStateToProps = (state: any) => {
 
 // reduxの型定義ファイル入れたあとで
 // function mapDispatchToProps(dispatch: Redux.Dispatch<any>) {
-const mapDispatchToProps = (dispatch: any) => {
+const mapDispatchToProps = dispatch => {
 	return {
 		changeText() {
 			dispatch(appActions.changeTextAction());
