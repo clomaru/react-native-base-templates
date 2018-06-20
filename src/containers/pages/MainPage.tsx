@@ -65,7 +65,7 @@ class MainPage extends React.Component<Props, State> {
 				<FlatList
 					data={this.state.items}
 					renderItem={({ item }) => (
-						<TouchableOpacity onPress={() => this.navigateToDetail()}>
+						<TouchableOpacity onPress={() => this.navigateToDetail(item)}>
 							<ListItem style={{ padding: 20 }}>{item.name}</ListItem>
 						</TouchableOpacity>
 					)}
@@ -79,12 +79,13 @@ class MainPage extends React.Component<Props, State> {
 		);
 	}
 
-	private navigateToDetail() {
-		console.log('oooo');
-		// this.props.navigator.push({
-		// 	// screen: 'croccha.ChangePassConfirmMailFormPage',
-		// 	// title: 'パスワードをお忘れ(変更)の方'
-		// });
+	private navigateToDetail(item) {
+		console.log(`item ${item}`);
+		this.props.navigator.push({
+			screen: 'searchRepository.DetailPage',
+			title: 'yeah!',
+			passProps: item
+		});
 	}
 
 	fetchRepositories(refreshing: boolean = false) {

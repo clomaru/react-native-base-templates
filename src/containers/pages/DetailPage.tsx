@@ -9,6 +9,7 @@ export default class DetailPage extends React.Component {
 		return (
 			<View style={styles.container}>
 				<Text style={styles.welcome}>ooooooooooo!!!!!!!!!</Text>
+				<Text style={styles.welcome}>{this.props.name}</Text>
 			</View>
 		);
 	}
