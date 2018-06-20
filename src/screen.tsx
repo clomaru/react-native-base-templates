@@ -1,18 +1,25 @@
 import { Navigation } from 'react-native-navigation';
 
-import Main from './containers/pages/main';
-import Main2 from './containers/pages/main2';
+import MainPage from './containers/pages/MainPage';
+import Main2Page from './containers/pages/Main2Page';
+import DetailPage from './containers/pages/DetailPage';
 
 export default function registerScreens(store: any, Provider: any) {
 	Navigation.registerComponent(
-		'searchRepository.Main',
-		() => Main,
+		'searchRepository.MainPage',
+		() => MainPage,
 		store,
 		Provider
 	);
 	Navigation.registerComponent(
-		'searchRepository.Main2',
-		() => Main2,
+		'searchRepository.Main2Page',
+		() => Main2Page,
+		store,
+		Provider
+	);
+	Navigation.registerComponent(
+		'searchRepository.DetailPage',
+		() => DetailPage,
 		store,
 		Provider
 	);

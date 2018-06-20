@@ -18,12 +18,12 @@ export default class App {
 			tabs: [
 				{
 					label: 'One',
-					screen: 'searchRepository.Main',
+					screen: 'searchRepository.MainPage',
 					title: 'Screen One'
 				},
 				{
 					label: 'Two',
-					screen: 'searchRepository.Main2',
+					screen: 'searchRepository.Main2Page',
 					title: 'Screen Two'
 				}
 			]
