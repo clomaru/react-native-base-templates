@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { css } from 'styled-components';
 import styled from 'styled-components/native';
 import { Text, View } from 'react-native';
 

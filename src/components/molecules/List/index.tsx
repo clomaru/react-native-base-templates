@@ -8,22 +8,21 @@ import { View } from 'react-native';
 
 interface Props {
 	children?: string;
-	onPress?: any;
+	onPress?: () => void;
 }
 
 const List: React.SFC<Props> = ({ children, onPress, ...props }) => (
 	<Wrapper {...props}>
-		<StyledListItem>{children}</StyledListItem>
+		<ListItem>{children}</ListItem>
 		<StyledButton onPress={onPress} {...props}>
 			Delete
 		</StyledButton>
 	</Wrapper>
 );
-
 export default List;
 
 interface StyledProps {
-	onPress?: any;
+	onPress?: () => void;
 }
 
 const Wrapper = styled.View`
@@ -32,8 +31,6 @@ const Wrapper = styled.View`
 	padding: 10px;
 	justify-content: space-between;
 `;
-
-const StyledListItem = styled(ListItem)``;
 
 const StyledButton = styledComponentsTS<StyledProps>(styledComponents(Button))`
 	background-color: #e65100;

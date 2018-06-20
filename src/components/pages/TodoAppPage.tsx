@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { css } from 'styled-components';
 import styled from 'styled-components/native';
-import { View, ScrollView, AsyncStorage } from 'react-native';
+import { View, AsyncStorage } from 'react-native';
 
 import TodoList from '../organisms/TodoList/index';
 
@@ -12,7 +12,6 @@ interface State {
 	todos: string[];
 }
 
-// TODO: strict:trueでやる
 export default class TodoAppPage extends React.Component<Props, State> {
 	constructor(props: Props) {
 		super(props);
@@ -52,7 +51,7 @@ export default class TodoAppPage extends React.Component<Props, State> {
 		);
 	}
 
-	private onPressDelete(index: any): void {
+	private onPressDelete(index: number): void {
 		this.setState(
 			{
 				todos: this.state.todos.filter((t, i) => i !== index)

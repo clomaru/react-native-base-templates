@@ -6,30 +6,20 @@ import { Text } from 'react-native';
 
 interface Props {
 	children?: React.ReactNode;
-	sizes?: number;
+	size?: number;
 }
 
-const Txt: React.SFC<Props> = ({ children, sizes, ...props }) => (
-	<Wrapper size={sizes} {...props}>
+const Txt: React.SFC<Props> = ({ children, size = 15, ...props }) => (
+	<Wrapper size={size} {...props}>
 		{children}
 	</Wrapper>
 );
 export default Txt;
 
-export const Anchor: React.SFC<Props> = ({ children, sizes, ...props }) => (
-	<StyledTxt size={sizes} {...props}>
-		{children}
-	</StyledTxt>
-);
-
 interface StyledProps {
-	sizes?: number;
+	size?: number;
 }
 
 const Wrapper = styledComponentsTS<StyledProps>(styledComponents(Text))`
 	font-size: ${p => p.size}px;
-`;
-
-const StyledTxt = styledComponentsTS<StyledProps>(styledComponents(Text))`
-	color: blue;
 `;

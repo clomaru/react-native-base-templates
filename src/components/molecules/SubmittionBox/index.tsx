@@ -8,7 +8,7 @@ import TextBox from '../../atoms/TextBox/index';
 
 interface Props {
 	children?: string;
-	onPress?: any;
+	onPress?: () => void;
 }
 
 const SubmittionBox: React.SFC<Props> = ({ children, onPress, ...props }) => (
@@ -21,7 +21,7 @@ const SubmittionBox: React.SFC<Props> = ({ children, onPress, ...props }) => (
 export default SubmittionBox;
 
 interface StyledProps {
-	onPress?: any;
+	onPress?: () => void;
 }
 
 const Wrapper = styled.View``;

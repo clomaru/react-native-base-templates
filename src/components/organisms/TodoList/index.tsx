@@ -3,19 +3,17 @@ import { ScrollView } from 'react-native';
 import styled from 'styled-components/native';
 import styledComponents from 'styled-components';
 import styledComponentsTS from 'styled-components-ts';
-import { containPresenter } from '../../utils/HoC.js';
+import { containPresenter } from '../../utils/HoC';
 import Heading from '../../atoms/Heading/index';
 import List from '../../molecules/List/index';
 import SubmittionBox from '../../molecules/SubmittionBox/index';
 
-import Txt from '../../atoms/Txt/index';
-
 interface Props {
 	presenter?: any;
-	onPressAdd?: any;
-	onChangeText?: any;
-	onPressDelete?: any;
-	value?: any;
+	onPressAdd?: () => void;
+	onChangeText?: (text: string) => void;
+	onPressDelete?: (index: number) => void;
+	value?: string;
 	todos?: string[];
 	text?: string;
 	index?: number;
@@ -33,12 +31,12 @@ class TodoListContianer extends React.Component<Props, State> {
 
 	public render() {
 		const {
-			presenter,
 			value,
 			todos,
 			onChangeText,
 			onPressAdd,
 			onPressDelete,
+			presenter,
 			...props
 		} = this.props;
 		const presenterProps = {
@@ -54,17 +52,14 @@ class TodoListContianer extends React.Component<Props, State> {
 
 	private onChangeText(...args: any[]): void {
 		const { onChangeText, text } = this.props;
-		onChangeText(...args, text);
 	}
 
 	private onPressAdd(): void {
 		const { onPressAdd } = this.props;
-		onPressAdd();
 	}
 
 	private onPressDelete(): void {
 		const { onPressDelete, index } = this.props;
-		onPressDelete(index);
 	}
 }
 
@@ -100,9 +95,9 @@ const TodoList = containPresenter(TodoListContianer, TodoListPresenter);
 export default TodoList;
 
 interface StyledProps {
-	value?: any;
-	onChangeText?: any;
-	onPress?: any;
+	value?: string;
+	onChangeText?: (text: string) => void;
+	onPress?: () => void;
 }
 
 const Wrapper = styled.View`
