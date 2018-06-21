@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { View } from 'react-native';
 import { storiesOf, module } from '@storybook/react-native';
-import Heading from './index.js';
+import Heading from './index';
 
-storiesOf('Heading', module).add('heading', () => (
+storiesOf('Heading', module).add('Heading', () => (
 	<View>
 		<Heading type="h1">見出し1</Heading>
 		<Heading type="h2">見出し2</Heading>
