@@ -1,10 +1,16 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-
-// TODO:      ↓この命名
 import * as appActions from '../../actions/index';
 import styled from 'styled-components/native';
-import { Text, View, FlatList, TouchableOpacity } from 'react-native';
+import {
+	Text,
+	View,
+	TextInput,
+	FlatList,
+	TouchableOpacity,
+	Image,
+	AppState
+} from 'react-native';
 
 import Button from '../../components/atoms/Button/index';
 import ListItem from '../../components/atoms/ListItem/index';
@@ -28,19 +34,11 @@ interface State {
 // https://stackoverflow.com/questions/47561848/property-value-does-not-exist-on-type-readonly?rq=1&utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
 
 const mapStateToProps = state => {
-	return {
-		showText: state.reducer.showText
-	};
+	return {};
 };
 
-// reduxの型定義ファイル入れたあとで
-// function mapDispatchToProps(dispatch: Redux.Dispatch<any>) {
 const mapDispatchToProps = dispatch => {
-	return {
-		changeText() {
-			dispatch(appActions.changeTextAction());
-		}
-	};
+	return {};
 };
 
 class MainPage extends React.Component<Props, State> {
@@ -48,7 +46,8 @@ class MainPage extends React.Component<Props, State> {
 		super(props);
 		this.state = {
 			items: [],
-			refreshing: false
+			refreshing: false,
+			text: ''
 			// showText: 'hello Redux'
 		};
 	}
@@ -56,17 +55,25 @@ class MainPage extends React.Component<Props, State> {
 	public render() {
 		return (
 			<Container>
-				<View>
-					<Text style={{ fontSize: 20 }}>{this.props.showText}</Text>
-					<Button onPress={this.props.changeText}>change the text</Button>
-				</View>
+				<SearchBox>
+					<StyledTextInput onChangeText={text => this.setState({ text })} />
+					<TouchableOpacity onPress={() => this.fetchRepositories(true)}>
+						<Text>Search</Text>
+					</TouchableOpacity>
+				</SearchBox>
 
-				<Button onPress={() => this.fetchRepositories()}>Fetch</Button>
+				{/* このボタンを上のボタンと統合する */}
+				{/* <Button onPress={() => this.fetchRepositories()}>Fetch</Button> */}
 				<FlatList
 					data={this.state.items}
 					renderItem={({ item }) => (
 						<TouchableOpacity onPress={() => this.navigateToDetail(item)}>
 							<ListItem style={{ padding: 20 }}>{item.name}</ListItem>
+							<Text>{item.owner.login}</Text>
+							<Image
+								style={{ width: 20, height: 20 }}
+								source={{ url: item.owner.avatar_url }}
+							/>
 						</TouchableOpacity>
 					)}
 					keyExtractor={item => item.id}
@@ -79,8 +86,22 @@ class MainPage extends React.Component<Props, State> {
 		);
 	}
 
+	componentDidMount() {
+		AppState.addEventListener('change', this.onChangeState);
+	}
+
+	componentWillUnmount() {
+		AppState.removeEventListener('change', this.onChangeState);
+	}
+
+	onChangeState = appState => {
+		if (appState === 'active') {
+			this.fetchRepositories(true);
+		}
+	};
+
 	private navigateToDetail(item) {
-		console.log(`item ${item}`);
+		console.log(item.name);
 		this.props.navigator.push({
 			screen: 'searchRepository.DetailPage',
 			title: 'yeah!',
@@ -91,7 +112,11 @@ class MainPage extends React.Component<Props, State> {
 	fetchRepositories(refreshing: boolean = false) {
 		const newPage = refreshing ? 1 : this.page + 1;
 		this.setState({ refreshing });
-		fetch(`https://api.github.com/search/repositories?q=react&page=${newPage}`)
+		fetch(
+			`https://api.github.com/search/repositories?q=${
+				this.state.text
+			}&page=${newPage}`
+		)
 			.then(response => response.json())
 			.then(({ items }) => {
 				this.page = newPage;
@@ -114,4 +139,15 @@ const Container = styled.View`
 	justify-content: center;
 	align-items: center;
 	flex: 1;
+`;
+
+const SearchBox = styled.View`
+	padding: 20px;
+	flex-direction: row;
+	background-color: white;
+`;
+
+const StyledTextInput = styled.TextInput`
+	flex: 1;
+	padding: 10px;
 `;
