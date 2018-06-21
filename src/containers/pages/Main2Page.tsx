@@ -1,37 +1,58 @@
 import * as React from 'react';
+import { connect } from 'react-redux';
+import * as appActions from '../../actions/index';
 import styled from 'styled-components/native';
 import { Text, View } from 'react-native';
 
-interface Props {}
+import Button from '../../components/atoms/Button/index';
+import ListItem from '../../components/atoms/ListItem/index';
 
-interface State {}
+interface Props {
+	page: number;
+}
 
-export default class Main2Page extends React.Component<Props, State> {
+interface State {
+	showText: string;
+}
+
+const mapStateToProps = (state: State) => {
+	return {
+		showText: state.reducer.showText
+	};
+};
+
+const mapDispatchToProps = (dispatch: Redux.Dispatch<any>) => {
+	return {
+		changeText() {
+			dispatch(appActions.changeTextAction());
+		}
+	};
+};
+
+class MainPage2 extends React.Component<Props, State> {
+	constructor(props: Props) {
+		super(props);
+	}
 	public render() {
 		return (
 			<Container>
-				<WelcomeText>main2 page!!</WelcomeText>
-				<InstructionsText>To get started, edit Main.js</InstructionsText>
+				<View>
+					<Text style={{ fontSize: 20 }}>{this.props.showText}</Text>
+					<Button onPress={this.props.changeText}>change the text</Button>
+				</View>
 			</Container>
 		);
 	}
 }
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(MainPage2);
 
 const Container = styled.View`
 	background-color: #f5fcff;
 	justify-content: center;
 	align-items: center;
 	flex: 1;
-`;
-
-const WelcomeText = styled.Text`
-	font-size: 20px;
-	text-align: center;
-	margin: 10px;
-`;
-
-const InstructionsText = styled.Text`
-	text-align: center;
-	color: #333333;
-	margin-bottom: 5px;
 `;
