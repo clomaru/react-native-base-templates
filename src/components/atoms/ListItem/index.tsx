@@ -3,13 +3,11 @@ import styled from 'styled-components/native';
 import { Text, View } from 'react-native';
 
 interface Props {
-	children?: string;
+	children?: React.ReactNode;
 }
 
 const ListItem: React.SFC<Props> = ({ children, ...props }) => (
-	<Wrapper {...props}>
-		<Text>{children}</Text>
-	</Wrapper>
+	<Wrapper {...props}>{children}</Wrapper>
 );
 
 export default ListItem;

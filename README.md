@@ -6,7 +6,9 @@
 
 - [ReactNative](https://github.com/facebook/react-native)
 - [React](https://github.com/facebook/react/)
+- [Redux](https://github.com/reduxjs/redux)
 - [TypeScript](https://github.com/Microsoft/TypeScript)
+- [react-native-navigation](https://github.com/wix/react-native-navigation)
 
 
 ### CodeFormatter
@@ -28,18 +30,17 @@
 - [fetchAPI](https://facebook.github.io/react-native/docs/network.html)
 
 
-## Branchs
+## Other Branchs
 
-- master(this)
+- [master](https://github.com/mrsekut/react-native-base-templates/tree/master)
 - [todoApp(dev now)](https://github.com/clomaru/react-native-base-templates/tree/todoApp)
-- searchRepositoryApp
+- searchRepositoryApp(this)
 - upLoadImgApp
 - twitterApp
 
 
 ## To Install
 
-- [redux](https://redux.js.org/)
 - [immutable.js](https://github.com/facebook/immutable-js)
 - [redux-thunk](https://github.com/reduxjs/redux-thunk)
 - [redux-saga](https://github.com/redux-saga/redux-saga/)

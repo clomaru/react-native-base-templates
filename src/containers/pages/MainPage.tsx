@@ -14,13 +14,20 @@ import {
 
 import Button from '../../components/atoms/Button/index';
 import ListItem from '../../components/atoms/ListItem/index';
+import SubmittionBox from '../../components/molecules/SubmittionBox/index';
+import ListWithIcon from '../../components/molecules/ListWithIcon/index';
 
+// TODO: template層を作る
 // TODO: すべてのstateのredux化
 // TODO: ページ遷移
 // TODO: udemy
 // TODO: android navigaton
 // TODO: ios icon
 // TODO: android icon
+// TODO: storybookのテスト
+// TODO: atomic designの本をもっとやんと読む
+// TODO: redux dev tools
+// TODO: react native debugger
 
 interface Props {
 	page: number;
@@ -33,11 +40,11 @@ interface State {
 }
 // https://stackoverflow.com/questions/47561848/property-value-does-not-exist-on-type-readonly?rq=1&utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
 
-const mapStateToProps = state => {
+const mapStateToProps = (state: State) => {
 	return {};
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch: Dispath) => {
 	return {};
 };
 
@@ -55,26 +62,21 @@ class MainPage extends React.Component<Props, State> {
 	public render() {
 		return (
 			<Container>
-				<SearchBox>
-					<StyledTextInput onChangeText={text => this.setState({ text })} />
-					<TouchableOpacity onPress={() => this.fetchRepositories(true)}>
-						<Text>Search</Text>
-					</TouchableOpacity>
-				</SearchBox>
+				<SubmittionBox
+					buttonText={'search'}
+					onChange={text => this.setState({ text })}
+					onPress={() => this.fetchRepositories(true)}
+				/>
 
-				{/* このボタンを上のボタンと統合する */}
-				{/* <Button onPress={() => this.fetchRepositories()}>Fetch</Button> */}
 				<FlatList
 					data={this.state.items}
 					renderItem={({ item }) => (
-						<TouchableOpacity onPress={() => this.navigateToDetail(item)}>
-							<ListItem style={{ padding: 20 }}>{item.name}</ListItem>
-							<Text>{item.owner.login}</Text>
-							<Image
-								style={{ width: 20, height: 20 }}
-								source={{ url: item.owner.avatar_url }}
+						<View>
+							<ListWithIcon
+								item={item}
+								onPress={() => this.navigateToDetail(item)}
 							/>
-						</TouchableOpacity>
+						</View>
 					)}
 					keyExtractor={item => item.id}
 					onEndReached={() => this.fetchRepositories()}
@@ -137,16 +139,18 @@ export default connect(
 const Container = styled.View`
 	background-color: #f5fcff;
 	justify-content: center;
-	align-items: center;
+	padding: 5px;
 	flex: 1;
 `;
 
+// TODO:けす
 const SearchBox = styled.View`
 	padding: 20px;
 	flex-direction: row;
 	background-color: white;
 `;
 
+// TODO:けす
 const StyledTextInput = styled.TextInput`
 	flex: 1;
 	padding: 10px;

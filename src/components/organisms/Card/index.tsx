@@ -10,6 +10,7 @@ interface Props {
 
 const Card: React.SFC<Props> = ({ ...props }) => (
 	<Wrapper>
+		<Text>ooooooo</Text>
 		<Text>{props.name}</Text>
 		<Image
 			style={{ width: 100, height: 100 }}
