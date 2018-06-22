@@ -27,7 +27,6 @@ interface Props {
 interface State {
 	items: any;
 	refreshing: boolean;
-	showText: string;
 }
 // https://stackoverflow.com/questions/47561848/property-value-does-not-exist-on-type-readonly?rq=1&utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
 
@@ -46,7 +45,6 @@ class MainPage extends React.Component<Props, State> {
 			items: [],
 			refreshing: false,
 			text: ''
-			// showText: 'hello Redux'
 		};
 	}
 	page = 1;
