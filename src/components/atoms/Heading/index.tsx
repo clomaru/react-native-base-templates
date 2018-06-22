@@ -6,12 +6,12 @@ import { Text } from 'react-native';
 import { containPresenter } from '../../utils/HoC';
 
 enum TagSize {
-	h1,
-	h2,
-	h3,
-	h4,
-	h5,
-	h6
+	h1 = 'h1',
+	h2 = 'h2',
+	h3 = 'h3',
+	h4 = 'h4',
+	h5 = 'h5',
+	h6 = 'h6'
 }
 
 interface Props {
@@ -25,7 +25,7 @@ const HeadingPresenter: React.SFC<Props> = ({
 	tagSizeTypes,
 	...props
 }) => (
-	<Wrapper types={tagSizeTypes} {...props}>
+	<Wrapper type={tagSizeTypes} {...props}>
 		{children}
 	</Wrapper>
 );
@@ -43,11 +43,11 @@ const Heading = containPresenter(HeadingContainer, HeadingPresenter);
 export default Heading;
 
 interface StyledProps {
-	types?: TagSize;
+	type?: TagSize;
 }
 
 const Wrapper = styledComponentsTS<StyledProps>(styledComponents(Text))`
-  font-size: ${p => tagSize[p.types]};
+	font-size: ${p => tagSize[p.type]};
 `;
 
 const tagSize = {

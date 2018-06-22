@@ -3,30 +3,33 @@ import styled from 'styled-components/native';
 import styledComponents from 'styled-components';
 import styledComponentsTS from 'styled-components-ts';
 import { Text, View, TouchableOpacity, Image } from 'react-native';
+import Heading from '../../atoms/Heading/index';
+import Txt from '../../atoms/Txt/index';
 import ListItem from '../../atoms/ListItem/index';
 import TextBox from '../../atoms/TextBox/index';
 
-// TODO: itemは汎用性ないやろ
 interface Props {
-	children?: string;
-	item?: any;
+	name?: string;
+	user?: string;
+	source?: string;
 	onPress?: () => void;
 }
 
+// TODO: RNのstyleについて調べる
 const ListWithIcon: React.SFC<Props> = ({
-	children,
-	item,
+	name,
+	user,
+	source,
 	onPress,
 	...props
 }) => (
 	<Wrapper onPress={onPress}>
 		<StyledListItem>
-			<Image
-				style={{ width: 40, height: 40 }}
-				source={{ url: item.owner.avatar_url }}
-			/>
-			oo{item.name}oo
-			<Text>aa{item.owner.login}</Text>
+			<StyledImage source={{ url: source }} />
+			<View>
+				<Heading type="h5">{name}</Heading>
+				<Txt size={15}>{user}</Txt>
+			</View>
 		</StyledListItem>
 	</Wrapper>
 );
@@ -36,4 +39,13 @@ const Wrapper = styled(TouchableOpacity)``;
 
 const StyledListItem = styled(ListItem)`
 	padding: 20px;
+`;
+
+interface StyledProps {
+	source?: any;
+}
+
+const StyledImage = styledComponentsTS<StyledProps>(styledComponents(Image))`
+	width: 40px;
+	height: 40px;
 `;
