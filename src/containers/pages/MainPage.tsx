@@ -2,22 +2,13 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import * as appActions from '../../actions/index';
 import styled from 'styled-components/native';
-import {
-	Text,
-	View,
-	TextInput,
-	FlatList,
-	TouchableOpacity,
-	Image,
-	AppState
-} from 'react-native';
+import { View, TextInput, FlatList, AppState } from 'react-native';
 
 import Button from '../../components/atoms/Button/index';
 import ListItem from '../../components/atoms/ListItem/index';
 import SubmittionBox from '../../components/molecules/SubmittionBox/index';
 import ListWithIcon from '../../components/molecules/ListWithIcon/index';
 
-// TODO: template層を作る
 // TODO: すべてのstateのredux化
 // TODO: ページ遷移
 // TODO: udemy
@@ -59,6 +50,15 @@ class MainPage extends React.Component<Props, State> {
 		};
 	}
 	page = 1;
+
+	componentDidMount() {
+		AppState.addEventListener('change', this.onChangeState);
+	}
+
+	componentWillUnmount() {
+		AppState.removeEventListener('change', this.onChangeState);
+	}
+
 	public render() {
 		return (
 			<Container>
@@ -71,12 +71,13 @@ class MainPage extends React.Component<Props, State> {
 				<FlatList
 					data={this.state.items}
 					renderItem={({ item }) => (
-						<View>
-							<ListWithIcon
-								item={item}
-								onPress={() => this.navigateToDetail(item)}
-							/>
-						</View>
+						<ListWithIcon
+							item={item}
+							name={item.name}
+							source={item.owner.avatar_url}
+							user={item.owner.login}
+							onPress={() => this.navigateToDetail(item)}
+						/>
 					)}
 					keyExtractor={item => item.id}
 					onEndReached={() => this.fetchRepositories()}
@@ -88,14 +89,6 @@ class MainPage extends React.Component<Props, State> {
 		);
 	}
 
-	componentDidMount() {
-		AppState.addEventListener('change', this.onChangeState);
-	}
-
-	componentWillUnmount() {
-		AppState.removeEventListener('change', this.onChangeState);
-	}
-
 	onChangeState = appState => {
 		if (appState === 'active') {
 			this.fetchRepositories(true);
@@ -103,7 +96,6 @@ class MainPage extends React.Component<Props, State> {
 	};
 
 	private navigateToDetail(item) {
-		console.log(item.name);
 		this.props.navigator.push({
 			screen: 'searchRepository.DetailPage',
 			title: 'yeah!',

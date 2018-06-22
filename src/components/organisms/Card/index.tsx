@@ -2,21 +2,19 @@ import * as React from 'react';
 import styled from 'styled-components/native';
 import styledComponents from 'styled-components';
 import styledComponentsTS from 'styled-components-ts';
-import { Text, View,, Image } from 'react-native';
+import { Text, View, Image } from 'react-native';
 import Txt from '../../atoms/Txt/index';
 
-interface Props {
-}
+interface Props {}
 
 const Card: React.SFC<Props> = ({ ...props }) => (
 	<Wrapper>
-		<Text>ooooooo</Text>
 		<Text>{props.name}</Text>
 		<Image
 			style={{ width: 100, height: 100 }}
-			source={{ url:props.owner.avatar_url }}
+			source={{ url: props.owner.avatar_url }}
 		/>
-		<Text >{props.owner.login}</Text>
+		<Text>{props.owner.login}</Text>
 		<Text>star: {props.stargazers_count}</Text>
 		<Text>url: {props.html_url}</Text>
 		<Text>Description: {props.description}</Text>
@@ -24,9 +22,7 @@ const Card: React.SFC<Props> = ({ ...props }) => (
 );
 export default Card;
 
-const Wrapper = styled(View)`
-`
-
+const Wrapper = styled(View)``;
 
 // flex: 1,
 // justifyContent: 'center',

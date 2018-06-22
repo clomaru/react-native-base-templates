@@ -2,6 +2,14 @@ import * as React from 'react';
 import { Text, View } from 'react-native';
 import DetailTemplate from '../../components/templates/DetailTemplate/index';
 
+const mapStateToProps = (state: State) => {
+	return {};
+};
+
+const mapDispatchToProps = (dispatch: Dispath) => {
+	return {};
+};
+
 export default class DetailPage extends React.Component {
 	constructor(props: any) {
 		super(props);
