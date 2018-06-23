@@ -1,7 +1,7 @@
-import * as types from './actionTypes';
+import ACTION_TYPES from './actionTypes';
 
 export const changeTextAction = () => {
 	return {
-		type: types.CHANGE_TEXT
+		type: ACTION_TYPES.CHANGE_TEXT
 	};
 };

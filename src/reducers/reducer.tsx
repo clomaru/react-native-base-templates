@@ -1,4 +1,4 @@
-import * as types from '../actions/actionTypes';
+import ACTION_TYPES from '../actions/actionTypes';
 // import Immutable from 'seamless-immutable';
 
 // const initialState = Immutable({
@@ -11,7 +11,7 @@ const initialState = {
 
 export const reducer = (state = initialState, action: any) => {
 	switch (action.type) {
-		case types.CHANGE_TEXT:
+		case ACTION_TYPES.CHANGE_TEXT:
 			return Object.assign({}, state, {
 				showText:
 					state.showText == 'hello Redux' ? 'chane success!!' : 'hello Redux'

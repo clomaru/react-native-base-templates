@@ -1,5 +1,5 @@
-export const CHANGE_TEXT = 'CHANGE_TEXT';
-// https://github.com/jasonhealy/react-native-typescript-starter/blob/master/src/constants/index.ts
-// TODO:こんなふうに書き換える
+const ACTION_TYPES = {
+	CHANGE_TEXT: 'CHANGE_TEXT'
+};
 
-// TODO:ディレクトリの場所を変える
+export default ACTION_TYPES;

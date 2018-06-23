@@ -4,8 +4,6 @@ import * as appActions from '../../actions/index';
 import styled from 'styled-components/native';
 import { View, TextInput, FlatList, AppState } from 'react-native';
 
-import Button from '../../components/atoms/Button/index';
-import ListItem from '../../components/atoms/ListItem/index';
 import SubmittionBox from '../../components/molecules/SubmittionBox/index';
 import ListWithIcon from '../../components/molecules/ListWithIcon/index';
 
@@ -131,17 +129,4 @@ const Container = styled.View`
 	justify-content: center;
 	padding: 5px;
 	flex: 1;
-`;
-
-// TODO:けす
-const SearchBox = styled.View`
-	padding: 20px;
-	flex-direction: row;
-	background-color: white;
-`;
-
-// TODO:けす
-const StyledTextInput = styled.TextInput`
-	flex: 1;
-	padding: 10px;
 `;
