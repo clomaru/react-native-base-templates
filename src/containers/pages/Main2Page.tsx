@@ -1,10 +1,9 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-// import * as appActions from '../../actions/index';
+import actions from '../../actions/index';
 import styled from 'styled-components/native';
 import { Text, View } from 'react-native';
-import actions from '../../actions/index';
 
 import Button from '../../components/atoms/Button/index';
 import ListItem from '../../components/atoms/ListItem/index';
@@ -20,16 +19,13 @@ interface State {
 
 const mapStateToProps = (state: State) => {
 	return {
-		showText: state.reducer.showText
+		showText: state.main2_reducer.showText
 	};
 };
 
 const mapDispatchToProps = (dispatch: Redux.Dispatch<any>) => {
 	return {
 		actions: bindActionCreators(actions, dispatch)
-		// changeText() {
-		// 	dispatch(appActions.changeTextAction());
-		// }
 	};
 };
 

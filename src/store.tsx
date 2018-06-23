@@ -1,19 +1,12 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux';
-import { reducer } from './reducers/reducer';
-// import rootReducer from './reducers/rootReducer';
-// import thunk from 'redux-thunk';
-
-// let middleware = [thunk];
-// middleware = [...middleware];
+import reducers from './reducers/reducer';
 
 export const configureStore = () => {
-	/* eslint-disable no-underscore-dangle */
+	/* tslint-disable no-underscore-dangle */
 	return createStore(
-		combineReducers({
-			reducer
-		}),
+		reducers,
 		window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 	);
-	/* eslint-enable */
+	/* tslint-enable */
 };
 export default configureStore;

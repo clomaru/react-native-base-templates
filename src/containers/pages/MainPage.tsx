@@ -1,10 +1,9 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as appActions from '../../actions/index';
+import actions from '../../actions';
 import styled from 'styled-components/native';
 import { View, TextInput, FlatList, AppState } from 'react-native';
-import actions from '../../actions';
 
 import SubmittionBox from '../../components/molecules/SubmittionBox/index';
 import ListWithIcon from '../../components/molecules/ListWithIcon/index';
@@ -32,20 +31,14 @@ interface State {
 
 const mapStateToProps = (state: State): any => {
 	return {
-		items: state.reducer.items,
-		refreshing: state.reducer.refreshing
+		items: state.main_reducer.items,
+		refreshing: state.main_reducer.refreshing
 	};
 };
 
 const mapDispatchToProps = (dispatch: Dispath): any => {
 	return {
 		actions: bindActionCreators(actions, dispatch)
-		// pushItem(items: string[]): any {
-		// 	dispatch(appActions.pushItemAction(items));
-		// },
-		// switchRefreshing(refreshing: boolean): any {
-		// 	dispatch(appActions.switchRefreshingAction(refreshing));
-		// }
 	};
 };
 
