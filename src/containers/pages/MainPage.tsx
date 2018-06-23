@@ -7,8 +7,6 @@ import { View, TextInput, FlatList, AppState } from 'react-native';
 import SubmittionBox from '../../components/molecules/SubmittionBox/index';
 import ListWithIcon from '../../components/molecules/ListWithIcon/index';
 
-// TODO: すべてのstateのredux化
-// TODO: ページ遷移
 // TODO: udemy
 // TODO: android navigaton
 // TODO: ios icon
@@ -51,7 +49,7 @@ class MainPage extends React.Component<Props, State> {
 	constructor(props: Props) {
 		super(props);
 		this.state = {
-			items: [],
+			// items: [],
 			text: ''
 		};
 	}
@@ -66,8 +64,8 @@ class MainPage extends React.Component<Props, State> {
 	}
 
 	public render() {
-		console.log(`this.state.items: ${this.state.items}`);
-		console.log(`this.props.items: ${this.props.items}`);
+		// console.log(`this.state.items: ${this.state.items}`);
+		// console.log(`this.props.items: ${this.props.items}`);
 		return (
 			<Container>
 				<SubmittionBox
@@ -77,7 +75,7 @@ class MainPage extends React.Component<Props, State> {
 				/>
 
 				<FlatList
-					data={this.state.items}
+					data={this.props.items}
 					renderItem={({ item }) => (
 						<ListWithIcon
 							item={item}
@@ -123,10 +121,11 @@ class MainPage extends React.Component<Props, State> {
 				this.page = newPage;
 				if (refreshing) {
 					this.props.switchRefreshing(this.props.refreshing);
-					this.setState({ items: items });
+					this.props.pushItem(items);
+					// this.setState({ items: items });
 				} else {
-					// this.props.pushItem(items);
-					this.setState({ items: [...this.state.items, ...items] });
+					this.props.pushItem(items);
+					// this.setState({ items: [...this.state.items, ...items] });
 				}
 			});
 	}
