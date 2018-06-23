@@ -1,14 +1,17 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import * as appActions from '../../actions/index';
+import { bindActionCreators } from 'redux';
+// import * as appActions from '../../actions/index';
 import styled from 'styled-components/native';
 import { Text, View } from 'react-native';
+import actions from '../../actions/index';
 
 import Button from '../../components/atoms/Button/index';
 import ListItem from '../../components/atoms/ListItem/index';
 
 interface Props {
 	page: number;
+	actions: any;
 }
 
 interface State {
@@ -23,9 +26,10 @@ const mapStateToProps = (state: State) => {
 
 const mapDispatchToProps = (dispatch: Redux.Dispatch<any>) => {
 	return {
-		changeText() {
-			dispatch(appActions.changeTextAction());
-		}
+		actions: bindActionCreators(actions, dispatch)
+		// changeText() {
+		// 	dispatch(appActions.changeTextAction());
+		// }
 	};
 };
 
@@ -38,7 +42,9 @@ class MainPage2 extends React.Component<Props, State> {
 			<Container>
 				<View>
 					<Text style={{ fontSize: 20 }}>{this.props.showText}</Text>
-					<Button onPress={this.props.changeText}>change the text</Button>
+					<Button onPress={this.props.actions.changeTextAction}>
+						change the text
+					</Button>
 				</View>
 			</Container>
 		);

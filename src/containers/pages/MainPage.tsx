@@ -1,8 +1,10 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import * as appActions from '../../actions/index';
 import styled from 'styled-components/native';
 import { View, TextInput, FlatList, AppState } from 'react-native';
+import actions from '../../actions';
 
 import SubmittionBox from '../../components/molecules/SubmittionBox/index';
 import ListWithIcon from '../../components/molecules/ListWithIcon/index';
@@ -18,6 +20,7 @@ import ListWithIcon from '../../components/molecules/ListWithIcon/index';
 
 interface Props {
 	page: number;
+	actions: any;
 }
 
 interface State {
@@ -36,12 +39,13 @@ const mapStateToProps = (state: State): any => {
 
 const mapDispatchToProps = (dispatch: Dispath): any => {
 	return {
-		pushItem(items: string[]): any {
-			dispatch(appActions.pushItemAction(items));
-		},
-		switchRefreshing(refreshing: boolean): any {
-			dispatch(appActions.switchRefreshingAction(refreshing));
-		}
+		actions: bindActionCreators(actions, dispatch)
+		// pushItem(items: string[]): any {
+		// 	dispatch(appActions.pushItemAction(items));
+		// },
+		// switchRefreshing(refreshing: boolean): any {
+		// 	dispatch(appActions.switchRefreshingAction(refreshing));
+		// }
 	};
 };
 
@@ -49,7 +53,6 @@ class MainPage extends React.Component<Props, State> {
 	constructor(props: Props) {
 		super(props);
 		this.state = {
-			// items: [],
 			text: ''
 		};
 	}
@@ -64,8 +67,6 @@ class MainPage extends React.Component<Props, State> {
 	}
 
 	public render() {
-		// console.log(`this.state.items: ${this.state.items}`);
-		// console.log(`this.props.items: ${this.props.items}`);
 		return (
 			<Container>
 				<SubmittionBox
@@ -120,13 +121,9 @@ class MainPage extends React.Component<Props, State> {
 			.then(({ items }) => {
 				this.page = newPage;
 				if (refreshing) {
-					this.props.switchRefreshing(this.props.refreshing);
-					this.props.pushItem(items);
-					// this.setState({ items: items });
-				} else {
-					this.props.pushItem(items);
-					// this.setState({ items: [...this.state.items, ...items] });
+					this.props.actions.switchRefreshingAction(this.props.refreshing);
 				}
+				this.props.actions.pushItemAction(items);
 			});
 	}
 }
