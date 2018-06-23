@@ -3,11 +3,34 @@ import styled from 'styled-components/native';
 import { View } from 'react-native';
 import Card from '../../organisms/Card/index';
 
-interface Props {}
+interface Props {
+	name?: string;
+	user?: string;
+	source?: string;
+	star: number;
+	url: string;
+	description: string;
+}
 
-const DetailTemplate: React.SFC<Props> = ({ ...props }) => (
+const DetailTemplate: React.SFC<Props> = ({
+	name,
+	user,
+	source,
+	star,
+	url,
+	description,
+	...props
+}) => (
 	<Wrapper>
-		<Card {...props} />
+		<Card
+			name={props.name}
+			source={props.owner.avatar_url}
+			user={props.owner.login}
+			star={props.stargazers_count}
+			url={props.html_url}
+			description={props.description}
+			{...props}
+		/>
 	</Wrapper>
 );
 export default DetailTemplate;
