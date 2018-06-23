@@ -23,12 +23,12 @@ const DetailTemplate: React.SFC<Props> = ({
 }) => (
 	<Wrapper>
 		<Card
-			name={props.name}
-			source={props.owner.avatar_url}
-			user={props.owner.login}
-			star={props.stargazers_count}
-			url={props.html_url}
-			description={props.description}
+			name={name}
+			source={source}
+			user={user}
+			star={star}
+			url={url}
+			description={description}
 			{...props}
 		/>
 	</Wrapper>
