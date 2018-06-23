@@ -10,6 +10,17 @@ const mapDispatchToProps = (dispatch: Dispath) => {
 	return {};
 };
 
+interface Props {
+	name?: string;
+	user?: string;
+	source?: string;
+	star: number;
+	url: string;
+	description: string;
+}
+
+interface State {}
+
 export default class DetailPage extends React.Component {
 	constructor(props: any) {
 		super(props);
@@ -21,7 +32,15 @@ export default class DetailPage extends React.Component {
 	render() {
 		return (
 			<View>
-				<DetailTemplate {...this.props} />
+				<DetailTemplate
+					name={this.props.name}
+					source={this.props.owner.avatar_url}
+					user={this.props.owner.login}
+					star={this.props.stargazers_count}
+					url={this.props.html_url}
+					description={this.props.description}
+					{...this.props}
+				/>
 			</View>
 		);
 	}

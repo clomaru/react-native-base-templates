@@ -23,17 +23,28 @@ interface Props {
 }
 
 interface State {
-	items: any;
+	items: string[];
+	text: string;
 	refreshing: boolean;
 }
 // https://stackoverflow.com/questions/47561848/property-value-does-not-exist-on-type-readonly?rq=1&utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
 
-const mapStateToProps = (state: State) => {
-	return {};
+const mapStateToProps = (state: State): any => {
+	return {
+		items: state.reducer.items,
+		refreshing: state.reducer.refreshing
+	};
 };
 
-const mapDispatchToProps = (dispatch: Dispath) => {
-	return {};
+const mapDispatchToProps = (dispatch: Dispath): any => {
+	return {
+		pushItem(items: string[]): any {
+			dispatch(appActions.pushItemAction(items));
+		},
+		switchRefreshing(refreshing: boolean): any {
+			dispatch(appActions.switchRefreshingAction(refreshing));
+		}
+	};
 };
 
 class MainPage extends React.Component<Props, State> {
@@ -41,21 +52,22 @@ class MainPage extends React.Component<Props, State> {
 		super(props);
 		this.state = {
 			items: [],
-			refreshing: false,
 			text: ''
 		};
 	}
 	page = 1;
 
-	componentDidMount() {
+	componentDidMount(): void {
 		AppState.addEventListener('change', this.onChangeState);
 	}
 
-	componentWillUnmount() {
+	componentWillUnmount(): void {
 		AppState.removeEventListener('change', this.onChangeState);
 	}
 
 	public render() {
+		console.log(`this.state.items: ${this.state.items}`);
+		console.log(`this.props.items: ${this.props.items}`);
 		return (
 			<Container>
 				<SubmittionBox
@@ -79,7 +91,7 @@ class MainPage extends React.Component<Props, State> {
 					onEndReached={() => this.fetchRepositories()}
 					onEndReachedThreshold={0.1}
 					onRefresh={() => this.fetchRepositories(true)}
-					refreshing={this.state.refreshing}
+					refreshing={this.props.refreshing}
 				/>
 			</Container>
 		);
@@ -94,7 +106,6 @@ class MainPage extends React.Component<Props, State> {
 	private navigateToDetail(item) {
 		this.props.navigator.push({
 			screen: 'searchRepository.DetailPage',
-			title: 'yeah!',
 			passProps: item
 		});
 	}
@@ -111,8 +122,10 @@ class MainPage extends React.Component<Props, State> {
 			.then(({ items }) => {
 				this.page = newPage;
 				if (refreshing) {
-					this.setState({ items, refreshing: false });
+					this.props.switchRefreshing(this.props.refreshing);
+					this.setState({ items: items });
 				} else {
+					// this.props.pushItem(items);
 					this.setState({ items: [...this.state.items, ...items] });
 				}
 			});
