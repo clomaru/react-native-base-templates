@@ -25,6 +25,11 @@
 - [Atomic Design](http://atomicdesign.bradfrost.com/)
 
 
+### Other
+
+- [react-native-debugger](https://github.com/jhen0409/react-native-debugger)
+
+
 ### ReactNativeAPI
 
 - [fetchAPI](https://facebook.github.io/react-native/docs/network.html)
@@ -47,7 +52,6 @@
 - [redux-logger](https://github.com/evgenyrodionov/redux-logger)
 - [redux-actions](https://github.com/redux-utilities/redux-actions)
 - [reduxsause](https://github.com/infinitered/reduxsauce)
-- [redux-devtools-extention](https://github.com/zalmoxisus/redux-devtools-extension)
 - [redux-persist](https://github.com/rt2zz/redux-persist)
 - [s2s](https://github.com/akameco/s2s)
 - [styleguidist](https://github.com/styleguidist/react-styleguidist)
