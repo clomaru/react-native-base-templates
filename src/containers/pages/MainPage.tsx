@@ -11,11 +11,10 @@ import ListWithIcon from '../../components/molecules/ListWithIcon/index';
 // TODO: udemy
 // TODO: android navigaton
 // TODO: ios icon
+// TODO: 型を定義
 // TODO: android icon
 // TODO: storybookのテスト
 // TODO: atomic designの本をもっとやんと読む
-// TODO: redux dev tools
-// TODO: react native debugger
 
 interface Props {
 	page: number;
