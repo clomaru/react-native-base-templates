@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import { bindActionCreators, Dispatch } from 'redux';
 import actions from '../../actions/index';
 import styled from 'styled-components/native';
 import { Text, View } from 'react-native';
@@ -17,17 +17,9 @@ interface State {
 	showText: string;
 }
 
-const mapStateToProps = (state: State) => {
-	return {
-		showText: state.main2_reducer.showText
-	};
-};
-
-const mapDispatchToProps = (dispatch: Redux.Dispatch<any>) => {
-	return {
-		actions: bindActionCreators(actions, dispatch)
-	};
-};
+const mapStateToProps = (state: State) => ({
+	showText: state.main2_reducer.showText
+});
 
 class MainPage2 extends React.Component<Props, State> {
 	constructor(props: Props) {
@@ -49,7 +41,9 @@ class MainPage2 extends React.Component<Props, State> {
 
 export default connect(
 	mapStateToProps,
-	mapDispatchToProps
+	(dispatch: Dispatch) => ({
+		actions: bindActionCreators(actions, dispatch)
+	})
 )(MainPage2);
 
 const Container = styled.View`

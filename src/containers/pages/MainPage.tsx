@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import { bindActionCreators, Dispatch } from 'redux';
 import actions from '../../actions';
 import styled from 'styled-components/native';
 import { View, TextInput, FlatList, AppState } from 'react-native';
@@ -28,18 +28,10 @@ interface State {
 }
 // https://stackoverflow.com/questions/47561848/property-value-does-not-exist-on-type-readonly?rq=1&utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
 
-const mapStateToProps = (state: State): any => {
-	return {
-		items: state.main_reducer.items,
-		refreshing: state.main_reducer.refreshing
-	};
-};
-
-const mapDispatchToProps = (dispatch: Dispath): any => {
-	return {
-		actions: bindActionCreators(actions, dispatch)
-	};
-};
+const mapStateToProps = (state: State): any => ({
+	items: state.main_reducer.items,
+	refreshing: state.main_reducer.refreshing
+});
 
 class MainPage extends React.Component<Props, State> {
 	constructor(props: Props) {
@@ -122,7 +114,9 @@ class MainPage extends React.Component<Props, State> {
 
 export default connect(
 	mapStateToProps,
-	mapDispatchToProps
+	(dispatch: Dispatch): any => ({
+		actions: bindActionCreators(actions, dispatch)
+	})
 )(MainPage);
 
 const Container = styled.View`

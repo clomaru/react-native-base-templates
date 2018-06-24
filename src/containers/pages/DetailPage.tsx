@@ -1,14 +1,10 @@
 import * as React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators, Dispatch } from 'redux';
 import { Text, View } from 'react-native';
 import DetailTemplate from '../../components/templates/DetailTemplate/index';
 
-const mapStateToProps = (state: State) => {
-	return {};
-};
-
-const mapDispatchToProps = (dispatch: Dispath) => {
-	return {};
-};
+const mapStateToProps = (state: State) => ({});
 
 interface Props {
 	name?: string;
@@ -21,7 +17,7 @@ interface Props {
 
 interface State {}
 
-export default class DetailPage extends React.Component {
+class DetailPage extends React.Component {
 	constructor(props: any) {
 		super(props);
 		// TODO:この方法遅延があるからあんま良くなくね知らんけど
@@ -45,3 +41,10 @@ export default class DetailPage extends React.Component {
 		);
 	}
 }
+
+export default connect(
+	mapStateToProps,
+	(dispatch: Dispatch) => ({
+		actions: bindActionCreators(actions, dispatch)
+	})
+)(DetailPage);
