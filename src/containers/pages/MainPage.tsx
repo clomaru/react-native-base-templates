@@ -113,9 +113,9 @@ class MainPage extends React.Component<Props, State> {
 			.then(({ items }) => {
 				this.page = newPage;
 				if (refreshing) {
-					this.props.actions.switchRefreshingAction(this.props.refreshing);
+					this.props.actions.switchRefreshing(this.props.refreshing);
 				}
-				this.props.actions.pushItemAction(items);
+				this.props.actions.pushItem(items);
 			});
 	}
 }

@@ -38,7 +38,7 @@ class MainPage2 extends React.Component<Props, State> {
 			<Container>
 				<View>
 					<Text style={{ fontSize: 20 }}>{this.props.showText}</Text>
-					<Button onPress={this.props.actions.changeTextAction}>
+					<Button onPress={this.props.actions.changeText}>
 						change the text
 					</Button>
 				</View>
