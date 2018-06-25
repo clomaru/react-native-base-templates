@@ -16,15 +16,23 @@ import ListWithIcon from '../../components/molecules/ListWithIcon/index';
 // TODO: storybookのテスト
 // TODO: atomic designの本をもっとやんと読む
 
+interface ItemProps {
+	name?: string;
+	owner?: string;
+	id?: number;
+}
+
 interface Props {
 	page: number;
 	actions: any;
+	item: ItemProps;
 }
 
 interface State {
 	items: string[];
 	text: string;
 	refreshing: boolean;
+	main_reducer: any;
 }
 // https://stackoverflow.com/questions/47561848/property-value-does-not-exist-on-type-readonly?rq=1&utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
 
@@ -42,11 +50,11 @@ class MainPage extends React.Component<Props, State> {
 	}
 	page = 1;
 
-	componentDidMount(): void {
+	private componentDidMount(): void {
 		AppState.addEventListener('change', this.onChangeState);
 	}
 
-	componentWillUnmount(): void {
+	private componentWillUnmount(): void {
 		AppState.removeEventListener('change', this.onChangeState);
 	}
 
@@ -63,7 +71,6 @@ class MainPage extends React.Component<Props, State> {
 					data={this.props.items}
 					renderItem={({ item }) => (
 						<ListWithIcon
-							item={item}
 							name={item.name}
 							source={item.owner.avatar_url}
 							user={item.owner.login}
@@ -80,20 +87,20 @@ class MainPage extends React.Component<Props, State> {
 		);
 	}
 
-	onChangeState = appState => {
+	onChangeState = (appState: string) => {
 		if (appState === 'active') {
 			this.fetchRepositories(true);
 		}
 	};
 
-	private navigateToDetail(item) {
+	private navigateToDetail(item: any) {
 		this.props.navigator.push({
 			screen: 'searchRepository.DetailPage',
 			passProps: item
 		});
 	}
 
-	fetchRepositories(refreshing: boolean = false) {
+	private fetchRepositories(refreshing: boolean = false) {
 		const newPage = refreshing ? 1 : this.page + 1;
 		this.setState({ refreshing });
 		fetch(

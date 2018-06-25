@@ -10,11 +10,12 @@ import ListItem from '../../components/atoms/ListItem/index';
 
 interface Props {
 	page: number;
+	showText: string;
 	actions: any;
 }
 
 interface State {
-	showText: string;
+	main2_reducer: any;
 }
 
 const mapStateToProps = (state: State) => ({
