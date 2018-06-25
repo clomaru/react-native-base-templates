@@ -8,7 +8,6 @@ import { View, TextInput, FlatList, AppState } from 'react-native';
 import SubmittionBox from '../../components/molecules/SubmittionBox/index';
 import ListWithIcon from '../../components/molecules/ListWithIcon/index';
 
-// TODO: udemy
 // TODO: android navigaton
 // TODO: ios icon
 // TODO: 型を定義
@@ -59,11 +58,12 @@ class MainPage extends React.Component<Props, State> {
 	}
 
 	public render() {
+		console.log(`this.state.text: ${this.state.text}`);
 		return (
 			<Container>
 				<SubmittionBox
 					buttonText={'search'}
-					onChange={text => this.setState({ text })}
+					onChangeText={text => this.setState({ text })}
 					onPress={() => this.fetchRepositories(true)}
 				/>
 
@@ -102,6 +102,7 @@ class MainPage extends React.Component<Props, State> {
 
 	private fetchRepositories(refreshing: boolean = false) {
 		const newPage = refreshing ? 1 : this.page + 1;
+		console.log(`this.state.text: ${this.state.text}`);
 		this.setState({ refreshing });
 		fetch(
 			`https://api.github.com/search/repositories?q=${
