@@ -11,10 +11,10 @@ import SubmittionBox from '../../molecules/SubmittionBox/index';
 interface Props {
 	presenter?: any;
 	onPressAdd?: () => void;
-	onChangeText?: (text: string) => void;
+	onChangeText?: (text: string) => void | undefined;
 	onPressDelete?: (index: number) => void;
 	value?: string;
-	todos?: string[];
+	todos?: string[] | undefined;
 	text?: string;
 	index?: number;
 }
