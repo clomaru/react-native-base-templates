@@ -1,6 +1,15 @@
 import ACTION_TYPES from '../actions/actionTypes';
+import { PushItem, SwitchRefreshing } from '../actions/main_actions';
+import { Action } from 'redux';
 
-const initialState = {
+interface InitialStateInterface {
+	items: string[];
+	refreshing: boolean;
+}
+
+// TODO:export type MainActions = PushItem | SwitchRefreshing;
+
+const initialState: InitialStateInterface = {
 	items: [],
 	refreshing: false
 };
