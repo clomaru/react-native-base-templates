@@ -1,7 +1,7 @@
 # ReactNativeBaseTemplate - TodoApp
 
 
-![Example4](gifs/dmeo.gif)
+![demo](gifs/demo.gif)
 
 
 ## Feature
