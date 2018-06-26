@@ -18,7 +18,7 @@
 * [Atomic Design](http://atomicdesign.bradfrost.com/)
 
 
-## Other Branchs
+## Other Branches
 
 * [master](https://github.com/clomaru/react-native-base-templates/tree/master)
 * [searchRepositoryApp](https://github.com/clomaru/react-native-base-templates/tree/searchRepositoryApp)
