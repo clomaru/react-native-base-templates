@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
-import actions from '../../actions';
+// import actions from '../../actions';
 import styled from 'styled-components/native';
 import { View, TextInput, FlatList, AppState } from 'react-native';
 
@@ -23,7 +23,7 @@ interface ItemProps {
 
 interface Props {
 	page: number;
-	actions: any;
+	// actions: any;
 	item: ItemProps;
 }
 
@@ -36,8 +36,8 @@ interface State {
 // https://stackoverflow.com/questions/47561848/property-value-does-not-exist-on-type-readonly?rq=1&utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
 
 const mapStateToProps = (state: State): any => ({
-	items: state.main_reducer.items,
-	refreshing: state.main_reducer.refreshing
+	items: state.mainReducer.items,
+	refreshing: state.mainReducer.refreshing
 });
 
 class MainPage extends React.Component<Props, State> {
@@ -113,19 +113,35 @@ class MainPage extends React.Component<Props, State> {
 			.then(({ items }) => {
 				this.page = newPage;
 				if (refreshing) {
-					this.props.actions.switchRefreshing(this.props.refreshing);
+					this.props.switchRefreshing(this.props.refreshing);
+					// this.props.actions.switchRefreshing(this.props.refreshing);
 				}
-				this.props.actions.pushItem(items);
+				this.props.pushItem(items);
+				// this.props.actions.pushItem(items);
 			});
 	}
 }
 
+import * as MainPageModule from '../../modules/MainPageModule';
+const mapDispatchToProps = (dispatch: Dispatch) => {
+	return {
+		switchRefreshing: (refreshing: boolean) =>
+			dispatch(MainPageModule.switchRefreshing(refreshing)),
+		pushItem: (items: string[]) => dispatch(MainPageModule.pushItem(items))
+	};
+};
+
 export default connect(
 	mapStateToProps,
-	(dispatch: Dispatch): any => ({
-		actions: bindActionCreators(actions, dispatch)
-	})
+	mapDispatchToProps
 )(MainPage);
+
+// export default connect(
+// 	mapStateToProps,
+// 	(dispatch: Dispatch): any => ({
+// 		actions: bindActionCreators(actions, dispatch)
+// 	})
+// )(MainPage);
 
 const Container = styled.View`
 	background-color: #f5fcff;
