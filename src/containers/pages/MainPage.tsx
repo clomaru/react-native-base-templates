@@ -114,10 +114,8 @@ class MainPage extends React.Component<Props, State> {
 				this.page = newPage;
 				if (refreshing) {
 					this.props.switchRefreshing(this.props.refreshing);
-					// this.props.actions.switchRefreshing(this.props.refreshing);
 				}
 				this.props.pushItem(items);
-				// this.props.actions.pushItem(items);
 			});
 	}
 }
@@ -135,13 +133,6 @@ export default connect(
 	mapStateToProps,
 	mapDispatchToProps
 )(MainPage);
-
-// export default connect(
-// 	mapStateToProps,
-// 	(dispatch: Dispatch): any => ({
-// 		actions: bindActionCreators(actions, dispatch)
-// 	})
-// )(MainPage);
 
 const Container = styled.View`
 	background-color: #f5fcff;
