@@ -14,6 +14,7 @@ const initialState: InitialStateInterface = {
 	refreshing: false
 };
 
+// TODO:↓mainReducerみたいな名前にしないといけないっぽいよ
 const main_reducer = (state = initialState, action: any): any => {
 	switch (action.type) {
 		case ACTION_TYPES.PUSH_ITEMS:

@@ -27,17 +27,15 @@ class DetailPage extends React.Component<Props, State> {
 	}
 	render() {
 		return (
-			<View>
-				<DetailTemplate
-					name={this.props.name}
-					source={this.props.owner.avatar_url}
-					user={this.props.owner.login}
-					star={this.props.stargazers_count}
-					url={this.props.html_url}
-					description={this.props.description}
-					{...this.props}
-				/>
-			</View>
+			<DetailTemplate
+				name={this.props.name}
+				source={this.props.owner.avatar_url}
+				user={this.props.owner.login}
+				star={this.props.stargazers_count}
+				url={this.props.html_url}
+				description={this.props.description}
+				{...this.props}
+			/>
 		);
 	}
 }

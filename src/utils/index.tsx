@@ -1,5 +1,5 @@
 export function combineActionsGroups(...actionGroups: any[]) {
-	let mixing: any = {};
+	const mixing: any = {};
 	actionGroups.forEach((actionGroup: any) => {
 		Object.keys(actionGroup).forEach((key: string) => {
 			if (mixing[key] !== undefined) {
