@@ -5,22 +5,29 @@ import styled from 'styled-components/native';
 import { Text, View } from 'react-native';
 
 import Button from '../../components/atoms/Button/index';
-import ListItem from '../../components/atoms/ListItem/index';
+import { changeText } from '../../modules/MainPage2Module';
 
 interface Props {
-	page: number;
 	showText: string;
+	changeText: () => void;
 }
 
 interface State {
 	main2Reducer: any;
 }
 
-const mapStateToProps = (state: State) => ({
+const mapStateToProps = (state: State): any => ({
 	showText: state.main2Reducer.showText
 });
 
-class MainPage2 extends React.Component<Props, State> {
+const mapDispatchToProps = (dispatch: Dispatch) =>
+	bindActionCreators({ changeText }, dispatch);
+
+@(connect(
+	mapStateToProps,
+	mapDispatchToProps
+) as any)
+export default class MainPage2 extends React.Component<Props, State> {
 	constructor(props: Props) {
 		super(props);
 	}
@@ -35,18 +42,6 @@ class MainPage2 extends React.Component<Props, State> {
 		);
 	}
 }
-
-import * as MainPage2Module from '../../modules/MainPage2Module';
-const mapDispatchToProps = (dispatch: Dispatch) => {
-	return {
-		changeText: () => dispatch(MainPage2Module.changeText())
-	};
-};
-
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps
-)(MainPage2);
 
 const Container = styled.View`
 	background-color: #f5fcff;

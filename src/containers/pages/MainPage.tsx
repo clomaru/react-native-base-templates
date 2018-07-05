@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
-// import actions from '../../actions';
 import styled from 'styled-components/native';
-import { View, TextInput, FlatList, AppState } from 'react-native';
+import { View, FlatList, AppState } from 'react-native';
 
 import SubmittionBox from '../../components/molecules/SubmittionBox/index';
 import ListWithIcon from '../../components/molecules/ListWithIcon/index';
+import { pushItem, switchRefreshing } from '../../modules/MainPageModule';
 
 // TODO: android navigaton
 // TODO: ios icon
@@ -23,7 +23,6 @@ interface ItemProps {
 
 interface Props {
 	page: number;
-	// actions: any;
 	item: ItemProps;
 }
 
@@ -31,16 +30,22 @@ interface State {
 	items: string[];
 	text: string;
 	refreshing: boolean;
-	main_reducer: any;
+	mainReducer: any;
 }
-// https://stackoverflow.com/questions/47561848/property-value-does-not-exist-on-type-readonly?rq=1&utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
 
 const mapStateToProps = (state: State): any => ({
 	items: state.mainReducer.items,
 	refreshing: state.mainReducer.refreshing
 });
 
-class MainPage extends React.Component<Props, State> {
+const mapDispatchToProps = (dispatch: Dispatch) =>
+	bindActionCreators({ pushItem, switchRefreshing }, dispatch);
+
+@(connect(
+	mapStateToProps,
+	mapDispatchToProps
+) as any)
+export default class MainPage extends React.Component<Props, State> {
 	constructor(props: Props) {
 		super(props);
 		this.state = {
@@ -119,20 +124,6 @@ class MainPage extends React.Component<Props, State> {
 			});
 	}
 }
-
-import * as MainPageModule from '../../modules/MainPageModule';
-const mapDispatchToProps = (dispatch: Dispatch) => {
-	return {
-		switchRefreshing: (refreshing: boolean) =>
-			dispatch(MainPageModule.switchRefreshing(refreshing)),
-		pushItem: (items: string[]) => dispatch(MainPageModule.pushItem(items))
-	};
-};
-
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps
-)(MainPage);
 
 const Container = styled.View`
 	background-color: #f5fcff;
