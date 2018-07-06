@@ -4,6 +4,8 @@
 		"lib": ["es5", "es6"],
 		"module": "commonjs",
 		"sourceMap": true,
+		"experimentalDecorators": true,
+		"allowjs": true,
 		"outDir": "./lib",
 		"strict": true,
 		"removeComments": true,
