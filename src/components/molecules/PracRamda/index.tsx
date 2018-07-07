@@ -56,6 +56,7 @@ const counterEnhancer = compose(
 const SampleCounterBaseComponent = props => (
 	<View>
 		<Txt>{props.counter}</Txt>
+		<Heading type='h1'>ooooo</Heading>
 		<TouchableOpacity
 			onPress={() => {
 				props.increment();
