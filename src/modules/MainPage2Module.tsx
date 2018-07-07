@@ -20,8 +20,7 @@ export enum ActionTypes {
 	CHANGE_TEXT = 'CHANGE_TEXT',
 	INCREMENT = 'INCREMENT',
 	DECREMENT = 'DECREMENT',
-	INCREMENT_ASYNC = 'INCREMENT_ASYNC',
-	INCREMENT_IF_ODD = 'INCREMENT_IF_ODD'
+	INCREMENT_ASYNC = 'INCREMENT_ASYNC'
 }
 
 // reducer
@@ -31,8 +30,7 @@ export type Main2Actoins =
 	| ChangeTextAction
 	| IncrementAction
 	| DecrementAction
-	| IncrementAsyncAction
-	| IncrementIfOddAction;
+	| IncrementAsyncAction;
 
 const main2Reducer = (
 	state: Main2State = initialState,
@@ -53,11 +51,6 @@ const main2Reducer = (
 		case ActionTypes.DECREMENT:
 			return Object.assign({}, state, {
 				num: state.num - 1
-			});
-
-		case ActionTypes.INCREMENT_IF_ODD:
-			return Object.assign({}, state, {
-				num: state.num % 2 !== 0 ? state.num + 1 : state.num
 			});
 
 		default:
@@ -86,10 +79,6 @@ interface IncrementAsyncAction extends Action {
 	type: ActionTypes.INCREMENT_ASYNC;
 }
 
-interface IncrementIfOddAction extends Action {
-	type: ActionTypes.INCREMENT_IF_ODD;
-}
-
 export const changeText = (): ChangeTextAction => ({
 	type: ActionTypes.CHANGE_TEXT
 });
@@ -104,8 +93,4 @@ export const decrementNum = (): DecrementAction => ({
 
 export const incrementAsync = (): IncrementAsyncAction => ({
 	type: ActionTypes.INCREMENT_ASYNC
-});
-
-export const incrementIfOdd = (): IncrementIfOddAction => ({
-	type: ActionTypes.INCREMENT_IF_ODD
 });

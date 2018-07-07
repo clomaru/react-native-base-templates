@@ -26,8 +26,7 @@ export const configureStore = (): Store => {
 		// TODO:↓リファクタしたい
 		compose(
 			middleware,
-			window.__REDUX_DEVTOOLS_EXTENSION__ &&
-				window.__REDUX_DEVTOOLS_EXTENSION__()
+			window.__REDUX_DEVTOOLS_EXTENSION__()
 		)
 	);
 	/* tslint-enable */

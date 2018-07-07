@@ -6,8 +6,7 @@ import {
 	changeText,
 	incrementNum,
 	decrementNum,
-	incrementAsync,
-	incrementIfOdd
+	incrementAsync
 } from '../../modules/MainPage2Module';
 import styled from 'styled-components/native';
 
@@ -17,7 +16,11 @@ import PracRamda from '../../components/molecules/PracRamda/index';
 
 interface Props {
 	showText: string;
+	num: number;
 	changeText: () => void;
+	incrementNum: () => void;
+	decrementNum: () => void;
+	incrementAsync: () => void;
 }
 
 interface State {
@@ -31,7 +34,7 @@ const mapStateToProps = (state: ReduxState) => ({
 
 const mapDispatchToProps = (dispatch: Dispatch<ReduxAction>) =>
 	bindActionCreators(
-		{ changeText, incrementNum, decrementNum, incrementAsync, incrementIfOdd },
+		{ changeText, incrementNum, decrementNum, incrementAsync },
 		dispatch
 	);
 
@@ -57,9 +60,6 @@ export default class MainPage2 extends React.Component<Props, State> {
 					</TouchableOpacity>
 					<TouchableOpacity onPress={this.props.incrementAsync}>
 						<Text>acyns</Text>
-					</TouchableOpacity>
-					<TouchableOpacity onPress={this.props.incrementIfOdd}>
-						<Text>if</Text>
 					</TouchableOpacity>
 				</View>
 				<View>
