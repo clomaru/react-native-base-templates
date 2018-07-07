@@ -1,11 +1,13 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
-import styled from 'styled-components/native';
-import { Text, View } from 'react-native';
-
-import Button from '../../components/atoms/Button/index';
+import { ReduxAction, ReduxState } from '../../store';
 import { changeText } from '../../modules/MainPage2Module';
+import styled from 'styled-components/native';
+
+import { Text, View } from 'react-native';
+import Button from '../../components/atoms/Button/index';
+import PracRamda from '../../components/molecules/PracRamda/index';
 
 interface Props {
 	showText: string;
@@ -13,14 +15,14 @@ interface Props {
 }
 
 interface State {
-	main2Reducer: any;
+	main2Reducer: ReduxState;
 }
 
-const mapStateToProps = (state: State): any => ({
+const mapStateToProps = (state: ReduxState) => ({
 	showText: state.main2Reducer.showText
 });
 
-const mapDispatchToProps = (dispatch: Dispatch) =>
+const mapDispatchToProps = (dispatch: Dispatch<ReduxAction>) =>
 	bindActionCreators({ changeText }, dispatch);
 
 @(connect(
@@ -35,7 +37,12 @@ export default class MainPage2 extends React.Component<Props, State> {
 		return (
 			<Container>
 				<View>
-					<Text style={{ fontSize: 20 }}>{this.props.showText}</Text>
+					<Text>oooo</Text>
+					<PracRamda />
+					<Text>oooo</Text>
+				</View>
+				<View>
+					<StyledText>{this.props.showText}</StyledText>
 					<Button onPress={this.props.changeText}>change the text</Button>
 				</View>
 			</Container>
@@ -48,4 +55,8 @@ const Container = styled.View`
 	justify-content: center;
 	align-items: center;
 	flex: 1;
+`;
+
+const StyledText = styled.Text`
+	font-size: 20px;
 `;

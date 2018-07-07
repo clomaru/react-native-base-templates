@@ -3,40 +3,50 @@ import { Action } from 'redux';
 // initial state
 //=============================
 
-const initialState = {
-	showText: 'hello Redux'
+export interface Main2State {
+	showText: string;
+}
+
+const initialState: Main2State = {
+	showText: 'hello Ducks'
 };
 
 // action type
-//=============================
+// =============================
 
-const ACTION_TYPES = {
-	CHANGE_TEXT: 'CHANGE_TEXT'
-};
+enum ActionTypes {
+	CHANGE_TEXT = 'CHANGE_TEXT'
+}
 
 // reducer
-//=============================
+// =============================
 
-const main2Reducer = (state = initialState, action: Action): any => {
+export type Main2Actoins = ChangeTextAction;
+
+const main2Reducer = (
+	state: Main2State = initialState,
+	action: Main2Actoins
+): Main2State => {
 	switch (action.type) {
-		case ACTION_TYPES.CHANGE_TEXT:
+		case ActionTypes.CHANGE_TEXT:
 			return Object.assign({}, state, {
 				showText:
-					state.showText == 'hello Redux' ? 'chane success!!' : 'hello Redux'
+					state.showText == 'hello Ducks' ? 'change success!!' : 'hello Ducks'
 			});
 
 		default:
 			return state;
 	}
 };
+export default main2Reducer;
 
 // action creator
 //=============================
 
-interface ChangeText extends Action {}
+interface ChangeTextAction extends Action {
+	type: ActionTypes.CHANGE_TEXT;
+}
 
-export const changeText = (): ChangeText => ({
-	type: ACTION_TYPES.CHANGE_TEXT
+export const changeText = (): ChangeTextAction => ({
+	type: ActionTypes.CHANGE_TEXT
 });
-
-export default main2Reducer;

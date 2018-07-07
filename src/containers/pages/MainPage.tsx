@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
+import { ReduxAction, ReduxState } from '../../store';
 import styled from 'styled-components/native';
 import { View, FlatList, AppState } from 'react-native';
 
@@ -10,10 +11,8 @@ import { pushItem, switchRefreshing } from '../../modules/MainPageModule';
 
 // TODO: android navigaton
 // TODO: ios icon
-// TODO: 型を定義
 // TODO: android icon
 // TODO: storybookのテスト
-// TODO: atomic designの本をもっとやんと読む
 
 interface ItemProps {
 	name?: string;
@@ -30,15 +29,15 @@ interface State {
 	items: string[];
 	text: string;
 	refreshing: boolean;
-	mainReducer: any;
+	mainReducer: ReduxState;
 }
 
-const mapStateToProps = (state: State): any => ({
+const mapStateToProps = (state: ReduxState) => ({
 	items: state.mainReducer.items,
 	refreshing: state.mainReducer.refreshing
 });
 
-const mapDispatchToProps = (dispatch: Dispatch) =>
+const mapDispatchToProps = (dispatch: Dispatch<ReduxAction>) =>
 	bindActionCreators({ pushItem, switchRefreshing }, dispatch);
 
 @(connect(

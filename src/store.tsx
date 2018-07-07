@@ -1,6 +1,9 @@
-import { createStore, applyMiddleware, combineReducers } from 'redux';
-import mainReducer from './modules/MainPageModule';
-import main2Reducer from './modules/MainPage2Module';
+import { createStore, combineReducers, Action } from 'redux';
+import mainReducer, { MainActions, MainState } from './modules/MainPageModule';
+import main2Reducer, {
+	Main2Actoins,
+	Main2State
+} from './modules/MainPage2Module';
 
 export const configureStore = () => {
 	/* tslint-disable no-underscore-dangle */
@@ -14,3 +17,10 @@ export const configureStore = () => {
 	/* tslint-enable */
 };
 export default configureStore;
+
+export type ReduxState = {
+	mainReducer: MainState;
+	main2Reducer: Main2State;
+};
+
+export type ReduxAction = MainActions | Main2Actoins | Action;

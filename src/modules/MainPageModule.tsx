@@ -3,12 +3,12 @@ import { Action } from 'redux';
 // initial state
 //=============================
 
-interface InitialStateInterface {
+export interface MainState {
 	items: string[];
 	refreshing: boolean;
 }
 
-const initialState: InitialStateInterface = {
+const initialState: MainState = {
 	items: [],
 	refreshing: false
 };
@@ -16,23 +16,27 @@ const initialState: InitialStateInterface = {
 // action type
 //=============================
 
-const ACTION_TYPES = {
-	PUSH_ITEMS: 'PUSH_ITEMS',
-	SWITCH_REFRESHING: 'SWITCH_REFRESHING'
-};
+enum ActionTypes {
+	PUSH_ITEMS = 'PUSH_ITEMS',
+	SWITCH_REFRESHING = 'SWITCH_REFRESHING'
+}
 
 // reducer
 //=============================
-// TODO:export type MainActions = PushItem | SwitchRefreshing;
 
-const mainReducer = (state = initialState, action: any): any => {
+export type MainActions = PushItemAction | SwitchRefreshingAction;
+
+const mainReducer = (
+	state: MainState = initialState,
+	action: MainActions
+): MainState => {
 	switch (action.type) {
-		case ACTION_TYPES.PUSH_ITEMS:
+		case ActionTypes.PUSH_ITEMS:
 			return Object.assign({}, state, {
 				items: [...state.items, ...action.items]
 			});
 
-		case ACTION_TYPES.SWITCH_REFRESHING:
+		case ActionTypes.SWITCH_REFRESHING:
 			return Object.assign({}, state, {
 				refreshing: false
 			});
@@ -41,26 +45,29 @@ const mainReducer = (state = initialState, action: any): any => {
 			return state;
 	}
 };
+export default mainReducer;
 
 // action creator
 //=============================
 
-interface PushItem extends Action {
+interface PushItemAction extends Action {
+	type: ActionTypes.PUSH_ITEMS;
 	items: string[];
 }
 
-export const pushItem = (items: string[]): PushItem => ({
-	type: ACTION_TYPES.PUSH_ITEMS,
+export const pushItem = (items: string[]): PushItemAction => ({
+	type: ActionTypes.PUSH_ITEMS,
 	items
 });
 
-interface SwitchRefreshing extends Action {
+interface SwitchRefreshingAction extends Action {
+	type: ActionTypes.SWITCH_REFRESHING;
 	refreshing: boolean;
 }
 
-export const switchRefreshing = (refreshing: boolean): SwitchRefreshing => ({
-	type: ACTION_TYPES.SWITCH_REFRESHING,
+export const switchRefreshing = (
+	refreshing: boolean
+): SwitchRefreshingAction => ({
+	type: ActionTypes.SWITCH_REFRESHING,
 	refreshing
 });
-
-export default mainReducer;
