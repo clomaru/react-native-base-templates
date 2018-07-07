@@ -37,9 +37,7 @@ export default class MainPage2 extends React.Component<Props, State> {
 		return (
 			<Container>
 				<View>
-					<Text>oooo</Text>
 					<PracRamda />
-					<Text>oooo</Text>
 				</View>
 				<View>
 					<StyledText>{this.props.showText}</StyledText>
