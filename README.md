@@ -7,9 +7,9 @@
 - [ReactNative](https://github.com/facebook/react-native)
 - [React](https://github.com/facebook/react/)
 - [Redux](https://github.com/reduxjs/redux)
+- [Ducks](https://github.com/erikras/ducks-modular-redux)
 - [TypeScript](https://github.com/Microsoft/TypeScript)
 - [react-native-navigation](https://github.com/wix/react-native-navigation)
-
 
 ### CodeFormatter
 
@@ -17,23 +17,19 @@
 - [prettier](https://github.com/prettier/prettier)
 - [tslint-plugin-prettier](https://github.com/ikatyang/tslint-plugin-prettier)
 
-
 ### Design
 
 - [styled-components](https://github.com/storybooks/storybook)
 - [StoryBook](https://github.com/storybooks/storybook)
 - [Atomic Design](http://atomicdesign.bradfrost.com/)
 
-
 ### Other
 
 - [react-native-debugger](https://github.com/jhen0409/react-native-debugger)
 
-
 ### ReactNativeAPI
 
 - [fetchAPI](https://facebook.github.io/react-native/docs/network.html)
-
 
 ## Other Branchs
 
@@ -42,7 +38,6 @@
 - searchRepositoryApp(this)
 - upLoadImgApp
 - twitterApp
-
 
 ## To Install
 

@@ -1,60 +1,86 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import actions from '../../actions/index';
+import { bindActionCreators, Dispatch } from 'redux';
+import { ReduxAction, ReduxState } from '../../store';
+import {
+	changeText,
+	incrementNum,
+	decrementNum,
+	incrementAsync
+} from '../../modules/MainPage2Module';
 import styled from 'styled-components/native';
-import { Text, View } from 'react-native';
 
+import { Text, View, TouchableOpacity } from 'react-native';
 import Button from '../../components/atoms/Button/index';
-import ListItem from '../../components/atoms/ListItem/index';
+import PracRamda from '../../components/molecules/PracRamda/index';
 
 interface Props {
-	page: number;
-	actions: any;
+	showText: string;
+	num: number;
+	changeText: () => void;
+	incrementNum: () => void;
+	decrementNum: () => void;
+	incrementAsync: () => void;
 }
 
 interface State {
-	showText: string;
+	main2Reducer: ReduxState;
 }
 
-const mapStateToProps = (state: State) => {
-	return {
-		showText: state.main2_reducer.showText
-	};
-};
+const mapStateToProps = (state: ReduxState) => ({
+	showText: state.main2Reducer.showText,
+	num: state.main2Reducer.num
+});
 
-const mapDispatchToProps = (dispatch: Redux.Dispatch<any>) => {
-	return {
-		actions: bindActionCreators(actions, dispatch)
-	};
-};
+const mapDispatchToProps = (dispatch: Dispatch<ReduxAction>) =>
+	bindActionCreators(
+		{ changeText, incrementNum, decrementNum, incrementAsync },
+		dispatch
+	);
 
-class MainPage2 extends React.Component<Props, State> {
+@(connect(
+	mapStateToProps,
+	mapDispatchToProps
+) as any)
+export default class MainPage2 extends React.Component<Props, State> {
 	constructor(props: Props) {
 		super(props);
 	}
+
 	public render() {
 		return (
 			<Container>
 				<View>
-					<Text style={{ fontSize: 20 }}>{this.props.showText}</Text>
-					<Button onPress={this.props.actions.changeTextAction}>
-						change the text
-					</Button>
+					<Text>{this.props.num}</Text>
+					<TouchableOpacity onPress={this.props.incrementNum}>
+						<Text>+</Text>
+					</TouchableOpacity>
+					<TouchableOpacity onPress={this.props.decrementNum}>
+						<Text>-</Text>
+					</TouchableOpacity>
+					<TouchableOpacity onPress={this.props.incrementAsync}>
+						<Text>acyns</Text>
+					</TouchableOpacity>
+				</View>
+				<View>
+					<PracRamda />
+				</View>
+				<View>
+					<StyledText>{this.props.showText}</StyledText>
+					<Button onPress={this.props.changeText}>change the text</Button>
 				</View>
 			</Container>
 		);
 	}
 }
 
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps
-)(MainPage2);
-
 const Container = styled.View`
 	background-color: #f5fcff;
 	justify-content: center;
 	align-items: center;
 	flex: 1;
+`;
+
+const StyledText = styled.Text`
+	font-size: 20px;
 `;

@@ -3,7 +3,6 @@ import styled from 'styled-components/native';
 import styledComponents from 'styled-components';
 import styledComponentsTS from 'styled-components-ts';
 import { Text } from 'react-native';
-import { containPresenter } from '../../utils/HoC';
 
 enum TagSize {
 	h1 = 'h1',
@@ -20,7 +19,7 @@ interface Props {
 	presenter?: any;
 }
 
-const HeadingPresenter: React.SFC<Props> = ({
+const Heading: React.SFC<Props> = ({
 	children,
 	tagSizeTypes,
 	...props
@@ -30,16 +29,6 @@ const HeadingPresenter: React.SFC<Props> = ({
 	</Wrapper>
 );
 
-const HeadingContainer: React.SFC<Props> = ({
-	presenter,
-	tagSizeTypes = TagSize.h2,
-	children,
-	...props
-}) => {
-	return presenter({ tagSizeTypes, children, ...props });
-};
-
-const Heading = containPresenter(HeadingContainer, HeadingPresenter);
 export default Heading;
 
 interface StyledProps {
