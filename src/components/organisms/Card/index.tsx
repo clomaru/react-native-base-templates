@@ -25,7 +25,7 @@ const Card: React.SFC<Props> = ({
 	...props
 }) => (
 	<Wrapper>
-		<Heading>{name}</Heading>
+		<Heading type='h1'>{name}</Heading>
 		<StyledImage source={{ url: source }} />
 		<Txt>{user}</Txt>
 		<Txt>star: {star}</Txt>

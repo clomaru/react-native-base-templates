@@ -19,44 +19,9 @@ const counterEnhancer = compose(
 	})
 );
 
-// const addCounterState = BaseComponent =>
-// 	class extends React.Component<{}, { counter: number }> {
-// 		constructor(props) {
-// 			super(props);
-// 			this.state = {
-// 				counter: 5
-// 			};
-// 		}
-//
-// 		increment = () => {
-// 			this.setState({ counter: this.state.counter + 1 });
-// 		};
-//
-// 		decrement = () => {
-// 			this.setState({ counter: this.state.counter - 1 });
-// 		};
-//
-// 		reset = () => {
-// 			this.setState({ counter: 5 });
-// 		};
-//
-// 		render() {
-// 			return (
-// 				<BaseComponent
-// 					{...this.props}
-// 					decrement={this.decrement}
-// 					increment={this.increment}
-// 					reset={this.reset}
-// 					counter={this.state.counter}
-// 				/>
-// 			);
-// 		}
-// 	};
-
 const SampleCounterBaseComponent = props => (
 	<View>
-		<Txt>{props.counter}</Txt>
-		<Heading type='h1'>ooooo</Heading>
+		<Heading type='h1'>{props.counter}</Heading>
 		<TouchableOpacity
 			onPress={() => {
 				props.increment();
