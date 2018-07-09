@@ -17,14 +17,14 @@ export default class App {
 		Navigation.startTabBasedApp({
 			tabs: [
 				{
-					label: 'One',
-					screen: 'searchRepository.MainPage',
-					title: 'Screen One'
-				},
-				{
 					label: 'Two',
 					screen: 'searchRepository.Main2Page',
 					title: 'Screen Two'
+				},
+				{
+					label: 'One',
+					screen: 'searchRepository.MainPage',
+					title: 'Screen One'
 				}
 			]
 		});
