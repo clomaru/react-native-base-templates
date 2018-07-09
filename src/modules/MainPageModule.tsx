@@ -4,11 +4,13 @@ import { Action } from 'redux';
 //=============================
 
 export interface MainState {
+	text: string;
 	items: string[];
 	refreshing: boolean;
 }
 
 const initialState: MainState = {
+	text: '',
 	items: [],
 	refreshing: false
 };
@@ -17,6 +19,7 @@ const initialState: MainState = {
 //=============================
 
 enum ActionTypes {
+	CHANGE_TEXTBOX = 'CHANGE_TEXTBOX',
 	PUSH_ITEMS = 'PUSH_ITEMS',
 	SWITCH_REFRESHING = 'SWITCH_REFRESHING'
 }
@@ -24,13 +27,21 @@ enum ActionTypes {
 // reducer
 //=============================
 
-export type MainActions = PushItemAction | SwitchRefreshingAction;
+export type MainActions =
+	| ChangeTextboxAction
+	| PushItemAction
+	| SwitchRefreshingAction;
 
 const mainReducer = (
 	state: MainState = initialState,
 	action: MainActions
 ): MainState => {
 	switch (action.type) {
+		case ActionTypes.CHANGE_TEXTBOX:
+			return Object.assign({}, state, {
+				text: action.text
+			});
+
 		case ActionTypes.PUSH_ITEMS:
 			return Object.assign({}, state, {
 				items: [...state.items, ...action.items]
@@ -50,20 +61,30 @@ export default mainReducer;
 // action creator
 //=============================
 
+interface ChangeTextboxAction extends Action {
+	type: ActionTypes.CHANGE_TEXTBOX;
+	text: string;
+}
+
 interface PushItemAction extends Action {
 	type: ActionTypes.PUSH_ITEMS;
 	items: string[];
 }
 
-export const pushItem = (items: string[]): PushItemAction => ({
-	type: ActionTypes.PUSH_ITEMS,
-	items
-});
-
 interface SwitchRefreshingAction extends Action {
 	type: ActionTypes.SWITCH_REFRESHING;
 	refreshing: boolean;
 }
+
+export const changeTextbox = (text: string): ChangeTextboxAction => ({
+	type: ActionTypes.CHANGE_TEXTBOX,
+	text
+});
+
+export const pushItem = (items: string[]): PushItemAction => ({
+	type: ActionTypes.PUSH_ITEMS,
+	items
+});
 
 export const switchRefreshing = (
 	refreshing: boolean

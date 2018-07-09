@@ -6,14 +6,17 @@ import {
 	Action,
 	Store
 } from 'redux';
+
 import mainReducer, { MainActions, MainState } from './modules/MainPageModule';
 import main2Reducer, {
 	Main2Actoins,
 	Main2State
 } from './modules/MainPage2Module';
+
 import createSagaMiddleware from 'redux-saga';
 import rootSaga from './sagas/index';
 
+// TODO:↓みづらくね？
 export const configureStore = (): Store => {
 	const sagaMiddleware = createSagaMiddleware();
 	const middleware = applyMiddleware(sagaMiddleware);
