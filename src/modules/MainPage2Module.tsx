@@ -6,46 +6,35 @@ import { Dispatch } from 'react-redux';
 
 export interface Main2State {
 	showText: string;
-	num: number;
-	state: boolean;
-	hasError: boolean;
-	isLoading: boolean;
-	comments: string[];
+	apiIsProcessing: boolean;
+	zipCode: number | null;
+	address: string | null;
+	error: string | null;
 }
 
 const initialState: Main2State = {
 	showText: 'hello Ducks',
-	num: 0,
-	state: false,
-	hasError: false,
-	isLoading: false,
-	comments: []
+	apiIsProcessing: false,
+	zipCode: null,
+	address: null,
+	error: null
 };
 
 // action type
 // =============================
 
+// TODO: ここできればducks流のやつでちゃんと書きたい
 export enum ActionTypes {
 	CHANGE_TEXT = 'CHANGE_TEXT',
-	INCREMENT = 'INCREMENT',
-	DECREMENT = 'DECREMENT',
-	INCREMENT_ASYNC = 'INCREMENT_ASYNC',
-	GET_COMMENTS_ERROR = 'GET_COMMENTS_ERROR',
-	LOAD_COMMENTS = 'LOAD_COMMENTS',
-	FETCH_COMMENTS_SUCCESS = 'FETCH_COMMENTS_SUCCESS'
+	GET_ADDRESS_REQUESTED = 'GET_ADDRESS_REQUESTED',
+	GET_ADDRESS_SUCCEEDED = 'GET_ADDRESS_SUCCEEDED',
+	GET_ADDRESS_FAILED = 'GET_ADDRESS_FAILED'
 }
 
 // reducer
 // =============================
 
-export type Main2Actoins =
-	| ChangeTextAction
-	| IncrementAction
-	| DecrementAction
-	| IncrementAsyncAction
-	| getCommentsErrorAction
-	| loadCommentsAction
-	| fetchCommentsSuccessAction;
+export type Main2Actoins = ChangeTextAction | GetAddressRequested;
 
 const main2Reducer = (
 	state: Main2State = initialState,
@@ -58,24 +47,25 @@ const main2Reducer = (
 					state.showText == 'hello Ducks' ? 'change success!!' : 'hello Ducks'
 			});
 
-		case ActionTypes.INCREMENT:
+		case ActionTypes.GET_ADDRESS_REQUESTED:
 			return Object.assign({}, state, {
-				num: state.num + 1
+				apiIsProcessing: true,
+				zipCode: action.payload.zipCode,
+				address: null,
+				error: null
 			});
 
-		case ActionTypes.DECREMENT:
+		case ActionTypes.GET_ADDRESS_SUCCEEDED:
 			return Object.assign({}, state, {
-				num: state.num - 1
+				apiIsProcessing: false,
+				address: action.payload.address
 			});
 
-		case ActionTypes.GET_COMMENTS_ERROR:
-			return action.hasError;
-
-		case ActionTypes.LOAD_COMMENTS:
-			return action.isLoading;
-
-		case ActionTypes.FETCH_COMMENTS_SUCCESS:
-			return action.comments;
+		case ActionTypes.GET_ADDRESS_FAILED:
+			return Object.assign({}, state, {
+				apiIsProcessing: false,
+				error: action.payload.message
+			});
 
 		default:
 			return state;
@@ -91,83 +81,17 @@ interface ChangeTextAction extends Action {
 	type: ActionTypes.CHANGE_TEXT;
 }
 
-interface IncrementAction extends Action {
-	type: ActionTypes.INCREMENT;
-}
-
-interface DecrementAction extends Action {
-	type: ActionTypes.DECREMENT;
-}
-
-interface IncrementAsyncAction extends Action {
-	type: ActionTypes.INCREMENT_ASYNC;
-}
-
-interface getCommentsErrorAction extends Action {
-	type: ActionTypes.GET_COMMENTS_ERROR;
-	hasError: boolean;
-}
-
-interface loadCommentsAction extends Action {
-	type: ActionTypes.LOAD_COMMENTS;
-	isLoading: boolean;
-}
-
-interface fetchCommentsSuccessAction extends Action {
-	type: ActionTypes.FETCH_COMMENTS_SUCCESS;
-	comments: string[];
+interface GetAddressRequested extends Action {
+	type: ActionTypes.GET_ADDRESS_REQUESTED;
+	zipCode: number;
 }
 
 export const changeText = (): ChangeTextAction => ({
 	type: ActionTypes.CHANGE_TEXT
 });
 
-export const incrementNum = (): IncrementAction => ({
-	type: ActionTypes.INCREMENT
+// TODO: payloadってなに
+export const getAddressRequested = (zipCode: number): GetAddressRequested => ({
+	type: ActionTypes.GET_ADDRESS_REQUESTED,
+	payload: { zipcode }
 });
-
-export const decrementNum = (): DecrementAction => ({
-	type: ActionTypes.DECREMENT
-});
-
-export const incrementAsync = (): IncrementAsyncAction => ({
-	type: ActionTypes.INCREMENT_ASYNC
-});
-
-// async
-// TODO:status命名
-export const getCommentsError = (status: boolean): getCommentsErrorAction => ({
-	type: ActionTypes.GET_COMMENTS_ERROR,
-	hasError: status
-});
-
-export const loadComments = (status: boolean): loadCommentsAction => ({
-	type: ActionTypes.LOAD_COMMENTS,
-	isLoading: status
-});
-
-export const fetchCommentsSuccess = (
-	comments: string[]
-): fetchCommentsSuccessAction => ({
-	type: ActionTypes.FETCH_COMMENTS_SUCCESS,
-	comments
-});
-
-export const fetchComments = (url: string) => {
-	return (dispatch: Dispatch) => {
-		dispatch(loadComments(true));
-
-		fetch(url)
-			.then(response => {
-				if (!response.ok) {
-					throw Error(response.statusText);
-				}
-				dispatch(loadComments(false));
-
-				return response;
-			})
-			.then(response => response.json())
-			.then(comments => dispatch(fetchCommentsSuccess(comments)))
-			.catch(() => dispatch(getCommentsError(true)));
-	};
-};

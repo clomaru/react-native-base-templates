@@ -13,13 +13,13 @@ import main2Reducer, {
 	Main2State
 } from './modules/MainPage2Module';
 
-import createSagaMiddleware from 'redux-saga';
-import rootSaga from './sagas/index';
+// import createSagaMiddleware from 'redux-saga';
+// import rootSaga from './sagas/index';
 
 // TODO:↓みづらくね？
 export const configureStore = (): Store => {
-	const sagaMiddleware = createSagaMiddleware();
-	const middleware = applyMiddleware(sagaMiddleware);
+	// const sagaMiddleware = createSagaMiddleware();
+	// const middleware = applyMiddleware(sagaMiddleware);
 	/* tslint-disable no-underscore-dangle */
 	const store = createStore(
 		combineReducers({
@@ -28,13 +28,13 @@ export const configureStore = (): Store => {
 		}),
 		// TODO:↓リファクタしたい
 		compose(
-			middleware,
+			// middleware,
 			window.__REDUX_DEVTOOLS_EXTENSION__()
 		)
 	);
 	/* tslint-enable */
 
-	sagaMiddleware.run(rootSaga);
+	// sagaMiddleware.run(rootSaga);
 	return store;
 };
 export default configureStore;
