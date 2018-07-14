@@ -19,6 +19,7 @@ const SubmittionBox: React.SFC<Props> = ({
 	...props
 }) => (
 	<Wrapper>
+		{/* childrenでええん？ */}
 		<TextBox {...props}>{children}</TextBox>
 		<StyleButton onPress={onPress}>{buttonText}</StyleButton>
 	</Wrapper>

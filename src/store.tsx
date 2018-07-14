@@ -6,20 +6,26 @@ import {
 	Action,
 	Store
 } from 'redux';
+import { all } from 'redux-saga/effects';
 
 import mainReducer, { MainActions, MainState } from './modules/MainPageModule';
 import main2Reducer, {
 	Main2Actoins,
-	Main2State
+	Main2State,
+	sagas
 } from './modules/MainPage2Module';
 
-// import createSagaMiddleware from 'redux-saga';
-// import rootSaga from './sagas/index';
+import createSagaMiddleware from 'redux-saga';
+
+const allSagas = [...sagas];
+function* rootSaga() {
+	yield all(allSagas.map(f => f()));
+}
 
 // TODO:↓みづらくね？
 export const configureStore = (): Store => {
-	// const sagaMiddleware = createSagaMiddleware();
-	// const middleware = applyMiddleware(sagaMiddleware);
+	const sagaMiddleware = createSagaMiddleware();
+	const middleware = applyMiddleware(sagaMiddleware);
 	/* tslint-disable no-underscore-dangle */
 	const store = createStore(
 		combineReducers({
@@ -28,13 +34,13 @@ export const configureStore = (): Store => {
 		}),
 		// TODO:↓リファクタしたい
 		compose(
-			// middleware,
+			middleware,
 			window.__REDUX_DEVTOOLS_EXTENSION__()
 		)
 	);
 	/* tslint-enable */
 
-	// sagaMiddleware.run(rootSaga);
+	sagaMiddleware.run(rootSaga);
 	return store;
 };
 export default configureStore;

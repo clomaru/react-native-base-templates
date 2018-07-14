@@ -1,5 +1,7 @@
 import { Action } from 'redux';
 import { Dispatch } from 'react-redux';
+import { takeLatest, put, call } from 'redux-saga/effects';
+import apis from '../api/postcode-js';
 
 // initial state
 //=============================
@@ -91,7 +93,46 @@ export const changeText = (): ChangeTextAction => ({
 });
 
 // TODO: payloadってなに
-export const getAddressRequested = (zipCode: number): GetAddressRequested => ({
+export const getAddressRequested = (
+	zipCode: number,
+	meta
+): GetAddressRequested => ({
 	type: ActionTypes.GET_ADDRESS_REQUESTED,
-	payload: { zipcode }
+	payload: { zipCode },
+	meta
 });
+
+// Sagas
+//=============================
+
+function* getAddress(action) {
+	const meta = action.meta || {};
+	const res = yield apis.getAddress(action.payload.zipCode);
+	if (res.data && res.data.length > 0) {
+		yield put({
+			type: ActionTypes.GET_ADDRESS_SUCCEEDED,
+			payload: {
+				zipCode: action.payload.zipCode,
+				address: res.data[0].allAdress,
+				error: false
+			}
+		});
+		// if (meta.pageOnSuccess) yield put(changeText);
+	} else {
+		const message = res.validationErrors
+			? res.validationErrors[0].message
+			: null;
+		yield put({
+			type: ActionTypes.GET_ADDRESS_FAILED,
+			payload: new Error(message),
+			error: true
+		});
+		// if (meta.pageOnFailure) yield put(changeText);
+	}
+}
+
+function* watchLastGetZipData() {
+	yield takeLatest(ActionTypes.GET_ADDRESS_REQUESTED, getAddress);
+}
+
+export const sagas = [watchLastGetZipData];
