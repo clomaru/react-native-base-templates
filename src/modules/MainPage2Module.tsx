@@ -25,18 +25,16 @@ const initialState: Main2State = {
 // action type
 // =============================
 
-// TODO: ここできればducks流のやつでちゃんと書きたい
 export enum ActionTypes {
-	GET_ADDRESS_REQUESTED = 'GET_ADDRESS_REQUESTED',
-	GET_ADDRESS_SUCCEEDED = 'GET_ADDRESS_SUCCEEDED',
-	GET_ADDRESS_FAILED = 'GET_ADDRESS_FAILED',
-	DETEMINATE_FETCH = 'DETEMINATE_FETCH'
+	GET_ADDRESS_REQUESTED = 'MainPage2Module/GET_ADDRESS_REQUESTED',
+	GET_ADDRESS_SUCCEEDED = 'MainPage2Module/GET_ADDRESS_SUCCEEDED',
+	GET_ADDRESS_FAILED = 'MainPage2Module/GET_ADDRESS_FAILED'
 }
 
 // reducer
 // =============================
 
-export type Main2Actoins = GetAddressRequested | DeteminateOfFetchAction;
+export type Main2Actoins = GetAddressRequested;
 
 const main2Reducer = (
 	state: Main2State = initialState,
@@ -54,17 +52,14 @@ const main2Reducer = (
 		case ActionTypes.GET_ADDRESS_SUCCEEDED:
 			return Object.assign({}, state, {
 				apiIsProcessing: false,
-				address: action.payload.address
+				address: action.payload.address,
+				isSuccess: action.payload.isSuccess
 			});
 
 		case ActionTypes.GET_ADDRESS_FAILED:
 			return Object.assign({}, state, {
 				apiIsProcessing: false,
-				error: action.payload.message
-			});
-
-		case ActionTypes.DETEMINATE_FETCH:
-			return Object.assign({}, state, {
+				error: action.payload.message,
 				isSuccess: action.payload.isSuccess
 			});
 
@@ -77,54 +72,29 @@ export default main2Reducer;
 // action creator
 //=============================
 
-// TODO:このinterfaceをかくことによって得られる恩恵はなんだ？
-
 interface GetAddressRequested extends Action {
 	type: ActionTypes.GET_ADDRESS_REQUESTED;
-	zipCode: number;
+	payload: {
+		zipCode: number;
+	};
 }
 
-interface DeteminateOfFetchAction extends Action {
-	type: ActionTypes.DETEMINATE_FETCH;
-	isSuccess: boolean;
-}
-
-// TODO: payloadってなに
-export const getAddressRequested = (
-	zipCode: number,
-	meta
-): GetAddressRequested => ({
+export const getAddressRequested = (zipCode: number): GetAddressRequested => ({
 	type: ActionTypes.GET_ADDRESS_REQUESTED,
-	payload: { zipCode },
-	meta
-});
-
-// TODO:名前変える
-// TODO: GET_ADDRESS_SUCCEEDEDと統合できる
-export const deteminateOfFetch = (
-	isSuccess: boolean
-): DeteminateOfFetchAction => ({
-	type: ActionTypes.DETEMINATE_FETCH,
-	payload: { isSuccess }
+	payload: { zipCode }
 });
 
 // Sagas
 //=============================
 
 function* getAddress(action: { payload: { zipCode: number; isSuccess: any } }) {
-	// const meta = action.meta || {};
 	const res = yield apis.getAddress(action.payload.zipCode);
 	if (res.data && res.data.length > 0) {
-		yield put({
-			type: ActionTypes.DETEMINATE_FETCH,
-			payload: {
-				isSuccess: true
-			}
-		});
 		yield put({
 			type: ActionTypes.GET_ADDRESS_SUCCEEDED,
 			payload: {
 				zipCode: action.payload.zipCode,
+				isSuccess: true,
 				address: res.data[0].allAddress,
 				error: false
 			}
@@ -134,13 +104,8 @@ function* getAddress(action: { payload: { zipCode: number; isSuccess: any } }) {
 			? res.validationErrors[0].message
 			: null;
 		yield put({
-			type: ActionTypes.DETEMINATE_FETCH,
-			payload: {
-				isSuccess: false
-			}
-		});
-		yield put({
 			type: ActionTypes.GET_ADDRESS_FAILED,
+			isSuccess: false,
 			payload: new Error(message),
 			error: true
 		});
