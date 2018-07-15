@@ -14,6 +14,7 @@ import PostResult from '../../components/organisms/PostResult/index';
 interface Props {
 	showText: string;
 	zipCode: number;
+	address: string;
 }
 
 interface State {
@@ -63,7 +64,7 @@ export default class MainPage2 extends React.Component<Props, State> {
 
 	// TODO:一回画像でいって余裕があればloader使お
 	public render() {
-		console.log(this.props.isSuccess);
+		console.log(this.props.address);
 		return (
 			<Container>
 				<View>

@@ -76,7 +76,9 @@ const main2Reducer = (
 			});
 
 		case ActionTypes.DETEMINATE_FETCH:
-			return !state.isSuccess;
+			return Object.assign({}, state, {
+				isSuccess: action.payload.isSuccess
+			});
 
 		default:
 			return state;
@@ -117,39 +119,50 @@ export const getAddressRequested = (
 });
 
 // TODO:名前変える
+// TODO: GET_ADDRESS_SUCCEEDEDと統合できる
 export const deteminateOfFetch = (
 	isSuccess: boolean
 ): DeteminateOfFetchAction => ({
 	type: ActionTypes.DETEMINATE_FETCH,
-	isSuccess
+	payload: { isSuccess }
 });
 
 // Sagas
 //=============================
 
-function* getAddress(action) {
-	const meta = action.meta || {};
+function* getAddress(action: { payload: { zipCode: number; isSuccess: any } }) {
+	// const meta = action.meta || {};
 	const res = yield apis.getAddress(action.payload.zipCode);
 	if (res.data && res.data.length > 0) {
+		yield put({
+			type: ActionTypes.DETEMINATE_FETCH,
+			payload: {
+				isSuccess: true
+			}
+		});
 		yield put({
 			type: ActionTypes.GET_ADDRESS_SUCCEEDED,
 			payload: {
 				zipCode: action.payload.zipCode,
-				address: res.data[0].allAdress,
+				address: res.data[0].allAddress,
 				error: false
 			}
 		});
-		if (meta.pageOnSuccess) yield call(deteminateOfFetch, meta.pageOnSuccess);
 	} else {
 		const message = res.validationErrors
 			? res.validationErrors[0].message
 			: null;
 		yield put({
+			type: ActionTypes.DETEMINATE_FETCH,
+			payload: {
+				isSuccess: false
+			}
+		});
+		yield put({
 			type: ActionTypes.GET_ADDRESS_FAILED,
 			payload: new Error(message),
 			error: true
 		});
-		if (meta.pageOnFailure) yield call(deteminateOfFetch, meta.pageOnFailure);
 	}
 }
 

@@ -1,4 +1,4 @@
-const getAddress = zipCode => {
+const getAddress = (zipCode: number) => {
 	const url = `https://postcode-jp.appspot.com/api/postcode?general=true&office=true&postcode=${zipCode}`;
 	return fetch(url)
 		.then(res => res.json())
