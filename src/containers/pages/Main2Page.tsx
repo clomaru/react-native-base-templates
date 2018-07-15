@@ -5,10 +5,8 @@ import { ReduxAction, ReduxState } from '../../store';
 import { getAddressRequested } from '../../modules/MainPage2Module';
 import styled from 'styled-components/native';
 
-import { Text, View, Image, TouchableOpacity } from 'react-native';
-import Button from '../../components/atoms/Button/index';
+import { Text, View } from 'react-native';
 import SubmittionBox from '../../components/molecules/SubmittionBox/index';
-import PracRamda from '../../components/molecules/PracRamda/index';
 import PostResult from '../../components/organisms/PostResult/index';
 
 interface Props {
@@ -45,21 +43,6 @@ export default class MainPage2 extends React.Component<Props, State> {
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
-	handleChange(e) {
-		this.setState({ zipCode: e });
-	}
-
-	handleSubmit(e) {
-		e.preventDefault();
-		const meta = {
-			pageOnSuccess: true,
-			pageOnFailure: false
-		};
-		this.props.getAddressRequested(this.state.zipCode, meta);
-
-		// console.log(`郵便番号 ${this.state.zipCode}の住所取得を要求`);
-	}
-
 	// TODO:一回画像でいって余裕があればloader使お
 	public render() {
 		console.log(this.props.address);
@@ -79,19 +62,30 @@ export default class MainPage2 extends React.Component<Props, State> {
 						</View>
 					) : (
 						<View>
-							oooo
 							<PostResult
 								isSuccess={this.props.isSuccess}
 								zipCode={this.state.zipCode}
 								address={this.props.address}
 								error={this.props.error}
 							/>
-							oooo
 						</View>
 					)}
 				</View>
 			</Container>
 		);
+	}
+
+	handleChange(e) {
+		this.setState({ zipCode: e });
+	}
+
+	handleSubmit(e) {
+		e.preventDefault();
+		const meta = {
+			pageOnSuccess: true,
+			pageOnFailure: false
+		};
+		this.props.getAddressRequested(this.state.zipCode, meta);
 	}
 }
 

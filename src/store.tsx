@@ -18,8 +18,8 @@ import main2Reducer, {
 import createSagaMiddleware from 'redux-saga';
 
 const allSagas = [...sagas];
-function* rootSaga(context) {
-	yield all(allSagas.map(f => f(context)));
+function* rootSaga() {
+	yield all(allSagas.map(f => f()));
 }
 
 // TODO:↓みづらくね？
@@ -35,7 +35,8 @@ export const configureStore = (): Store => {
 		// TODO:↓リファクタしたい
 		compose(
 			middleware,
-			window.__REDUX_DEVTOOLS_EXTENSION__()
+			window.__REDUX_DEVTOOLS_EXTENSION__ &&
+				window.__REDUX_DEVTOOLS_EXTENSION__()
 		)
 	);
 	/* tslint-enable */

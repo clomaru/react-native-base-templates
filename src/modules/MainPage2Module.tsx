@@ -1,6 +1,6 @@
 import { Action } from 'redux';
 import { Dispatch } from 'react-redux';
-import { takeLatest, put, call } from 'redux-saga/effects';
+import { takeLatest, put } from 'redux-saga/effects';
 import apis from '../api/postcode-js';
 
 // initial state
