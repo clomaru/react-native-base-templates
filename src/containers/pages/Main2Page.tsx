@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 import { ReduxAction, ReduxState } from '../../store';
-import { changeText, getAddressRequested } from '../../modules/MainPage2Module';
+import { getAddressRequested } from '../../modules/MainPage2Module';
 import styled from 'styled-components/native';
 
 import { Text, View, Image, TouchableOpacity } from 'react-native';
@@ -12,7 +12,6 @@ import PracRamda from '../../components/molecules/PracRamda/index';
 import PostResult from '../../components/organisms/PostResult/index';
 
 interface Props {
-	showText: string;
 	zipCode: number;
 	address: string;
 }
@@ -22,7 +21,6 @@ interface State {
 }
 
 const mapStateToProps = (state: ReduxState) => ({
-	showText: state.main2Reducer.showText,
 	apiIsProcessing: state.main2Reducer.apiIsProcessing,
 	zipCode: state.main2Reducer.zipCode,
 	address: state.main2Reducer.address,
@@ -31,7 +29,7 @@ const mapStateToProps = (state: ReduxState) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<ReduxAction>) =>
-	bindActionCreators({ changeText, getAddressRequested }, dispatch);
+	bindActionCreators({ getAddressRequested }, dispatch);
 
 @(connect(
 	mapStateToProps,
@@ -91,10 +89,6 @@ export default class MainPage2 extends React.Component<Props, State> {
 							oooo
 						</View>
 					)}
-				</View>
-				<View>
-					<StyledText>{this.props.showText}</StyledText>
-					<Button onPress={this.props.changeText}>change the text</Button>
 				</View>
 			</Container>
 		);

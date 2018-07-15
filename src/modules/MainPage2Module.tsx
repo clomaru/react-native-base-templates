@@ -7,7 +7,6 @@ import apis from '../api/postcode-js';
 //=============================
 
 export interface Main2State {
-	showText: string;
 	apiIsProcessing: boolean;
 	zipCode: number | null;
 	address: string | null;
@@ -16,7 +15,6 @@ export interface Main2State {
 }
 
 const initialState: Main2State = {
-	showText: 'hello Ducks',
 	apiIsProcessing: false,
 	zipCode: null,
 	address: null,
@@ -29,7 +27,6 @@ const initialState: Main2State = {
 
 // TODO: ここできればducks流のやつでちゃんと書きたい
 export enum ActionTypes {
-	CHANGE_TEXT = 'CHANGE_TEXT',
 	GET_ADDRESS_REQUESTED = 'GET_ADDRESS_REQUESTED',
 	GET_ADDRESS_SUCCEEDED = 'GET_ADDRESS_SUCCEEDED',
 	GET_ADDRESS_FAILED = 'GET_ADDRESS_FAILED',
@@ -39,22 +36,13 @@ export enum ActionTypes {
 // reducer
 // =============================
 
-export type Main2Actoins =
-	| ChangeTextAction
-	| GetAddressRequested
-	| DeteminateOfFetchAction;
+export type Main2Actoins = GetAddressRequested | DeteminateOfFetchAction;
 
 const main2Reducer = (
 	state: Main2State = initialState,
 	action: Main2Actoins
 ): Main2State => {
 	switch (action.type) {
-		case ActionTypes.CHANGE_TEXT:
-			return Object.assign({}, state, {
-				showText:
-					state.showText == 'hello Ducks' ? 'change success!!' : 'hello Ducks'
-			});
-
 		case ActionTypes.GET_ADDRESS_REQUESTED:
 			return Object.assign({}, state, {
 				apiIsProcessing: true,
@@ -90,9 +78,6 @@ export default main2Reducer;
 //=============================
 
 // TODO:このinterfaceをかくことによって得られる恩恵はなんだ？
-interface ChangeTextAction extends Action {
-	type: ActionTypes.CHANGE_TEXT;
-}
 
 interface GetAddressRequested extends Action {
 	type: ActionTypes.GET_ADDRESS_REQUESTED;
@@ -103,10 +88,6 @@ interface DeteminateOfFetchAction extends Action {
 	type: ActionTypes.DETEMINATE_FETCH;
 	isSuccess: boolean;
 }
-
-export const changeText = (): ChangeTextAction => ({
-	type: ActionTypes.CHANGE_TEXT
-});
 
 // TODO: payloadってなに
 export const getAddressRequested = (
