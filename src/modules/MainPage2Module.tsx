@@ -12,6 +12,7 @@ export interface Main2State {
 	zipCode: number | null;
 	address: string | null;
 	error: string | null;
+	isSuccess: boolean;
 }
 
 const initialState: Main2State = {
@@ -19,7 +20,8 @@ const initialState: Main2State = {
 	apiIsProcessing: false,
 	zipCode: null,
 	address: null,
-	error: null
+	error: null,
+	isSuccess: false
 };
 
 // action type
@@ -30,13 +32,17 @@ export enum ActionTypes {
 	CHANGE_TEXT = 'CHANGE_TEXT',
 	GET_ADDRESS_REQUESTED = 'GET_ADDRESS_REQUESTED',
 	GET_ADDRESS_SUCCEEDED = 'GET_ADDRESS_SUCCEEDED',
-	GET_ADDRESS_FAILED = 'GET_ADDRESS_FAILED'
+	GET_ADDRESS_FAILED = 'GET_ADDRESS_FAILED',
+	DETEMINATE_FETCH = 'DETEMINATE_FETCH'
 }
 
 // reducer
 // =============================
 
-export type Main2Actoins = ChangeTextAction | GetAddressRequested;
+export type Main2Actoins =
+	| ChangeTextAction
+	| GetAddressRequested
+	| DeteminateOfFetchAction;
 
 const main2Reducer = (
 	state: Main2State = initialState,
@@ -69,6 +75,9 @@ const main2Reducer = (
 				error: action.payload.message
 			});
 
+		case ActionTypes.DETEMINATE_FETCH:
+			return !state.isSuccess;
+
 		default:
 			return state;
 	}
@@ -88,6 +97,11 @@ interface GetAddressRequested extends Action {
 	zipCode: number;
 }
 
+interface DeteminateOfFetchAction extends Action {
+	type: ActionTypes.DETEMINATE_FETCH;
+	isSuccess: boolean;
+}
+
 export const changeText = (): ChangeTextAction => ({
 	type: ActionTypes.CHANGE_TEXT
 });
@@ -100,6 +114,14 @@ export const getAddressRequested = (
 	type: ActionTypes.GET_ADDRESS_REQUESTED,
 	payload: { zipCode },
 	meta
+});
+
+// TODO:名前変える
+export const deteminateOfFetch = (
+	isSuccess: boolean
+): DeteminateOfFetchAction => ({
+	type: ActionTypes.DETEMINATE_FETCH,
+	isSuccess
 });
 
 // Sagas
@@ -117,7 +139,7 @@ function* getAddress(action) {
 				error: false
 			}
 		});
-		// if (meta.pageOnSuccess) yield put(changeText);
+		if (meta.pageOnSuccess) yield call(deteminateOfFetch, meta.pageOnSuccess);
 	} else {
 		const message = res.validationErrors
 			? res.validationErrors[0].message
@@ -127,7 +149,7 @@ function* getAddress(action) {
 			payload: new Error(message),
 			error: true
 		});
-		// if (meta.pageOnFailure) yield put(changeText);
+		if (meta.pageOnFailure) yield call(deteminateOfFetch, meta.pageOnFailure);
 	}
 }
 

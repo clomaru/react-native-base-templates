@@ -5,10 +5,11 @@ import { ReduxAction, ReduxState } from '../../store';
 import { changeText, getAddressRequested } from '../../modules/MainPage2Module';
 import styled from 'styled-components/native';
 
-import { Text, View, TouchableOpacity } from 'react-native';
+import { Text, View, Image, TouchableOpacity } from 'react-native';
 import Button from '../../components/atoms/Button/index';
 import SubmittionBox from '../../components/molecules/SubmittionBox/index';
 import PracRamda from '../../components/molecules/PracRamda/index';
+import PostResult from '../../components/organisms/PostResult/index';
 
 interface Props {
 	showText: string;
@@ -21,7 +22,11 @@ interface State {
 
 const mapStateToProps = (state: ReduxState) => ({
 	showText: state.main2Reducer.showText,
-	zipCode: state.main2Reducer.zipCode
+	apiIsProcessing: state.main2Reducer.apiIsProcessing,
+	zipCode: state.main2Reducer.zipCode,
+	address: state.main2Reducer.address,
+	error: state.main2Reducer.error,
+	isSuccess: state.main2Reducer.isSuccess
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<ReduxAction>) =>
@@ -34,7 +39,8 @@ const mapDispatchToProps = (dispatch: Dispatch<ReduxAction>) =>
 export default class MainPage2 extends React.Component<Props, State> {
 	constructor(props: Props) {
 		super(props);
-		this.state = { zipCode: '' };
+
+		this.state = { zipCode: this.props.zipCode || '' };
 
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
@@ -47,15 +53,17 @@ export default class MainPage2 extends React.Component<Props, State> {
 	handleSubmit(e) {
 		e.preventDefault();
 		const meta = {
-			pageOnSuccess: 'success',
-			pageOnFailure: 'failure'
+			pageOnSuccess: true,
+			pageOnFailure: false
 		};
 		this.props.getAddressRequested(this.state.zipCode, meta);
 
 		// console.log(`郵便番号 ${this.state.zipCode}の住所取得を要求`);
 	}
 
+	// TODO:一回画像でいって余裕があればloader使お
 	public render() {
+		console.log(this.props.isSuccess);
 		return (
 			<Container>
 				<View>
@@ -66,6 +74,22 @@ export default class MainPage2 extends React.Component<Props, State> {
 						buttonText="送信"
 						value={this.state.zipCode}
 					/>
+					{this.props.apiIsProcessing ? (
+						<View>
+							<Text>loading...</Text>
+						</View>
+					) : (
+						<View>
+							oooo
+							<PostResult
+								isSuccess={this.props.isSuccess}
+								zipCode={this.state.zipCode}
+								address={this.props.address}
+								error={this.props.error}
+							/>
+							oooo
+						</View>
+					)}
 				</View>
 				<View>
 					<StyledText>{this.props.showText}</StyledText>

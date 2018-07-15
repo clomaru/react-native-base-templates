@@ -18,8 +18,8 @@ import main2Reducer, {
 import createSagaMiddleware from 'redux-saga';
 
 const allSagas = [...sagas];
-function* rootSaga() {
-	yield all(allSagas.map(f => f()));
+function* rootSaga(context) {
+	yield all(allSagas.map(f => f(context)));
 }
 
 // TODO:↓みづらくね？
