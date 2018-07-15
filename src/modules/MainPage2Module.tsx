@@ -11,7 +11,7 @@ export interface Main2State {
 	zipCode: number | null;
 	address: string | null;
 	error: string | null;
-	isSuccess: boolean;
+	isSuccess: boolean | null;
 }
 
 const initialState: Main2State = {
@@ -19,7 +19,7 @@ const initialState: Main2State = {
 	zipCode: null,
 	address: null,
 	error: null,
-	isSuccess: false
+	isSuccess: null
 };
 
 // action type
@@ -34,7 +34,10 @@ export enum ActionTypes {
 // reducer
 // =============================
 
-export type Main2Actoins = GetAddressRequested;
+export type Main2Actoins =
+	| GetAddressRequested
+	| GetAddressSucceeded
+	| GetAddressFailed;
 
 const main2Reducer = (
 	state: Main2State = initialState,
@@ -79,6 +82,22 @@ interface GetAddressRequested extends Action {
 	};
 }
 
+interface GetAddressSucceeded extends Action {
+	type: ActionTypes.GET_ADDRESS_SUCCEEDED;
+	payload: {
+		address: string;
+		isSuccess: boolean;
+	};
+}
+
+interface GetAddressFailed extends Action {
+	type: ActionTypes.GET_ADDRESS_FAILED;
+	payload: {
+		message: string;
+		isSuccess: boolean;
+	};
+}
+
 export const getAddressRequested = (zipCode: number): GetAddressRequested => ({
 	type: ActionTypes.GET_ADDRESS_REQUESTED,
 	payload: { zipCode }
@@ -87,7 +106,7 @@ export const getAddressRequested = (zipCode: number): GetAddressRequested => ({
 // Sagas
 //=============================
 
-function* getAddress(action: { payload: { zipCode: number; isSuccess: any } }) {
+function* getAddress(action: Main2Actoins) {
 	const res = yield apis.getAddress(action.payload.zipCode);
 	if (res.data && res.data.length > 0) {
 		yield put({
