@@ -6,14 +6,23 @@ import {
 	Action,
 	Store
 } from 'redux';
+import { all } from 'redux-saga/effects';
+
 import mainReducer, { MainActions, MainState } from './modules/MainPageModule';
 import main2Reducer, {
 	Main2Actoins,
-	Main2State
+	Main2State,
+	sagas
 } from './modules/MainPage2Module';
-import createSagaMiddleware from 'redux-saga';
-import rootSaga from './sagas/index';
 
+import createSagaMiddleware from 'redux-saga';
+
+const allSagas = [...sagas];
+function* rootSaga(context) {
+	yield all(allSagas.map(f => f(context)));
+}
+
+// TODO:↓みづらくね？
 export const configureStore = (): Store => {
 	const sagaMiddleware = createSagaMiddleware();
 	const middleware = applyMiddleware(sagaMiddleware);

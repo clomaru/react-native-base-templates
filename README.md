@@ -25,6 +25,10 @@
 
 ### Other
 
+- [redux-saga](https://github.com/redux-saga/redux-saga)
+- [Higher-order Components](https://reactjs.org/docs/higher-order-components.html)
+- [Recompose](https://github.com/acdlite/recompose)
+- [Ramdajs](https://github.com/ramda/ramda)
 - [react-native-debugger](https://github.com/jhen0409/react-native-debugger)
 
 ### ReactNativeAPI
@@ -42,8 +46,6 @@
 ## To Install
 
 - [immutable.js](https://github.com/facebook/immutable-js)
-- [redux-thunk](https://github.com/reduxjs/redux-thunk)
-- [redux-saga](https://github.com/redux-saga/redux-saga/)
 - [redux-logger](https://github.com/evgenyrodionov/redux-logger)
 - [redux-actions](https://github.com/redux-utilities/redux-actions)
 - [reduxsause](https://github.com/infinitered/reduxsauce)

@@ -1,26 +1,39 @@
 import { Action } from 'redux';
+import { Dispatch } from 'react-redux';
+import { takeLatest, put, call } from 'redux-saga/effects';
+import apis from '../api/postcode-js';
 
 // initial state
 //=============================
 
 export interface Main2State {
 	showText: string;
-	num: number;
+	apiIsProcessing: boolean;
+	zipCode: number | null;
+	address: string | null;
+	error: string | null;
+	isSuccess: boolean;
 }
 
 const initialState: Main2State = {
 	showText: 'hello Ducks',
-	num: 0
+	apiIsProcessing: false,
+	zipCode: null,
+	address: null,
+	error: null,
+	isSuccess: false
 };
 
 // action type
 // =============================
 
+// TODO: ここできればducks流のやつでちゃんと書きたい
 export enum ActionTypes {
 	CHANGE_TEXT = 'CHANGE_TEXT',
-	INCREMENT = 'INCREMENT',
-	DECREMENT = 'DECREMENT',
-	INCREMENT_ASYNC = 'INCREMENT_ASYNC'
+	GET_ADDRESS_REQUESTED = 'GET_ADDRESS_REQUESTED',
+	GET_ADDRESS_SUCCEEDED = 'GET_ADDRESS_SUCCEEDED',
+	GET_ADDRESS_FAILED = 'GET_ADDRESS_FAILED',
+	DETEMINATE_FETCH = 'DETEMINATE_FETCH'
 }
 
 // reducer
@@ -28,9 +41,8 @@ export enum ActionTypes {
 
 export type Main2Actoins =
 	| ChangeTextAction
-	| IncrementAction
-	| DecrementAction
-	| IncrementAsyncAction;
+	| GetAddressRequested
+	| DeteminateOfFetchAction;
 
 const main2Reducer = (
 	state: Main2State = initialState,
@@ -43,14 +55,29 @@ const main2Reducer = (
 					state.showText == 'hello Ducks' ? 'change success!!' : 'hello Ducks'
 			});
 
-		case ActionTypes.INCREMENT:
+		case ActionTypes.GET_ADDRESS_REQUESTED:
 			return Object.assign({}, state, {
-				num: state.num + 1
+				apiIsProcessing: true,
+				zipCode: action.payload.zipCode,
+				address: null,
+				error: null
 			});
 
-		case ActionTypes.DECREMENT:
+		case ActionTypes.GET_ADDRESS_SUCCEEDED:
 			return Object.assign({}, state, {
-				num: state.num - 1
+				apiIsProcessing: false,
+				address: action.payload.address
+			});
+
+		case ActionTypes.GET_ADDRESS_FAILED:
+			return Object.assign({}, state, {
+				apiIsProcessing: false,
+				error: action.payload.message
+			});
+
+		case ActionTypes.DETEMINATE_FETCH:
+			return Object.assign({}, state, {
+				isSuccess: action.payload.isSuccess
 			});
 
 		default:
@@ -67,30 +94,80 @@ interface ChangeTextAction extends Action {
 	type: ActionTypes.CHANGE_TEXT;
 }
 
-interface IncrementAction extends Action {
-	type: ActionTypes.INCREMENT;
+interface GetAddressRequested extends Action {
+	type: ActionTypes.GET_ADDRESS_REQUESTED;
+	zipCode: number;
 }
 
-interface DecrementAction extends Action {
-	type: ActionTypes.DECREMENT;
-}
-
-interface IncrementAsyncAction extends Action {
-	type: ActionTypes.INCREMENT_ASYNC;
+interface DeteminateOfFetchAction extends Action {
+	type: ActionTypes.DETEMINATE_FETCH;
+	isSuccess: boolean;
 }
 
 export const changeText = (): ChangeTextAction => ({
 	type: ActionTypes.CHANGE_TEXT
 });
 
-export const incrementNum = (): IncrementAction => ({
-	type: ActionTypes.INCREMENT
+// TODO: payloadってなに
+export const getAddressRequested = (
+	zipCode: number,
+	meta
+): GetAddressRequested => ({
+	type: ActionTypes.GET_ADDRESS_REQUESTED,
+	payload: { zipCode },
+	meta
 });
 
-export const decrementNum = (): DecrementAction => ({
-	type: ActionTypes.DECREMENT
+// TODO:名前変える
+// TODO: GET_ADDRESS_SUCCEEDEDと統合できる
+export const deteminateOfFetch = (
+	isSuccess: boolean
+): DeteminateOfFetchAction => ({
+	type: ActionTypes.DETEMINATE_FETCH,
+	payload: { isSuccess }
 });
 
-export const incrementAsync = (): IncrementAsyncAction => ({
-	type: ActionTypes.INCREMENT_ASYNC
-});
+// Sagas
+//=============================
+
+function* getAddress(action: { payload: { zipCode: number; isSuccess: any } }) {
+	// const meta = action.meta || {};
+	const res = yield apis.getAddress(action.payload.zipCode);
+	if (res.data && res.data.length > 0) {
+		yield put({
+			type: ActionTypes.DETEMINATE_FETCH,
+			payload: {
+				isSuccess: true
+			}
+		});
+		yield put({
+			type: ActionTypes.GET_ADDRESS_SUCCEEDED,
+			payload: {
+				zipCode: action.payload.zipCode,
+				address: res.data[0].allAddress,
+				error: false
+			}
+		});
+	} else {
+		const message = res.validationErrors
+			? res.validationErrors[0].message
+			: null;
+		yield put({
+			type: ActionTypes.DETEMINATE_FETCH,
+			payload: {
+				isSuccess: false
+			}
+		});
+		yield put({
+			type: ActionTypes.GET_ADDRESS_FAILED,
+			payload: new Error(message),
+			error: true
+		});
+	}
+}
+
+function* watchLastGetZipData() {
+	yield takeLatest(ActionTypes.GET_ADDRESS_REQUESTED, getAddress);
+}
+
+export const sagas = [watchLastGetZipData];

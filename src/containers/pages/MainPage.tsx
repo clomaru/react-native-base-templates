@@ -7,7 +7,11 @@ import { View, FlatList, AppState } from 'react-native';
 
 import SubmittionBox from '../../components/molecules/SubmittionBox/index';
 import ListWithIcon from '../../components/molecules/ListWithIcon/index';
-import { pushItem, switchRefreshing } from '../../modules/MainPageModule';
+import {
+	changeTextbox,
+	pushItem,
+	switchRefreshing
+} from '../../modules/MainPageModule';
 
 // TODO: android navigaton
 // TODO: ios icon
@@ -22,23 +26,24 @@ interface ItemProps {
 
 interface Props {
 	page: number;
+	text: string;
+	items: string[];
+	refreshing: boolean;
 	item: ItemProps;
 }
 
 interface State {
-	items: string[];
-	text: string;
-	refreshing: boolean;
 	mainReducer: ReduxState;
 }
 
 const mapStateToProps = (state: ReduxState) => ({
+	text: state.mainReducer.text,
 	items: state.mainReducer.items,
 	refreshing: state.mainReducer.refreshing
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<ReduxAction>) =>
-	bindActionCreators({ pushItem, switchRefreshing }, dispatch);
+	bindActionCreators({ changeTextbox, pushItem, switchRefreshing }, dispatch);
 
 @(connect(
 	mapStateToProps,
@@ -47,9 +52,6 @@ const mapDispatchToProps = (dispatch: Dispatch<ReduxAction>) =>
 export default class MainPage extends React.Component<Props, State> {
 	constructor(props: Props) {
 		super(props);
-		this.state = {
-			text: ''
-		};
 	}
 	page = 1;
 
@@ -62,12 +64,11 @@ export default class MainPage extends React.Component<Props, State> {
 	}
 
 	public render() {
-		console.log(`this.state.text: ${this.state.text}`);
 		return (
 			<Container>
 				<SubmittionBox
 					buttonText={'search'}
-					onChangeText={text => this.setState({ text })}
+					onChangeText={text => this.props.changeTextbox(text)}
 					onPress={() => this.fetchRepositories(true)}
 				/>
 
@@ -106,11 +107,10 @@ export default class MainPage extends React.Component<Props, State> {
 
 	private fetchRepositories(refreshing: boolean = false) {
 		const newPage = refreshing ? 1 : this.page + 1;
-		console.log(`this.state.text: ${this.state.text}`);
-		this.setState({ refreshing });
+		this.props.switchRefreshing(refreshing);
 		fetch(
 			`https://api.github.com/search/repositories?q=${
-				this.state.text
+				this.props.text
 			}&page=${newPage}`
 		)
 			.then(response => response.json())
