@@ -10,8 +10,7 @@ interface Props {
 	error: string;
 }
 
-// これ...propsをつけると伝達できるぞ!!!!!!!!!!!!!!
-const checkedFetched = ({ isSuccess, ...props }) => isSuccess;
+const checkedFetched = ({ isSuccess }): boolean => isSuccess;
 
 const PostResultSuccess: React.SFC<Props> = ({
 	zipCode,

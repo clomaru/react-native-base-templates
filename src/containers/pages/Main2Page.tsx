@@ -45,7 +45,7 @@ export default class MainPage2 extends React.Component<Props, State> {
 
 	// TODO:一回画像でいって余裕があればloader使お
 	public render() {
-		console.log(this.props.address);
+		const data = 'hello recompose';
 		return (
 			<Container>
 				<View>
