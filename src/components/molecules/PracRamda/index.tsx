@@ -1,56 +1,97 @@
-// あとでファイル名変えよう
-import * as React from 'react';
-import styled from 'styled-components/native';
-import { View, TouchableOpacity } from 'react-native';
-import Txt from '../../atoms/Txt/index';
-import Heading from '../../atoms/Heading/index';
-import ListItem from '../../atoms/ListItem/index';
-import * as R from 'ramda';
-import { compose, withState, withHandlers } from 'recompose';
+// // あとでファイル名変えよう
+import * as React from "react";
+import styled from "styled-components/native";
+import { View, TouchableOpacity } from "react-native";
+import Txt from "../../atoms/Txt/index";
+import Button from "../../atoms/Button/index";
+import Heading from "../../atoms/Heading/index";
+import ListItem from "../../atoms/ListItem/index";
+import { compose, withState, withHandlers } from "recompose";
+// これ
+interface ComponentProps {
+	// 	defaultNum: number;
+}
 
-interface Props {}
+interface WithStateProps {
+	counter: number;
+	updateCounter: ((f: (counter: number) => number) => void);
+	defaultNum?: number;
+}
 
-const counterEnhancer = compose(
-	withState('counter', 'updateCounter', 5),
-	withHandlers({
-		increment: ({ updateCounter }) => () => updateCounter(counter => counter + 1),
-		decrement: ({ updateCounter }) => () => updateCounter(counter => counter - 1),
-		reset: ({ updateCounter }) => () => updateCounter(5)
+interface WithHandlerProps {
+	increment: () => void;
+	decrement: () => void;
+	reset: () => void;
+}
+
+type ComposedProps = WithStateProps & WithHandlerProps;
+type CounterBoardProps = ComposedProps & ComponentProps;
+
+
+// import { compose, withState } from "recompose";
+// const mapValues = (obj, func) => {
+//   const result = {}
+//   for (const key in obj) {
+//     if (obj.hasOwnProperty(key)) {
+//       result[key] = func(obj[key], key)
+//     }
+//   }
+//   return result
+// }
+//
+// const withHandlers = handlers => BaseComponent => {
+//   const factory = React.createFactory(BaseComponent)
+//   class WithHandlers extends React.Component {
+//     handlers = mapValues(
+//       typeof handlers === 'function' ? handlers(this.props) : handlers,
+//       createHandler => (val, key) => { return createHandler(this.props)(val, key) }
+//     )
+//
+//     render() {
+// 			console.log('ooo')
+//       console.log(this.handlers.increment)
+//       return factory({
+//         ...this.props,
+//         ...this.handlers,
+//       })
+//     }
+//   }
+//   return WithHandlers
+// }
+
+const CounterBoardContainer = compose<CounterBoardProps, ComponentProps>(
+	withState<WithStateProps, number, "counter", "updateCounter">(
+		"counter",
+		"updateCounter",
+		({ defaultNum }) => defaultNum
+	),
+	withHandlers<CounterBoardProps, WithHandlerProps>({
+		increment: ({ updateCounter }) => () =>
+			updateCounter(counter => counter + 1),
+		decrement: ({ updateCounter }) => () =>
+			updateCounter(counter => counter - 1),
+		reset: ({ updateCounter, defaultNum }) => () =>
+			updateCounter(() => defaultNum)
 	})
 );
 
-const SampleCounterBaseComponent = props => (
+const CounterBoardPresenter: React.SFC<CounterBoardProps> = ({
+	counter,
+	increment,
+	decrement,
+	reset,
+	...props
+}) => (
 	<View>
-		<Heading type='h1'>{props.counter}</Heading>
-		<TouchableOpacity
-			onPress={() => {
-				props.increment();
-			}}>
-			<Txt>increment</Txt>
-		</TouchableOpacity>
-		<TouchableOpacity
-			onPress={() => {
-				props.decrement();
-			}}>
-			<Txt>dcrement</Txt>
-		</TouchableOpacity>
-		<TouchableOpacity
-			onPress={() => {
-				props.reset();
-			}}>
-			<Txt>reset</Txt>
-		</TouchableOpacity>
+		<Heading type="h1">{counter}</Heading>
+		<IncrementButton onPress={increment}>+</IncrementButton>
+		<DecrementButton onPress={decrement}>-</DecrementButton>
+		<Button onPress={reset}>reset</Button>
 	</View>
 );
 
-const Enhanced = counterEnhancer(SampleCounterBaseComponent);
-
-const PracRamda: React.SFC<Props> = ({ ...props }) => (
-	<Wrapper>
-		<Enhanced />
-	</Wrapper>
-);
-export default PracRamda;
+const CounterBoard = CounterBoardContainer(CounterBoardPresenter);
+export default CounterBoard;
 
 const Wrapper = styled.View`
 	justify-content: center;
@@ -58,6 +99,14 @@ const Wrapper = styled.View`
 	font-size: 20px;
 	text-align: center;
 	margin: 10px;
+`;
+
+const IncrementButton = styled(Button)`
+	background-color: #f69;
+`;
+
+const DecrementButton = styled(Button)`
+	background-color: #6495ed;
 `;
 
 // // あとでファイル名変えよう

@@ -1,13 +1,14 @@
-import * as React from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators, Dispatch } from 'redux';
-import { ReduxAction, ReduxState } from '../../store';
-import { getAddressRequested } from '../../modules/MainPage2Module';
-import styled from 'styled-components/native';
+import * as React from "react";
+import { connect } from "react-redux";
+import { bindActionCreators, Dispatch } from "redux";
+import { ReduxAction, ReduxState } from "../../store";
+import { getAddressRequested } from "../../modules/MainPage2Module";
+import styled from "styled-components/native";
 
-import { Text, View } from 'react-native';
-import SubmittionBox from '../../components/molecules/SubmittionBox/index';
-import PostResult from '../../components/organisms/PostResult/index';
+import { Text, View } from "react-native";
+import SubmittionBox from "../../components/molecules/SubmittionBox/index";
+import PostResult from "../../components/organisms/PostResult/index";
+import CounterBoard from "../../components/molecules/PracRamda/index";
 
 interface Props {
 	zipCode: number;
@@ -37,7 +38,7 @@ export default class MainPage2 extends React.Component<Props, State> {
 	constructor(props: Props) {
 		super(props);
 
-		this.state = { zipCode: this.props.zipCode || '' };
+		this.state = { zipCode: this.props.zipCode || "" };
 
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
@@ -45,10 +46,10 @@ export default class MainPage2 extends React.Component<Props, State> {
 
 	// TODO:一回画像でいって余裕があればloader使お
 	public render() {
-		const data = 'hello recompose';
 		return (
 			<Container>
-				<View>
+				<CounterBoard defaultNum={16} />
+				{/* <View>
 					<SubmittionBox
 						onPress={this.handleSubmit}
 						onChangeText={this.handleChange}
@@ -70,7 +71,7 @@ export default class MainPage2 extends React.Component<Props, State> {
 							/>
 						</View>
 					)}
-				</View>
+				</View> */}
 			</Container>
 		);
 	}
