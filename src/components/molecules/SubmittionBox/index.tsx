@@ -1,33 +1,32 @@
-import * as React from 'react';
-import { View } from 'react-native';
-import styled from 'styled-components/native';
-import styledComponents from 'styled-components';
-import styledComponentsTS from 'styled-components-ts';
-import Button from '../../atoms/Button/index';
-import TextBox from '../../atoms/TextBox/index';
+import * as React from "react";
+import { View } from "react-native";
+import styled from "styled-components/native";
+import styledComponents from "styled-components";
+import styledComponentsTS from "styled-components-ts";
+import Button from "../../atoms/Button/index";
+import TextBox from "../../atoms/TextBox/index";
 
 interface Props {
-	children?: string;
-	buttonText?: string;
-	onPress?: () => void;
+  children?: string;
+  buttonText?: string;
+  onPress?: () => any;
 }
 
 const SubmittionBox: React.SFC<Props> = ({
-	children,
-	buttonText,
-	onPress,
-	...props
+  children,
+  buttonText,
+  onPress,
+  ...props
 }) => (
-	<Wrapper>
-		{/* childrenでええん？ */}
-		<TextBox {...props}>{children}</TextBox>
-		<StyleButton onPress={onPress}>{buttonText}</StyleButton>
-	</Wrapper>
+  <Wrapper>
+    <TextBox {...props}>{children}</TextBox>
+    <StyleButton onPress={onPress}>{buttonText}</StyleButton>
+  </Wrapper>
 );
 export default SubmittionBox;
 
 interface StyledProps {
-	onPress?: () => void;
+  onPress?: () => void;
 }
 
 const Wrapper = styled.View``;

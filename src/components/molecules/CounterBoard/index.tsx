@@ -62,8 +62,6 @@ export default CounterBoard;
 
 const Wrapper = styled.View`
   justify-content: center;
-  font-size: 20px;
-  text-align: center;
   margin: 10px;
 `;
 

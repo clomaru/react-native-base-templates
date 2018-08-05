@@ -13,23 +13,23 @@ import {
   switchRefreshing
 } from "../../modules/SearchRepositoryModule";
 
-// TODO: android navigaton
-// TODO: ios icon
-// TODO: android icon
-// TODO: storybookのテスト
-
-interface ItemProps {
+interface Item {
   name?: string;
-  owner?: string;
+  owner?: {
+    avatar_url?: string;
+    login?: string;
+  };
   id?: number;
 }
 
 interface Props {
   page: number;
   text: string;
-  items: string[];
+  items: Item[];
   refreshing: boolean;
-  item: ItemProps;
+  changeTextbox: (x: string) => any;
+  pushItem: (items: Item) => void;
+  switchRefreshing: (x: boolean) => any;
 }
 
 interface State {
@@ -58,11 +58,11 @@ export default class SearchRepositoryPage extends React.Component<
   }
   page = 1;
 
-  private componentDidMount(): void {
+  public componentDidMount(): void {
     AppState.addEventListener("change", this.onChangeState);
   }
 
-  private componentWillUnmount(): void {
+  public componentWillUnmount(): void {
     AppState.removeEventListener("change", this.onChangeState);
   }
 
@@ -71,8 +71,8 @@ export default class SearchRepositoryPage extends React.Component<
       <Container>
         <SubmittionBox
           buttonText={"search"}
-          onChangeText={text => this.props.changeTextbox(text)}
           onPress={() => this.fetchRepositories(true)}
+          onChangeText={text => this.props.changeTextbox(text)}
         />
 
         <FlatList
@@ -95,20 +95,20 @@ export default class SearchRepositoryPage extends React.Component<
     );
   }
 
-  onChangeState = (appState: string) => {
+  onChangeState = (appState: string): void => {
     if (appState === "active") {
       this.fetchRepositories(true);
     }
   };
 
-  private navigateToDetail(item: any) {
+  private navigateToDetail(item: any): void {
     this.props.navigator.push({
       screen: "searchRepository.DetailPage",
       passProps: item
     });
   }
 
-  private fetchRepositories(refreshing: boolean = false) {
+  private fetchRepositories(refreshing: boolean = false): void {
     const newPage = refreshing ? 1 : this.page + 1;
     this.props.switchRefreshing(refreshing);
     fetch(
