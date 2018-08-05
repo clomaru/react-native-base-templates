@@ -11,45 +11,45 @@ import PostResult from "../../components/organisms/PostResult/index";
 import CounterBoard from "../../components/molecules/PracRamda/index";
 
 interface Props {
-	zipCode: number;
-	address: string;
+  zipCode: number;
+  address: string;
 }
 
 interface State {
-	main2Reducer: ReduxState;
+  main2Reducer: ReduxState;
 }
 
 const mapStateToProps = (state: ReduxState) => ({
-	apiIsProcessing: state.main2Reducer.apiIsProcessing,
-	zipCode: state.main2Reducer.zipCode,
-	address: state.main2Reducer.address,
-	error: state.main2Reducer.error,
-	isSuccess: state.main2Reducer.isSuccess
+  apiIsProcessing: state.main2Reducer.apiIsProcessing,
+  zipCode: state.main2Reducer.zipCode,
+  address: state.main2Reducer.address,
+  error: state.main2Reducer.error,
+  isSuccess: state.main2Reducer.isSuccess
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<ReduxAction>) =>
-	bindActionCreators({ getAddressRequested }, dispatch);
+  bindActionCreators({ getAddressRequested }, dispatch);
 
 @(connect(
-	mapStateToProps,
-	mapDispatchToProps
+  mapStateToProps,
+  mapDispatchToProps
 ) as any)
 export default class MainPage2 extends React.Component<Props, State> {
-	constructor(props: Props) {
-		super(props);
+  constructor(props: Props) {
+    super(props);
 
-		this.state = { zipCode: this.props.zipCode || "" };
+    this.state = { zipCode: this.props.zipCode || "" };
 
-		this.handleChange = this.handleChange.bind(this);
-		this.handleSubmit = this.handleSubmit.bind(this);
-	}
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
 
-	// TODO:一回画像でいって余裕があればloader使お
-	public render() {
-		return (
-			<Container>
-				<CounterBoard defaultNum={16} />
-				{/* <View>
+  // TODO:一回画像でいって余裕があればloader使お
+  public render() {
+    return (
+      <Container>
+        <CounterBoard defaultNum={16} />
+        {/* <View>
 					<SubmittionBox
 						onPress={this.handleSubmit}
 						onChangeText={this.handleChange}
@@ -72,31 +72,31 @@ export default class MainPage2 extends React.Component<Props, State> {
 						</View>
 					)}
 				</View> */}
-			</Container>
-		);
-	}
+      </Container>
+    );
+  }
 
-	handleChange(e) {
-		this.setState({ zipCode: e });
-	}
+  handleChange(e) {
+    this.setState({ zipCode: e });
+  }
 
-	handleSubmit(e) {
-		e.preventDefault();
-		const meta = {
-			pageOnSuccess: true,
-			pageOnFailure: false
-		};
-		this.props.getAddressRequested(this.state.zipCode, meta);
-	}
+  handleSubmit(e) {
+    e.preventDefault();
+    const meta = {
+      pageOnSuccess: true,
+      pageOnFailure: false
+    };
+    this.props.getAddressRequested(this.state.zipCode, meta);
+  }
 }
 
 const Container = styled.View`
-	background-color: #f5fcff;
-	justify-content: center;
-	align-items: center;
-	flex: 1;
+  background-color: #f5fcff;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
 `;
 
 const StyledText = styled.Text`
-	font-size: 20px;
+  font-size: 20px;
 `;
