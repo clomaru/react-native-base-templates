@@ -34,7 +34,7 @@ const mapDispatchToProps = (dispatch: Dispatch<ReduxAction>) =>
   mapStateToProps,
   mapDispatchToProps
 ) as any)
-export default class MainPage2 extends React.Component<Props, State> {
+export default class SagasPostSearchPage extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
 
@@ -49,29 +49,29 @@ export default class MainPage2 extends React.Component<Props, State> {
     return (
       <Container>
         <CounterBoard defaultNum={16} />
-        {/* <View>
-					<SubmittionBox
-						onPress={this.handleSubmit}
-						onChangeText={this.handleChange}
-						placeholder="半角数字で入力"
-						buttonText="送信"
-						value={this.state.zipCode}
-					/>
-					{this.props.apiIsProcessing ? (
-						<View>
-							<Text>loading...</Text>
-						</View>
-					) : (
-						<View>
-							<PostResult
-								isSuccess={this.props.isSuccess}
-								zipCode={this.state.zipCode}
-								address={this.props.address}
-								error={this.props.error}
-							/>
-						</View>
-					)}
-				</View> */}
+        <View>
+          <SubmittionBox
+            onPress={this.handleSubmit}
+            onChangeText={this.handleChange}
+            placeholder="半角数字で入力"
+            buttonText="送信"
+            value={this.state.zipCode}
+          />
+          {this.props.apiIsProcessing ? (
+            <View>
+              <Text>loading...</Text>
+            </View>
+          ) : (
+            <View>
+              <PostResult
+                isSuccess={this.props.isSuccess}
+                zipCode={this.state.zipCode}
+                address={this.props.address}
+                error={this.props.error}
+              />
+            </View>
+          )}
+        </View>
       </Container>
     );
   }

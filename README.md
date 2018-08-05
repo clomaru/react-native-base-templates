@@ -38,7 +38,7 @@
 ## Other Branchs
 
 - [master](https://github.com/mrsekut/react-native-base-templates/tree/master)
-- [todoApp(dev now)](https://github.com/clomaru/react-native-base-templates/tree/todoApp)
+- [todoApp](https://github.com/clomaru/react-native-base-templates/tree/todoApp)
 - searchRepositoryApp(this)
 - upLoadImgApp
 - twitterApp

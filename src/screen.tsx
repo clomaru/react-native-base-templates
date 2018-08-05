@@ -1,28 +1,28 @@
-import { Navigation } from 'react-native-navigation';
+import { Navigation } from "react-native-navigation";
 
-import MainPage from './containers/pages/MainPage';
-import Main2Page from './containers/pages/Main2Page';
-import DetailPage from './containers/pages/DetailPage';
+import SearchRepositoryPage from "./containers/pages/SearchRepositoryPage";
+import SagasPostSearchPage from "./containers/pages/SagasPostSearchPage";
+import DetailPage from "./containers/pages/DetailPage";
 
 export default function registerScreens(store: any, Provider: any) {
-	Navigation.registerComponent(
-		'searchRepository.MainPage',
-		() => MainPage,
-		store,
-		Provider
-	);
-	Navigation.registerComponent(
-		'searchRepository.Main2Page',
-		() => Main2Page,
-		store,
-		Provider
-	);
-	Navigation.registerComponent(
-		'searchRepository.DetailPage',
-		() => DetailPage,
-		store,
-		Provider
-	);
+  Navigation.registerComponent(
+    "searchRepository.SearchRepositoryPage",
+    () => SearchRepositoryPage,
+    store,
+    Provider
+  );
+  Navigation.registerComponent(
+    "searchRepository.SagasPostSearchPage",
+    () => SagasPostSearchPage,
+    store,
+    Provider
+  );
+  Navigation.registerComponent(
+    "searchRepository.DetailPage",
+    () => DetailPage,
+    store,
+    Provider
+  );
 }
 
 // export default (store: any, Provider: any) => {
