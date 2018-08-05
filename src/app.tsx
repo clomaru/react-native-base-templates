@@ -25,6 +25,11 @@ export default class App {
           label: "Two",
           screen: "searchRepository.SagasPostSearchPage",
           title: "Screen Two"
+        },
+        {
+          label: "Three",
+          screen: "searchRepository.RecomposeCounterPage",
+          title: "Screen Two"
         }
       ]
     });
