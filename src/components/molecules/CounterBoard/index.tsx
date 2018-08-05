@@ -1,14 +1,10 @@
-// // あとでファイル名変えよう
 import * as React from "react";
 import styled from "styled-components/native";
-import { View, TouchableOpacity } from "react-native";
-import Txt from "../../atoms/Txt/index";
+import { View } from "react-native";
 import Button from "../../atoms/Button/index";
 import Heading from "../../atoms/Heading/index";
-import ListItem from "../../atoms/ListItem/index";
 import { compose, withState, withHandlers } from "recompose";
 
-// これ
 interface ComponentProps {
   defaultNum: number;
 }
@@ -53,12 +49,12 @@ const CounterBoardPresenter: React.SFC<CounterBoardProps> = ({
   reset,
   ...props
 }) => (
-  <View>
+  <Wrapper>
     <Heading type="h1">{counter}</Heading>
     <IncrementButton onPress={increment}>+</IncrementButton>
     <DecrementButton onPress={decrement}>-</DecrementButton>
     <Button onPress={reset}>reset</Button>
-  </View>
+  </Wrapper>
 );
 
 const CounterBoard = CounterBoardContainer(CounterBoardPresenter);
@@ -66,7 +62,6 @@ export default CounterBoard;
 
 const Wrapper = styled.View`
   justify-content: center;
-  align-items: center;
   font-size: 20px;
   text-align: center;
   margin: 10px;
