@@ -8,7 +8,6 @@ import styled from "styled-components/native";
 import { Text, View } from "react-native";
 import SubmittionBox from "../../components/molecules/SubmittionBox/index";
 import PostResult from "../../components/organisms/PostResult/index";
-import CounterBoard from "../../components/molecules/PracRamda/index";
 
 interface Props {
   zipCode: number;
@@ -48,7 +47,6 @@ export default class SagasPostSearchPage extends React.Component<Props, State> {
   public render() {
     return (
       <Container>
-        <CounterBoard defaultNum={16} />
         <View>
           <SubmittionBox
             onPress={this.handleSubmit}

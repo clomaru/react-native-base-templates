@@ -1,13 +1,13 @@
 import * as React from "react";
 import styled from "styled-components/native";
 import { Text, TouchableOpacity } from "react-native";
-import { compose, branch, renderComponent } from "recompose";
+import CounterBoard from "../molecules/CounterBoard/index";
 
 interface Props {}
 
 const RecomposeCounterPage: React.SFC<Props> = ({ ...props }) => (
   <Wrapper {...props}>
-    <Text>住所の取得に失敗しました</Text>
+    <CounterBoard defaultNum={10} />
   </Wrapper>
 );
 
