@@ -1,13 +1,16 @@
 # ReactNativeBaseTemplate
 
-- git search page
-  ![demo](gifs/git.gif)
+### git search page
 
-- post search page
-  ![demo](gifs/post.gif)
+![demo](gifs/git.gif)
 
-- counter page
-  ![demo](gifs/counter.gif)
+### post search page
+
+![demo](gifs/post.gif)
+
+### counter page
+
+![demo](gifs/counter.gif)
 
 ## Feature Pckages
 
