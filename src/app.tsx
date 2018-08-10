@@ -1,32 +1,36 @@
-import * as React from 'react';
-import { Navigation } from 'react-native-navigation';
-import registerScreens from './screen';
-// import Icon from 'react-native-vector-icons/FontAwesome';
-import * as actions from './actions/index';
-import { Provider } from 'react-redux';
-import configureStore from './store';
+import * as React from "react";
+import { Navigation } from "react-native-navigation";
+import registerScreens from "./screen";
+import * as actions from "./actions/index";
+import { Provider } from "react-redux";
+import configureStore from "./store";
 
 const store = configureStore();
 registerScreens(store, Provider);
 
 export default class App {
-	constructor(props) {
-		this.startApp();
-	}
-	startApp() {
-		Navigation.startTabBasedApp({
-			tabs: [
-				{
-					label: 'Two',
-					screen: 'searchRepository.Main2Page',
-					title: 'Screen Two'
-				},
-				{
-					label: 'One',
-					screen: 'searchRepository.MainPage',
-					title: 'Screen One'
-				}
-			]
-		});
-	}
+  constructor(props) {
+    this.startApp();
+  }
+  startApp() {
+    Navigation.startTabBasedApp({
+      tabs: [
+        {
+          label: "Git Search",
+          screen: "searchRepository.SearchRepositoryPage",
+          title: "Git Search"
+        },
+        {
+          label: "Post Search",
+          screen: "searchRepository.SagasPostSearchPage",
+          title: "Post Search"
+        },
+        {
+          label: "Counter",
+          screen: "searchRepository.RecomposeCounterPage",
+          title: "Recompose Counter"
+        }
+      ]
+    });
+  }
 }

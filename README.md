@@ -1,5 +1,17 @@
 # ReactNativeBaseTemplate
 
+### git search page
+
+![demo](gifs/git.gif)
+
+### post search page
+
+![demo](gifs/post.gif)
+
+### counter page
+
+![demo](gifs/counter.gif)
+
 ## Feature Pckages
 
 ### Architecture
@@ -28,20 +40,21 @@
 - [redux-saga](https://github.com/redux-saga/redux-saga)
 - [Higher-order Components](https://reactjs.org/docs/higher-order-components.html)
 - [Recompose](https://github.com/acdlite/recompose)
-- [Ramdajs](https://github.com/ramda/ramda)
+- [Ramda.js](https://github.com/ramda/ramda)
 - [react-native-debugger](https://github.com/jhen0409/react-native-debugger)
 
 ### ReactNativeAPI
 
 - [fetchAPI](https://facebook.github.io/react-native/docs/network.html)
+- [ActivityIndicator](https://facebook.github.io/react-native/docs/activityindicator)
 
 ## Other Branchs
 
 - [master](https://github.com/mrsekut/react-native-base-templates/tree/master)
-- [todoApp(dev now)](https://github.com/clomaru/react-native-base-templates/tree/todoApp)
+- [todoApp](https://github.com/clomaru/react-native-base-templates/tree/todoApp)
 - searchRepositoryApp(this)
-- upLoadImgApp
-- twitterApp
+- [upLoadImgApp](https://github.com/mrsekut/react-native-base-templates/tree/upLoadImgApp)
+- [twitterApp](https://github.com/mrsekut/react-native-base-templates/tree/twitterApp)
 
 ## To Install
 
