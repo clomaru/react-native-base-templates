@@ -25,10 +25,10 @@ const ListWithIcon: React.SFC<Props> = ({
   <Wrapper onPress={onPress}>
     <StyledListItem>
       <StyledImage source={{ url: source }} />
-      <View>
+      <ListWithIconBody>
         <Heading type="h5">{name}</Heading>
         <Txt size={15}>{user}</Txt>
-      </View>
+      </ListWithIconBody>
     </StyledListItem>
   </Wrapper>
 );
@@ -45,6 +45,10 @@ const Wrapper = styled(TouchableOpacity)`
 
 const StyledListItem = styled(ListItem)`
   padding: 20px;
+`;
+
+const ListWithIconBody = styled.View`
+  margin-left: 30px;
 `;
 
 interface StyledProps {

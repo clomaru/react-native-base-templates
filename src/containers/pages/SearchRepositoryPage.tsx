@@ -85,7 +85,7 @@ export default class SearchRepositoryPage extends React.Component<
               onPress={() => this.navigateToDetail(item)}
             />
           )}
-          keyExtractor={item => item.id}
+          keyExtractor={item => item.id.toString()}
           onEndReached={() => this.fetchRepositories()}
           onEndReachedThreshold={0.1}
           onRefresh={() => this.fetchRepositories(true)}
