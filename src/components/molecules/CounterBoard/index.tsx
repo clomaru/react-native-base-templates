@@ -24,7 +24,6 @@ interface WithHandlerProps {
 type ComposedProps = WithStateProps & WithHandlerProps;
 type CounterBoardProps = ComposedProps & ComponentProps;
 
-// TODO: 型https://qiita.com/IgnorantCoder/items/2ec853c85e74cf8d71cd
 const CounterBoardContainer = compose<CounterBoardProps, ComponentProps>(
   withState<
     WithStateProps,

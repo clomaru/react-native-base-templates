@@ -16,6 +16,7 @@ interface Props {
 
 interface State {
   main2Reducer: ReduxState;
+  zipCode: number;
 }
 
 const mapStateToProps = (state: ReduxState) => ({
@@ -74,11 +75,11 @@ export default class SagasPostSearchPage extends React.Component<Props, State> {
     );
   }
 
-  handleChange(e) {
+  handleChange(e: string) {
     this.setState({ zipCode: e });
   }
 
-  handleSubmit(e) {
+  handleSubmit(e: any) {
     e.preventDefault();
     const meta = {
       pageOnSuccess: true,
