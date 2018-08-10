@@ -1,7 +1,6 @@
 import * as React from "react";
 import { Navigation } from "react-native-navigation";
 import registerScreens from "./screen";
-// import Icon from 'react-native-vector-icons/FontAwesome';
 import * as actions from "./actions/index";
 import { Provider } from "react-redux";
 import configureStore from "./store";
@@ -17,19 +16,19 @@ export default class App {
     Navigation.startTabBasedApp({
       tabs: [
         {
-          label: "One",
+          label: "Git Search",
           screen: "searchRepository.SearchRepositoryPage",
-          title: "Screen One"
+          title: "Git Search"
         },
         {
-          label: "Two",
+          label: "Post Search",
           screen: "searchRepository.SagasPostSearchPage",
-          title: "Screen Two"
+          title: "Post Search"
         },
         {
-          label: "Three",
+          label: "Counter",
           screen: "searchRepository.RecomposeCounterPage",
-          title: "Screen Two"
+          title: "Recompose Counter"
         }
       ]
     });
