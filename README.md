@@ -53,8 +53,8 @@
 - [master](https://github.com/mrsekut/react-native-base-templates/tree/master)
 - [todoApp](https://github.com/clomaru/react-native-base-templates/tree/todoApp)
 - searchRepositoryApp(this)
-- upLoadImgApp
-- twitterApp
+- [upLoadImgApp](https://github.com/mrsekut/react-native-base-templates/tree/upLoadImgApp)
+- [twitterApp](https://github.com/mrsekut/react-native-base-templates/tree/twitterApp)
 
 ## To Install
 
