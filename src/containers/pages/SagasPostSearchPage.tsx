@@ -1,8 +1,9 @@
 import * as React from "react";
+import { ActivityIndicator } from "react-native";
 import { connect } from "react-redux";
 import { bindActionCreators, Dispatch } from "redux";
 import { ReduxAction, ReduxState } from "../../store";
-import { getAddressRequested } from "../../modules/MainPage2Module";
+import { getAddressRequested } from "../../modules/SagasPostSearchModule";
 import styled from "styled-components/native";
 
 import { Text, View } from "react-native";
@@ -37,14 +38,11 @@ const mapDispatchToProps = (dispatch: Dispatch<ReduxAction>) =>
 export default class SagasPostSearchPage extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
-
     this.state = { zipCode: this.props.zipCode || "" };
-
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  // TODO:一回画像でいって余裕があればloader使お
   public render() {
     return (
       <Container>
@@ -57,9 +55,11 @@ export default class SagasPostSearchPage extends React.Component<Props, State> {
             value={this.state.zipCode}
           />
           {this.props.apiIsProcessing ? (
-            <View>
-              <Text>loading...</Text>
-            </View>
+            <ActivityIndicator
+              animating={!this.props.isSuccess}
+              size="small"
+              color="#0000ff"
+            />
           ) : (
             <View>
               <PostResult

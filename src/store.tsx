@@ -16,7 +16,7 @@ import main2Reducer, {
   Main2Actoins,
   Main2State,
   sagas
-} from "./modules/MainPage2Module";
+} from "./modules/SagasPostSearchModule";
 
 import createSagaMiddleware from "redux-saga";
 
@@ -25,7 +25,6 @@ function* rootSaga() {
   yield all(allSagas.map(f => f()));
 }
 
-// TODO:↓みづらくね？
 export const configureStore = (): Store => {
   const sagaMiddleware = createSagaMiddleware();
   const middleware = applyMiddleware(sagaMiddleware);
@@ -35,7 +34,6 @@ export const configureStore = (): Store => {
       mainReducer,
       main2Reducer
     }),
-    // TODO:↓リファクタしたい
     compose(
       middleware,
       window.__REDUX_DEVTOOLS_EXTENSION__ &&
