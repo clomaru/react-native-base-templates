@@ -75,7 +75,7 @@ export default class SearchRepositoryPage extends React.Component<
           onChangeText={text => this.props.changeTextbox(text)}
         />
 
-        <FlatList
+        <StyledFlatList
           data={this.props.items}
           renderItem={({ item }) => (
             <ListWithIcon
@@ -132,4 +132,8 @@ const Container = styled.View`
   justify-content: center;
   padding: 5px;
   flex: 1;
+`;
+
+const StyledFlatList = styled(FlatList)`
+  margin-top: 20px;
 `;

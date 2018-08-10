@@ -34,7 +34,14 @@ const ListWithIcon: React.SFC<Props> = ({
 );
 export default ListWithIcon;
 
-const Wrapper = styled(TouchableOpacity)``;
+const Wrapper = styled(TouchableOpacity)`
+  width: 350px;
+  height: 100px;
+  background: papayawhip;
+  margin: 5px auto;
+  border: 2px solid papayawhip;
+  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+`;
 
 const StyledListItem = styled(ListItem)`
   padding: 20px;
