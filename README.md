@@ -1,18 +1,6 @@
-# ReactNativeBaseTemplate
+# uploadImgApp
 
-### git search page
-
-![demo](gifs/git.gif)
-
-### post search page
-
-![demo](gifs/post.gif)
-
-### counter page
-
-![demo](gifs/counter.gif)
-
-## Feature Pckages
+## Feature Packages
 
 ### Architecture
 
@@ -52,8 +40,8 @@
 
 - [master](https://github.com/mrsekut/react-native-base-templates/tree/master)
 - [todoApp](https://github.com/clomaru/react-native-base-templates/tree/todoApp)
-- searchRepositoryApp(this)
-- [upLoadImgApp](https://github.com/mrsekut/react-native-base-templates/tree/upLoadImgApp)
+- [searchRepositoryApp](https://github.com/mrsekut/react-native-base-templates/tree/searchRepositoryApp)
+- uploadImgApp(this)
 - [twitterApp](https://github.com/mrsekut/react-native-base-templates/tree/twitterApp)
 
 ## To Install
