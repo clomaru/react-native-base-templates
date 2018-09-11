@@ -3,7 +3,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 import { ReduxAction, ReduxState } from '../../store';
 import styled from 'styled-components/native';
-import { View, Text, FlatList, AppState } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
+// import RNImagePicker from 'react-native-image-picker';
+const RNImagePicker = require('react-native-image-picker');
 
 // import SubmittionBox from "../../components/molecules/SubmittionBox/index";
 // import ListWithIcon from "../../components/molecules/ListWithIcon/index";
@@ -39,11 +41,17 @@ export default class SearchRepositoryPage extends React.Component<any, any> {
     return (
       <Container>
         <View>
-          <Text>oooo</Text>
+          <TouchableOpacity onPress={this.openPicker}>
+            <Text>oooo</Text>
+          </TouchableOpacity>
         </View>
       </Container>
     );
   }
+
+  openPicker = () => {
+    RNImagePicker.showImagePicker({}, res => console.log(res));
+  };
 }
 
 const Container = styled.View`
