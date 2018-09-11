@@ -1,12 +1,12 @@
-import * as React from "react";
-import styled from "styled-components/native";
-import { Text, TouchableOpacity } from "react-native";
+import * as React from 'react';
+import styled from 'styled-components/native';
+import { Text, TouchableOpacity } from 'react-native';
 
 interface Props {
   children?: React.ReactChildren;
 }
 
-const Button: React.SFC<Props> = ({ children, ...props }) => (
+const Button: React.SFC<Props> = ({ children, ...props }: Props) => (
   <Wrapper {...props}>
     <ButtonText>{children}</ButtonText>
   </Wrapper>

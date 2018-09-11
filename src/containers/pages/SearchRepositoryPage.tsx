@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 import { ReduxAction, ReduxState } from '../../store';
 import styled from 'styled-components/native';
-import { View, Text, TouchableOpacity } from 'react-native';
-// import RNImagePicker from 'react-native-image-picker';
+import { View, Text, TouchableOpacity, Image } from 'react-native';
 const RNImagePicker = require('react-native-image-picker');
+import Button from '../../components/atoms/Button/index';
 
 // import SubmittionBox from "../../components/molecules/SubmittionBox/index";
 // import ListWithIcon from "../../components/molecules/ListWithIcon/index";
@@ -28,9 +28,13 @@ const RNImagePicker = require('react-native-image-picker');
 //   mapStateToProps,
 //   mapDispatchToProps
 // ) as any)
+
 export default class SearchRepositoryPage extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
+    this.state = {
+      uri: ''
+    };
   }
 
   public componentDidMount(): void {}
@@ -41,16 +45,24 @@ export default class SearchRepositoryPage extends React.Component<any, any> {
     return (
       <Container>
         <View>
-          <TouchableOpacity onPress={this.openPicker}>
-            <Text>oooo</Text>
-          </TouchableOpacity>
+          <StyledImage source={{ uri: this.state.uri }} />
+          <Button onPress={this.openPicker}>open</Button>
         </View>
       </Container>
     );
   }
 
   openPicker = () => {
-    RNImagePicker.showImagePicker({}, res => console.log(res));
+    RNImagePicker.showImagePicker({}, res => {
+      if (res.didCancel) {
+        console.log('User cancelled image picker');
+      } else if (res.error) {
+        console.log('ImagePicker Error: ', res.error);
+      } else {
+        let source = { uri: res.uri };
+        this.setState(source);
+      }
+    });
   };
 }
 
@@ -59,4 +71,10 @@ const Container = styled.View`
   justify-content: center;
   padding: 5px;
   flex: 1;
+`;
+
+const StyledImage = styled.Image`
+  width: 100%;
+  height: 200;
+  background-color: #eee;
 `;
